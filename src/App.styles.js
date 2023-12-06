@@ -52,11 +52,11 @@ html, body {
 `
 
 export const Wrapper = styled.div`
-  background-color: #fafafa;
+  background-color: #fff;
   width: 100%;
   min-height: 100vh;
   overflow: hidden;
-  padding-bottom: 20px;
+  //   padding-bottom: 20px;
 `
 export const Container = styled.div`
   max-width: 1190px;
@@ -87,6 +87,34 @@ export const ButtonPurple = styled.button`
   &:active {
     background-color: var(--palette-purple-100);
   }
+`
+export const Button = styled.button`
+  color: #fff;
+  height: 50px;
+  background: var(--main-topic);
+  border-radius: 6px;
+  padding: 0 24px;
+  cursor: pointer;
+  border: none;
+  font-size: 16px;
+  line-height: 150%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background 0.3s ease 0s;
+  &:hover {
+    background: var(--btn-hover);
+  }
+  &:disabled {
+    background-color: var(--btn-disabled);
+  }
+
+  //   line-height: 24px;
+  //   letter-spacing: -0.05px;
+  //   &:active {
+  //     background-color: var(--palette-purple-100);
+  //   }
 `
 export const DarkBG = styled.div`
   position: absolute;

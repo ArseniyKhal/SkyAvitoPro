@@ -1,6 +1,16 @@
 import React from 'react'
-// import * as S from "./App.styles"
+import { Header } from './components/Header/header'
+import * as S from './App.styles'
 
 export const App = () => {
-  return <></>
+  return (
+    <>
+      <S.GlobalStyle />
+      <S.Wrapper>
+        <Header></Header>
+        {/* <AppRoutes err={dataBaseError} /> */}
+        <S.Container></S.Container>
+      </S.Wrapper>
+    </>
+  )
 }
