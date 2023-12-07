@@ -1,9 +1,10 @@
 import { Card } from 'components/Card/Card'
-import * as S from './Main.styles'
 import { useState } from 'react'
+import { Header } from 'components/Header/header'
+import * as S from './Main.styles'
 
 export const Main = () => {
-  // // скрытие кнопки "Наверх ↑"
+  // скрытие кнопки "Наверх ↑"
   const [offSet, setOffSet] = useState('')
   window.addEventListener('scroll', () => {
     window.scrollY > 100 ? setOffSet(true) : setOffSet(false)
@@ -11,11 +12,10 @@ export const Main = () => {
 
   return (
     <>
+      <Header></Header>
       <div style={{ fontSize: '36px' }}>Главная страница</div>
       <S.Title>Объявления</S.Title>
       <S.MainList>
-        <Card></Card>
-        <Card></Card>
         <Card></Card>
         <Card></Card>
         <Card></Card>

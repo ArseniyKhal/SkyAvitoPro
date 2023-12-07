@@ -1,5 +1,4 @@
 import { AppRoutes } from './routes'
-import { Header } from './components/Header/header'
 import * as S from './App.styles'
 
 export const App = () => {
@@ -7,7 +6,6 @@ export const App = () => {
     <>
       <S.GlobalStyle />
       <S.Wrapper>
-        <Header></Header>
         <S.Container>
           <AppRoutes />
         </S.Container>

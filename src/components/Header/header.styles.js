@@ -5,10 +5,14 @@ export const HeaderFirstLine = styled.div`
   height: 80px;
   width: 100%;
   background-color: var(--main-topic);
+  position: absolute;
+  top: 0;
+  left: 0px;
 `
 export const HeaderSecondLine = styled.div`
   height: 136px;
   width: 100%;
+  margin-top: 80px;
 `
 export const HeaderContainer = styled.div`
   max-width: 1190px;
