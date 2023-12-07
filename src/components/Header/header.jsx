@@ -1,4 +1,3 @@
-// import { useLocation, useNavigate } from 'react-router-dom'
 // import { Link } from 'react-router-dom'
 // import { useRef, useState } from 'react'
 // import { useDispatch } from 'react-redux'
@@ -6,17 +5,19 @@
 // import { useAuth } from 'hooks/use-auth'
 // import { useDropdownClose } from 'hooks/use-dropdown-close'
 // import { signOutUser } from 'api'
+import { useLocation, useNavigate } from 'react-router'
 import * as S from './header.styles'
 
 export const Header = () => {
   //   const dispatch = useDispatch()
-  //   const navigate = useNavigate()
+  const navigate = useNavigate()
   //   const { isAuth, email } = useAuth()
   //   const [isProfileMenu, setProfileMenu] = useState(false)
-  //   let colorTextBlack = true
-  //   if (useLocation().pathname === '/') {
-  //     colorTextBlack = false
-  //   }
+  let isMain = false
+  if (useLocation().pathname === '/') {
+    isMain = true
+  }
+  let isAuth = true
 
   //   const node = useRef()
   //   useDropdownClose(node, () => {
@@ -24,19 +25,24 @@ export const Header = () => {
   //       setProfileMenu(false)
   //     }
   //   })
-  const isAuth = false
   return (
     //  <S.Header ref={node}>
     <>
       <S.HeaderFirstLine>
         <S.HeaderContainer>
           <S.HeaderContent>
-            <S.EnterButtonSecondLine onClick={() => console.log('тык')}>
-              Вход в личный кабинет
+            <S.EnterButtonSecondLine
+              onClick={() => console.log('гоу авторизовываться')}
+            >
+              {isAuth ? 'Разместить объявление' : 'Вход в личный кабинет'}
             </S.EnterButtonSecondLine>
-            <S.EnterButtonSecondLine onClick={() => console.log('тык')}>
-              Вход в личный кабинет
-            </S.EnterButtonSecondLine>
+            {isAuth && (
+              <S.EnterButtonSecondLine
+                onClick={() => console.log('переход в Личный кабинет')}
+              >
+                Личный кабинет
+              </S.EnterButtonSecondLine>
+            )}
 
             {/* <S.HeaderLogo onClick={() => navigate('/')}> */}
             {/* <S.HeaderLogo>
@@ -99,7 +105,7 @@ export const Header = () => {
       <S.HeaderSecondLine>
         <S.HeaderContainer>
           <S.HeaderContent
-            style={{ justifyContent: isAuth ? 'space-between' : 'flex-start' }}
+            style={{ justifyContent: isMain ? 'space-between' : 'flex-start' }}
           >
             <S.HeaderLogo>
               <svg
@@ -164,7 +170,7 @@ export const Header = () => {
                 </defs>
               </svg>
             </S.HeaderLogo>
-            {isAuth ? (
+            {isMain ? (
               <>
                 <S.SearchText
                   // value={searchText}
@@ -183,7 +189,7 @@ export const Header = () => {
                 </S.EnterButton>
               </>
             ) : (
-              <S.EnterButton onClick={() => console.log('тык')}>
+              <S.EnterButton onClick={() => navigate('/')}>
                 Вернуться на главную
               </S.EnterButton>
             )}
