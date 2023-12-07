@@ -3,11 +3,12 @@ import { styled } from 'styled-components'
 export const CenterBlock = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   text-align: center;
-  margin-top: 20vh;
-  color: var(--monochrome-white-20);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `
 export const ParagraphImg = styled.img`
   width: auto;

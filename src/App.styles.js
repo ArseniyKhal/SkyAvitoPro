@@ -144,8 +144,6 @@ export const Button = styled.button`
     background-color: var(--btn-disabled);
   }
 
-  //   line-height: 24px;
-  //   letter-spacing: -0.05px;
   //   &:active {
   //     background-color: var(--palette-purple-100);
   //   }

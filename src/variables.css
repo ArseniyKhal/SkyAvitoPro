@@ -12,4 +12,8 @@ html {
 .dfgh {
 	object-fit: cover;
 	margin-bottom: 10px;
+	overflow: hidden;
+	transform: translate(-5px);
+	border-color: inherit;
+	justify-content: space-between;
 }

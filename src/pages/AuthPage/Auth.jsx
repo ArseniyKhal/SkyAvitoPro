@@ -1,17 +1,14 @@
+import { FormAuth } from 'components/FormAuth/FormAuth'
+import { Main } from 'pages/MainPage/Main'
 import * as S from './Auth.styles'
 
 export const Auth = () => {
-  // // скрытие кнопки "Наверх ↑"
-  // const [offSet, setOffSet] = useState('')
-  // window.addEventListener('scroll', () => {
-  //   window.scrollY > 100 ? setOffSet(true) : setOffSet(false)
-  // })
-
   return (
     <>
-      <div style={{ fontSize: '36px' }}>Страница авторизации и регистрации</div>
-
-      {/* <DarkBG>
+      <Main></Main>
+      {/* <div style={{ fontSize: '36px' }}>Страница авторизации и регистрации</div> */}
+      <FormAuth title={'Войти'} typeLogin={true}></FormAuth>
+      {/* 
 			<Container>
 			  <Header></Header>
 			  <S.TitleBlock>
@@ -50,7 +47,7 @@ export const Auth = () => {
 				 </S.MainFooter>
 			  )}
 			</Container>
-		 </DarkBG> */}
+		 */}
     </>
   )
 }

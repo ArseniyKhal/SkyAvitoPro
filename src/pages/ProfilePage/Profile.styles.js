@@ -1,78 +1,103 @@
 import { styled } from 'styled-components'
-import { ButtonPurple } from '../../App.styles'
+import { Button } from '../../App.styles'
 
-export const TitleBlock = styled.div`
+export const Title = styled.h1`
+  color: var(--text-color-black);
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 220%;
+  margin-bottom: 10px;
+`
+export const ProfileSettings = styled.div`
+  margin-bottom: 70px;
+`
+export const SubTitle = styled.h2`
+  color: var(--text-color-black);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 220%;
+  font-size: 32px;
+  margin-bottom: 20px;
+`
+export const ProfileSettingsContent = styled.div`
   display: flex;
-  justify-content: space-between;
-  margin-top: -40px;
-  margin-bottom: 52px;
+  gap: 50px;
 `
-export const TitleBlockContent = styled.div`
-  width: 830px;
+export const BlockAvatar = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 `
-export const TitleBlockTitle = styled.h3`
-  color: var(--monochrome-white-20);
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 115%;
-  letter-spacing: -0.05px;
-  opacity: 0.5;
-  margin-bottom: 17px;
+export const AvatarPicture = styled.div`
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  overflow: hidden;
 `
-export const TitleBlockSlogan = styled.h1`
-  color: #f4f4ff;
-  font-size: 60px;
-  line-height: 91.5%;
-  letter-spacing: -1.169px;
+export const AvatarImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `
-export const SaleSticker = styled.div`
-  position: relative;
-  width: 212.27px;
-  height: 151.741px;
-  transform: rotate(15.957deg);
-  top: 23px;
-  right: -50px;
+export const AvatarСhangeBtn = styled.div`
+  color: var(--main-topic);
+  line-height: 150%;
+  cursor: pointer;
 `
 
-export const SaleStickerText = styled.p`
-  position: absolute;
-  color: #ff8071;
-  text-align: center;
-  font-size: 20px;
-  line-height: 90%;
-  letter-spacing: -0.15px;
-  left: 18%;
-  top: 38%;
+export const BlockSettings = styled.div`
+  //   margin-bottom: 30px;
+  display: flex;
+  width: 614px;
+  flex-wrap: wrap;
+  row-gap: 48px;
+  padding-top: 21px;
+  justify-content: space-between;
 `
+export const InputsBlock = styled.div`
+  position: relative;
+  width: 300px;
+`
+export const InputsBlockTel = styled(InputsBlock)`
+  width: 100%;
+`
+export const Label = styled.label`
+  color: #c4c4c4;
+  font-weight: 500;
+  line-height: 150%;
+  position: relative;
+  display: inline-block;
+  top: -40px;
+  width: 0px;
+`
+export const ProfileSettingsInput = styled.input`
+  width: 100%;
+  height: 50px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background: inherit;
+  padding: 0px 19px;
+  outline: none;
+  font-size: 16px;
+  fill: none;
+  //   &::placeholder {
+  //     font-size: 16px;
+  //     line-height: 24px;
+  //     color: #d0cece;
+  //   }
+`
+export const EnterButton = styled(Button)`
+  padding: 0 37px;
+  margin-top: -20px;
+`
+
+export const UsersProducts = styled.div``
 export const MainList = styled.ul`
   display: grid;
-  grid-template: auto/ repeat(3, 360px);
+  grid-template: auto/ repeat(4, 270px);
   justify-content: space-between;
-  row-gap: 44px;
+  row-gap: 40px;
   margin-bottom: 34px;
-`
-export const MainFooter = styled.div`
-  display: flex;
-  justify-content: center;
-`
-export const BlockError = styled.div`
-  color: var(--orange-90);
-  font-size: 30px;
-`
-export const MainButton = styled(ButtonPurple)`
-  width: 147px;
-  height: 48px;
-  margin-bottom: 60px;
-  border-radius: 46px;
-  background: #c7e957;
-  color: #000;
-  font-size: 24px;
-  line-height: 32px;
-  letter-spacing: -0.1px;
-  &:hover {
-    background: #daf289;
-  }
-  & active {
-    background: #ebffab;
-  }
 `

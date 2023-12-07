@@ -13,7 +13,6 @@ export const Main = () => {
   return (
     <>
       <Header></Header>
-      <div style={{ fontSize: '36px' }}>Главная страница</div>
       <S.Title>Объявления</S.Title>
       <S.MainList>
         <Card></Card>
