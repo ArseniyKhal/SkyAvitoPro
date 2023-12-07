@@ -59,7 +59,8 @@ a:visited {
 	text-decoration: none;
 	font-family: 'Roboto', sans-serif;
 	cursor: pointer;
-	color:inherit;
+	decoration: none;
+	color: inherit;
 }
 ul li {
 	list-style: none;

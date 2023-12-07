@@ -1,4 +1,4 @@
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 // import { useState } from 'react'
 // import { ModalWindow } from 'components/ModalWindow/ModalWindow'
 // import { WorkoutSelectionWindow } from 'pages/profile-page/Profile'
@@ -15,11 +15,15 @@ export const Card = () =>
     return (
       <S.Card>
         <S.CardPicture>
-          <S.CardImg src={`/img/1.png`}></S.CardImg>
+          <Link to={`/course/`}>
+            <S.CardImg src={`/img/1.png`}></S.CardImg>
+          </Link>
         </S.CardPicture>
         <S.CardContent>
           <S.CardLink>
-            Ракетка для большого тенниса Triumph Pro ST 2023
+            <Link to={`/course/`}>
+              Ракетка для большого тенниса Triumph Pro ST 2023
+            </Link>
           </S.CardLink>
           <S.CardPrice>2 200 ₽</S.CardPrice>
           <S.CardBlock>

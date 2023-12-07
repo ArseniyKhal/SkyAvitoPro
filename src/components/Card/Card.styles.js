@@ -1,14 +1,11 @@
 import { styled } from 'styled-components'
 
 export const Card = styled.li`
-  width: 270px;
+  //   width: 270px;
   //   height: 440px;
   overflow: hidden;
   position: relative;
   transition: transform 0.3s ease;
-  &:hover {
-    transform: scale(1.01);
-  }
 `
 export const CardPicture = styled.div`
   height: 270px;
@@ -32,6 +29,10 @@ export const CardLink = styled.p`
   font-weight: 500;
   line-height: 120%;
   margin-bottom: 10px;
+  cursor: pointer;
+  &:hover {
+    color: #ff6163;
+  }
 `
 export const CardPrice = styled.p`
   color: var(--text-color-black);

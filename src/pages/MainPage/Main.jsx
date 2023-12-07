@@ -1,12 +1,13 @@
 import { Card } from 'components/Card/Card'
 import * as S from './Main.styles'
+import { useState } from 'react'
 
 export const Main = () => {
   // // скрытие кнопки "Наверх ↑"
-  // const [offSet, setOffSet] = useState('')
-  // window.addEventListener('scroll', () => {
-  //   window.scrollY > 100 ? setOffSet(true) : setOffSet(false)
-  // })
+  const [offSet, setOffSet] = useState('')
+  window.addEventListener('scroll', () => {
+    window.scrollY > 100 ? setOffSet(true) : setOffSet(false)
+  })
 
   return (
     <>
@@ -14,7 +15,22 @@ export const Main = () => {
       <S.Title>Объявления</S.Title>
       <S.MainList>
         <Card></Card>
+        <Card></Card>
+        <Card></Card>
+        <Card></Card>
+        <Card></Card>
       </S.MainList>
+      {offSet && (
+        <S.MainFooter>
+          <S.MainButton
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+            }}
+          >
+            Наверх ↑
+          </S.MainButton>
+        </S.MainFooter>
+      )}
       {/* <DarkBG>
 			<Container>
 			  <Header></Header>
@@ -42,17 +58,7 @@ export const Main = () => {
 					<S.MainList>{mapCoursesList}</S.MainList>
 				 </>
 			  )}
-			  {offSet && (
-				 <S.MainFooter>
-					<S.MainButton
-					  onClick={() => {
-						 window.scrollTo({ top: 0, behavior: 'smooth' })
-					  }}
-					>
-					  Наверх ↑
-					</S.MainButton>
-				 </S.MainFooter>
-			  )}
+			  
 			</Container>
 		 </DarkBG> */}
     </>
