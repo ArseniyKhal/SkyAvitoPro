@@ -3,12 +3,44 @@ import { styled, createGlobalStyle, keyframes } from 'styled-components'
 export const GlobalStyle = createGlobalStyle`
 @font-face {
 	font-family: "StratosSkyeng";
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
 	src: local("StratosSkyeng"), local("StratosSkyeng"),
 		url("/fonts/StratosSkyeng.woff2") format("woff2"),
 		url("/fonts/StratosSkyeng.woff") format("woff");
+}
+@font-face {
+	font-family: "Roboto";
 	font-weight: 400;
 	font-style: normal;
+	font-display: swap;
+	src: local("Roboto-Regular"), local("Roboto-Regular"),
+		url("/fonts/Roboto-Regular.woff2") format("woff2"),
+		url("/fonts/Roboto-Regular.woff") format("woff"),
+		url("/fonts/Roboto-Regular.ttf") format("ttf");
 }
+@font-face {
+	font-family: "Roboto";
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+	src: local("Roboto-Medium"), local("Roboto-Medium"),
+		url("/fonts/Roboto-Medium.woff2") format("woff2"),
+		url("/fonts/Roboto-Medium.woff") format("woff"),
+		url("/fonts/Roboto-Medium.ttf") format("ttf");
+}
+@font-face {
+	font-family: "Roboto";
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+	src: local("Roboto-Bold"), local("Roboto-Bold"),
+		url("/fonts/Roboto-Bold.woff2") format("woff2"),
+		url("/fonts/Roboto-Bold.woff") format("woff"),
+		url("/fonts/Roboto-Bold.ttf") format("ttf");
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -25,9 +57,9 @@ export const GlobalStyle = createGlobalStyle`
 a,
 a:visited {
 	text-decoration: none;
-	font-family: "StratosSkyeng", sans-serif;
+	font-family: 'Roboto', sans-serif;
 	cursor: pointer;
-	color: #000;
+	color:inherit;
 }
 ul li {
 	list-style: none;
@@ -42,21 +74,21 @@ h6 {
 	font-weight: 400;
 }
 html, body {
-	font-family: "StratosSkyeng", sans-serif;
+	font-family: 'Roboto', sans-serif;
 	color: #000;
-	font-size: 18px;
+	font-size: 16px;
 	font-style: normal;
 	font-weight: 400;
-  user-select: none;
+   user-select: none;
 }
 `
 
 export const Wrapper = styled.div`
-  background-color: #fafafa;
+  background-color: #fff;
   width: 100%;
   min-height: 100vh;
   overflow: hidden;
-  padding-bottom: 20px;
+  //   padding-bottom: 20px;
 `
 export const Container = styled.div`
   max-width: 1190px;
@@ -87,6 +119,34 @@ export const ButtonPurple = styled.button`
   &:active {
     background-color: var(--palette-purple-100);
   }
+`
+export const Button = styled.button`
+  color: #fff;
+  height: 50px;
+  background: var(--main-topic);
+  border-radius: 6px;
+  padding: 0 24px;
+  cursor: pointer;
+  border: none;
+  font-size: 16px;
+  line-height: 150%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background 0.3s ease 0s;
+  &:hover {
+    background: var(--btn-hover);
+  }
+  &:disabled {
+    background-color: var(--btn-disabled);
+  }
+
+  //   line-height: 24px;
+  //   letter-spacing: -0.05px;
+  //   &:active {
+  //     background-color: var(--palette-purple-100);
+  //   }
 `
 export const DarkBG = styled.div`
   position: absolute;
