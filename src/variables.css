@@ -7,3 +7,9 @@ html {
 	--text-color-black: #000;
 	--text-color-input: rgba(0, 0, 0, 0.30);
 }
+
+
+.dfgh {
+	object-fit: cover;
+	margin-bottom: 10px;
+}

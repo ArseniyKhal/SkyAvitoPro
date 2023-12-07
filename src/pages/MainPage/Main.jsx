@@ -1,3 +1,4 @@
+import { Card } from 'components/Card/Card'
 import * as S from './Main.styles'
 
 export const Main = () => {
@@ -10,6 +11,10 @@ export const Main = () => {
   return (
     <>
       <div style={{ fontSize: '36px' }}>Главная страница</div>
+      <S.Title>Объявления</S.Title>
+      <S.MainList>
+        <Card></Card>
+      </S.MainList>
       {/* <DarkBG>
 			<Container>
 			  <Header></Header>
