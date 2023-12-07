@@ -9,7 +9,7 @@ export const App = () => {
       <S.Wrapper>
         <Header></Header>
         {/* <AppRoutes err={dataBaseError} /> */}
-        <S.Container></S.Container>
+        <S.Container> </S.Container>
       </S.Wrapper>
     </>
   )
