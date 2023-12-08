@@ -90,7 +90,7 @@ export const Wrapper = styled.div`
   min-height: 100vh;
   overflow: hidden;
   position: relative;
-  //   padding-bottom: 20px;
+  padding-bottom: 40px;
 `
 export const Container = styled.div`
   max-width: 1190px;

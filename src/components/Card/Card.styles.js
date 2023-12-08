@@ -42,7 +42,7 @@ export const CardPrice = styled.p`
   margin-bottom: 10px;
 `
 export const CardBlock = styled.div`
-  color: #5f5f5f;
+  color: var(--text-color-grey);
   line-height: 130%;
 `
 export const CardLocation = styled.p`

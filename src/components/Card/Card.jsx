@@ -22,7 +22,7 @@ export const Card = () =>
         <S.CardContent>
           <S.CardLink>
             <Link to={`/course/`}>
-              Ракетка для большого тенниса Triumph Pro ST 2023
+              Ракетка для большого тенниса Triumph Pro ST Б/У
             </Link>
           </S.CardLink>
           <S.CardPrice>2 200 ₽</S.CardPrice>

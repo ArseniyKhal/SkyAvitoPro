@@ -4,6 +4,7 @@ import { Main } from 'pages/MainPage/Main'
 import { Profile } from 'pages/ProfilePage/Profile'
 import { Auth } from 'pages/AuthPage/Auth'
 import { NotFound } from 'pages/NotFoundPage/NotFound'
+import { Adv } from 'pages/AdvPage/Adv'
 
 export const AppRoutes = () => {
   return (
@@ -19,6 +20,7 @@ export const AppRoutes = () => {
           </ProtectedRoute>
         }
       />
+      <Route path="adv/" element={<Adv />} />
     </Routes>
   )
 }

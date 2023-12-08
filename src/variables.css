@@ -5,6 +5,7 @@ html {
 	--btn-disabled: #D9D9D9;
 	--text-color-white: #fff;
 	--text-color-black: #000;
+	--text-color-grey: #5f5f5f;
 	--text-color-input: rgba(0, 0, 0, 0.30);
 }
 
@@ -16,4 +17,5 @@ html {
 	transform: translate(-5px);
 	border-color: inherit;
 	justify-content: space-between;
+	flex-direction: column;
 }

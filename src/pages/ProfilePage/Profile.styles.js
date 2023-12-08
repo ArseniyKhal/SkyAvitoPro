@@ -11,12 +11,11 @@ export const Title = styled.h1`
 export const ProfileSettings = styled.div`
   margin-bottom: 70px;
 `
-export const SubTitle = styled.h2`
+export const SubTitle = styled.h3`
   color: var(--text-color-black);
   font-size: 32px;
   font-weight: 500;
   line-height: 220%;
-  font-size: 32px;
   margin-bottom: 20px;
 `
 export const ProfileSettingsContent = styled.div`
