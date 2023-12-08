@@ -5,6 +5,7 @@ import { Profile } from 'pages/ProfilePage/Profile'
 import { Auth } from 'pages/AuthPage/Auth'
 import { NotFound } from 'pages/NotFoundPage/NotFound'
 import { Adv } from 'pages/AdvPage/Adv'
+import { SellerProfile } from 'pages/SellerProfilePage/SellerProfile'
 
 export const AppRoutes = () => {
   return (
@@ -20,7 +21,22 @@ export const AppRoutes = () => {
           </ProtectedRoute>
         }
       />
-      <Route path="adv/" element={<Adv />} />
+      <Route
+        path="adv/"
+        element={
+          <ProtectedRoute>
+            <Adv />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="seller/"
+        element={
+          <ProtectedRoute>
+            <SellerProfile />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
   )
 }

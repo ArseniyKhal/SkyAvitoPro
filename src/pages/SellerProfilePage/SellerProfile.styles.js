@@ -9,7 +9,7 @@ export const Title = styled.h1`
   margin-bottom: 10px;
 `
 export const ProfileSettings = styled.div`
-  margin-bottom: 50px;
+  margin-bottom: 70px;
 `
 export const SubTitle = styled.h3`
   color: var(--text-color-black);
@@ -39,37 +39,6 @@ export const AvatarImg = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-`
-export const BlokInfo = styled.div``
-export const SellerName = styled.p`
-  color: var(--text-color-black);
-  margin-bottom: 4px;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 200%;
-`
-export const SellerLocation = styled.p`
-  color: var(--text-color-grey);
-  line-height: 130%;
-  margin-bottom: 4px;
-`
-export const TelButton = styled(Button)`
-  display: flex;
-  flex-direction: column;
-  padding: 0 37px;
-  font-size: 14px;
-  line-height: 140%;
-  margin-top: 30px;
-  & span {
-    font-size: 16px;
-    font-weight: 600;
-  }
-`
-
-export const AvatarСhangeBtn = styled.div`
-  color: var(--main-topic);
-  line-height: 150%;
-  cursor: pointer;
 `
 
 export const BlockSettings = styled.div`
