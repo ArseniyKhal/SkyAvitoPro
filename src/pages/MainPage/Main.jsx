@@ -1,17 +1,22 @@
 import { Card } from 'components/Card/Card'
 import { useState } from 'react'
 import { Header } from 'components/Header/header'
+import { Outlet } from 'react-router-dom'
+import { getAllAds } from 'api'
+// import { useGetAllTodosQuery } from 'services/servicesApi'
 import * as S from './Main.styles'
 
 export const Main = () => {
+  //   const { data, error, isLoading } = useGetAllTodosQuery()
   // скрытие кнопки "Наверх ↑"
   const [offSet, setOffSet] = useState('')
   window.addEventListener('scroll', () => {
     window.scrollY > 100 ? setOffSet(true) : setOffSet(false)
   })
-
+  //   getAllAds().then((data) => console.log(data))
   return (
     <>
+      <Outlet />
       <Header></Header>
       <S.Title>Объявления</S.Title>
       <S.MainList>

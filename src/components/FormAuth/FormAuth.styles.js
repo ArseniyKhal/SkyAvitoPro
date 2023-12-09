@@ -11,8 +11,8 @@ export const ModalForm = styled.div`
   left: 50%;
   width: 366px;
   transform: translate(-50%, -50%);
-  //   background-color: #ffffff;
-  background-color: #f0f0f0;
+  background-color: #ffffff;
+  //   background-color: #f0f0f0;
   padding: 45px;
   border-radius: 12px;
 

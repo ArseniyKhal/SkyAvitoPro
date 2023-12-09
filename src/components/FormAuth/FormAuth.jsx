@@ -14,7 +14,7 @@ import * as S from './FormAuth.styles'
 //   localStorage.setItem('userSkyFitnesPro', userInfo)
 // }
 
-export const FormAuth = ({ title }) => {
+export const FormAuth = ({ title, typeLogin }) => {
   //   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [inputError, setInputError] = useState(null)
@@ -22,7 +22,7 @@ export const FormAuth = ({ title }) => {
   const [email, setEmail] = useState('')
   const [pass, setPass] = useState('')
   const [repPass, setRepPass] = useState('')
-  const [typeLogin, setTypeLogin] = useState(true)
+  //   const [typeLogin, setTypeLogin] = useState(true)
 
   //   const handleClick = async () => {
   //     try {

@@ -1,4 +1,4 @@
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 // import { useRef, useState } from 'react'
 // import { useDispatch } from 'react-redux'
 // import { removeUser } from 'store/slices/userSlice'
@@ -17,7 +17,7 @@ export const Header = () => {
   if (useLocation().pathname === '/') {
     isMain = true
   }
-  let isAuth = true
+  let isAuth = false
 
   //   const node = useRef()
   //   useDropdownClose(node, () => {
@@ -31,17 +31,27 @@ export const Header = () => {
       <S.HeaderFirstLine>
         <S.HeaderContainer>
           <S.HeaderContent>
-            <S.EnterButtonSecondLine
-              onClick={() => console.log('гоу авторизовываться')}
-            >
-              {isAuth ? 'Разместить объявление' : 'Вход в личный кабинет'}
-            </S.EnterButtonSecondLine>
-            {isAuth && (
-              <S.EnterButtonSecondLine
-                onClick={() => console.log('переход в Личный кабинет')}
-              >
-                Личный кабинет
+            {!isAuth && (
+              //   <Link to={'/modal'} state={{ background: location }}>
+              <S.EnterButtonSecondLine onClick={() => navigate('/auth')}>
+                {/* <S.EnterButtonSecondLine> */}
+                Вход в личный кабинет
               </S.EnterButtonSecondLine>
+              //   </Link>
+            )}
+            {isAuth && (
+              <>
+                <S.EnterButtonSecondLine
+                  onClick={() => console.log('окно размещения объявления')}
+                >
+                  Разместить объявление
+                </S.EnterButtonSecondLine>
+                <S.EnterButtonSecondLine
+                  onClick={() => console.log('переход в Личный кабинет')}
+                >
+                  Личный кабинет
+                </S.EnterButtonSecondLine>
+              </>
             )}
 
             {/* <S.HeaderLogo onClick={() => navigate('/')}> */}
