@@ -7,23 +7,6 @@ export const ModalForm = styled.div`
   align-items: center;
   text-align: center;
   padding: 45px;
-  //   position: absolute;
-  //   top: 30%;
-  //   left: 50%;
-  //   width: 366px;
-  //   transform: translate(-50%, -50%);
-  //   background-color: #ffffff;
-  //   background-color: #f0f0f0;
-  //   border-radius: 12px;
-
-  //   margin-top: 20vh;
-  //   --modal-width: 366px;
-  //   --modal-height: 439px;
-  //   left: calc(50% - (var(--modal-width) / 2));
-  //   top: calc(50% - (var(--modal-height) / 2));
-  //   box-sizing: border-box;
-  //   width: var(--modal-width);
-  //   min-height: var(--modal-height);
 `
 export const ModalLogo = styled.div`
   display: flex;
@@ -99,62 +82,3 @@ export const Error = styled.div`
   margin-top: 20px;
   text-align: left;
 `
-
-// export const TitleBlock = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   margin-top: -40px;
-//   margin-bottom: 52px;
-// `
-// export const TitleBlockContent = styled.div`
-//   width: 830px;
-// `
-// export const TitleBlockTitle = styled.h3`
-//   color: var(--monochrome-white-20);
-//   font-size: 20px;
-//   font-weight: 400;
-//   line-height: 115%;
-//   letter-spacing: -0.05px;
-//   opacity: 0.5;
-//   margin-bottom: 17px;
-// `
-// export const TitleBlockSlogan = styled.h1`
-//   color: #f4f4ff;
-//   font-size: 60px;
-//   line-height: 91.5%;
-//   letter-spacing: -1.169px;
-// `
-// export const SaleSticker = styled.div`
-//   position: relative;
-//   width: 212.27px;
-//   height: 151.741px;
-//   transform: rotate(15.957deg);
-//   top: 23px;
-//   right: -50px;
-// `
-
-// export const SaleStickerText = styled.p`
-//   position: absolute;
-//   color: #ff8071;
-//   text-align: center;
-//   font-size: 20px;
-//   line-height: 90%;
-//   letter-spacing: -0.15px;
-//   left: 18%;
-//   top: 38%;
-// `
-// export const MainList = styled.ul`
-//   display: grid;
-//   grid-template: auto/ repeat(3, 360px);
-//   justify-content: space-between;
-//   row-gap: 44px;
-//   margin-bottom: 34px;
-// `
-// export const MainFooter = styled.div`
-//   display: flex;
-//   justify-content: center;
-// `
-// export const BlockError = styled.div`
-//   color: var(--orange-90);
-//   font-size: 30px;
-// `

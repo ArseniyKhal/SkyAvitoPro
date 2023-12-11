@@ -15,45 +15,46 @@ export const Auth = ({ typeLogin }) => {
   const [city, setCity] = useState('')
   //   const [typeLogin, setTypeLogin] = useState(true)
 
-  //   const handleClick = async () => {
-  //     try {
-  //       if (!email) {
-  //         return setInputError('Введите email')
-  //       }
-  //       if (!pass) {
-  //         return setInputError('Введите пароль')
-  //       }
-  //       if (!typeLogin && pass !== repPass) {
-  //         return setInputError('пароли не совпадают')
-  //       }
-  //       if (!typeLogin && pass.length < 8 && pass.length > 0) {
-  //         return setInputError('Не менее 8 символов')
-  //       }
-  //       setIsLoading(true)
-  //       setInputError('')
-  //       let user = {}
-  //       if (typeLogin) {
-  //         user = await login({ email, pass })
-  //       } else {
-  //         user = await registration({ email, pass })
-  //       }
-  //       if (user) {
-  //         dispatch(
-  //           setUser({
-  //             email: user.email,
-  //             id: user.uid,
-  //             token: user.accessToken,
-  //           }),
-  //         )
-  //         saveUserInfoInLocalStorage(user)
-  //         navigate('/')
-  //       }
-  //     } catch (error) {
-  //       setInputError(error.message)
-  //     } finally {
-  //       setIsLoading(false)
-  //     }
-  //   }
+  const handleClick = async () => {
+    // try {
+    if (!email) {
+      return setInputError('Введите email')
+    }
+    if (!pass) {
+      return setInputError('Введите пароль')
+    }
+    if (!typeLogin && pass !== repPass) {
+      return setInputError('пароли не совпадают')
+    }
+    if (!typeLogin && pass.length < 8 && pass.length > 0) {
+      return setInputError('Не менее 8 символов')
+    }
+    console.log('вход')
+    //  setIsLoading(true)
+    //  setInputError('')
+    //  let user = {}
+    //  if (typeLogin) {
+    //    user = await login({ email, pass })
+    //  } else {
+    //    user = await registration({ email, pass })
+    //  }
+    //  if (user) {
+    //    dispatch(
+    //      setUser({
+    //        email: user.email,
+    //        id: user.uid,
+    //        token: user.accessToken,
+    //      }),
+    //    )
+    //    saveUserInfoInLocalStorage(user)
+    //    navigate('/')
+    //  }
+    // } catch (error) {
+    //   setInputError(error.message)
+    // } finally {
+    //   setIsLoading(false)
+    // }
+  }
   const nameEnterBtn = typeLogin ? 'Войти' : 'Зарегистрироваться'
 
   return (

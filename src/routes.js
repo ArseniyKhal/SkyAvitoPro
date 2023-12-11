@@ -9,8 +9,6 @@ import { SellerProfile } from 'pages/SellerProfilePage/SellerProfile'
 import { Modal } from 'components/ModalWindow/Modal'
 
 export const AppRoutes = () => {
-  //   const location = useLocation()
-  //   const background = location.state && location.state.background
   return (
     <>
       <Routes>
@@ -50,16 +48,6 @@ export const AppRoutes = () => {
           }
         />
       </Routes>
-      {/* {background && (
-        <Routes>
-          <Route path="modal" element={<Modal />} />
-          <Route
-            path="/auth"
-            element={<Modal childComponent={<Auth typeLogin={true} />} />}
-          />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      )} */}
     </>
   )
 }

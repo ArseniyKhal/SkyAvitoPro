@@ -28,6 +28,7 @@ export const CardLink = styled.p`
   font-size: 22px;
   font-weight: 500;
   line-height: 120%;
+  //   min-height: 52px;
   margin-bottom: 10px;
   cursor: pointer;
   &:hover {

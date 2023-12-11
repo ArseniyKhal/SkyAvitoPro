@@ -6,7 +6,10 @@ export const NotFound = () => {
   return (
     <>
       <S.CenterBlock>
-        <S.ParagraphImg src={'/img/not-found.webp'}></S.ParagraphImg>
+        <S.ParagraphImg
+          src={'/img/not-found.webp'}
+          alt="not-found"
+        ></S.ParagraphImg>
         <S.Title>404</S.Title>
         <S.TitleText>Страница не найдена</S.TitleText>
         <S.ParagraphText>

@@ -15,7 +15,7 @@ export const SellerProfile = () => {
         <S.ProfileSettingsContent>
           <S.BlockAvatar>
             <S.AvatarPicture>
-              <S.AvatarImg src="/img/user.png"></S.AvatarImg>
+              <S.AvatarImg src="/img/user.png" alt="avatarImg"></S.AvatarImg>
             </S.AvatarPicture>
           </S.BlockAvatar>
           <S.BlokInfo>
