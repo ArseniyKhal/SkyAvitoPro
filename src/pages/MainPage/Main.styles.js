@@ -1,5 +1,5 @@
 import { styled } from 'styled-components'
-import { Button } from '../../App.styles'
+import { Button } from 'App.styles'
 
 export const Title = styled.h1`
   color: var(--text-color-black);
@@ -20,10 +20,10 @@ export const MainFooter = styled.div`
   display: flex;
   justify-content: center;
 `
+export const MainButton = styled(Button)`
+  margin-bottom: 60px;
+`
 export const BlockError = styled.div`
   color: var(--orange-90);
   font-size: 30px;
-`
-export const MainButton = styled(Button)`
-  margin-bottom: 60px;
 `

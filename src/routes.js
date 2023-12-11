@@ -7,20 +7,23 @@ import { NotFound } from 'pages/NotFoundPage/NotFound'
 import { Adv } from 'pages/AdvPage/Adv'
 import { SellerProfile } from 'pages/SellerProfilePage/SellerProfile'
 import { Modal } from 'components/ModalWindow/Modal'
-import { FormAuth } from 'components/FormAuth/FormAuth'
 
 export const AppRoutes = () => {
-  const location = useLocation()
-  const background = location.state && location.state.background
+  //   const location = useLocation()
+  //   const background = location.state && location.state.background
   return (
     <>
-      <Routes location={background || location}>
-        {/* <Route path="/auth" element={<Auth />} /> */}
+      <Routes>
         <Route path="*" element={<NotFound />} />
         <Route path="/" element={<Main />}>
-          <Route path="/modal" element={<Modal />} />
-          <Route path="/auth" element={<Auth typeLogin={true} />} />
-          <Route path="/registration" element={<Auth typeLogin={false} />} />
+          <Route
+            path="/auth"
+            element={<Modal childComponent={<Auth typeLogin={true} />} />}
+          />
+          <Route
+            path="/registration"
+            element={<Modal childComponent={<Auth typeLogin={false} />} />}
+          />
         </Route>
         <Route
           path="profile"
@@ -47,12 +50,16 @@ export const AppRoutes = () => {
           }
         />
       </Routes>
-      {background && (
+      {/* {background && (
         <Routes>
           <Route path="modal" element={<Modal />} />
+          <Route
+            path="/auth"
+            element={<Modal childComponent={<Auth typeLogin={true} />} />}
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      )}
+      )} */}
     </>
   )
 }

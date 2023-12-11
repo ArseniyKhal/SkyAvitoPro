@@ -29,6 +29,7 @@ export const Content = styled.div`
   width: 366px;
   min-height: 440px;
   position: relative;
+  padding: 45px;
 `
 export const CloseBtn = styled.div`
   position: absolute;

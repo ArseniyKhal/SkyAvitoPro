@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Header } from 'components/Header/header'
+import { NavMenu } from 'components/NavMenu/NavMenu'
 import * as S from './Adv.styles'
 
 export const Adv = () => {
@@ -12,6 +13,7 @@ export const Adv = () => {
   return (
     <>
       <Header></Header>
+      <NavMenu></NavMenu>
       <S.AdvContent>
         <S.BlockPicture>
           <S.Picture></S.Picture>

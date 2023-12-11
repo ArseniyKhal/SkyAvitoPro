@@ -1,11 +1,13 @@
 import { Header } from 'components/Header/header'
 import { Card } from 'components/Card/Card'
+import { NavMenu } from 'components/NavMenu/NavMenu'
 import * as S from '../ProfilePage/Profile.styles'
 
 export const SellerProfile = () => {
   return (
     <>
       <Header></Header>
+      <NavMenu></NavMenu>
       <S.Title>Профиль продавца</S.Title>
 
       <S.ProfileSettings>

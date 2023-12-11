@@ -3,10 +3,12 @@ import { useState } from 'react'
 import { Header } from 'components/Header/header'
 import { Outlet } from 'react-router-dom'
 import { getAllAds } from 'api'
+import { SearchSection } from 'components/Search/SearchSection'
 // import { useGetAllTodosQuery } from 'services/servicesApi'
 import * as S from './Main.styles'
 
 export const Main = () => {
+  const isMain = true
   //   const { data, error, isLoading } = useGetAllTodosQuery()
   // скрытие кнопки "Наверх ↑"
   const [offSet, setOffSet] = useState('')
@@ -18,6 +20,7 @@ export const Main = () => {
     <>
       <Outlet />
       <Header></Header>
+      <SearchSection></SearchSection>
       <S.Title>Объявления</S.Title>
       <S.MainList>
         <Card></Card>
@@ -35,36 +38,6 @@ export const Main = () => {
           </S.MainButton>
         </S.MainFooter>
       )}
-      {/* <DarkBG>
-			<Container>
-			  <Header></Header>
-			  <S.TitleBlock>
-				 <S.TitleBlockContent>
-					<S.TitleBlockTitle>
-					  Онлайн-тренировки для занятий дома
-					</S.TitleBlockTitle>
-					<S.TitleBlockSlogan>
-					  Начните заниматься спортом и улучшите качество жизни
-					</S.TitleBlockSlogan>
-				 </S.TitleBlockContent>
-				 <S.SaleSticker>
-					<img src="/img/sale-sticker.png"></img>
-					<S.SaleStickerText>
-					  Измени своё <br /> тело за полгода
-					</S.SaleStickerText>
-				 </S.SaleSticker>
-			  </S.TitleBlock>
-			  {error && <S.BlockError>{error}</S.BlockError>}
-			  {!courses && !error ? (
-				 <Loader></Loader>
-			  ) : (
-				 <>
-					<S.MainList>{mapCoursesList}</S.MainList>
-				 </>
-			  )}
-			  
-			</Container>
-		 </DarkBG> */}
     </>
   )
 }

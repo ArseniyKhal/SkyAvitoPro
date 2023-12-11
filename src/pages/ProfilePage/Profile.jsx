@@ -1,13 +1,14 @@
 import { Header } from 'components/Header/header'
 import { Card } from 'components/Card/Card'
+import { NavMenu } from 'components/NavMenu/NavMenu'
 import * as S from './Profile.styles'
 
 export const Profile = () => {
   return (
     <>
       <Header></Header>
+      <NavMenu></NavMenu>
       <S.Title>Здравствуйте, Антон!</S.Title>
-
       {/* блок Настройки профиля */}
       <S.ProfileSettings>
         <S.SubTitle>Настройки профиля</S.SubTitle>
@@ -69,7 +70,6 @@ export const Profile = () => {
           </S.BlockSettings>
         </S.ProfileSettingsContent>
       </S.ProfileSettings>
-
       {/* Блок Мои товары */}
       <S.UsersProducts>
         <S.SubTitle>Мои товары</S.SubTitle>
