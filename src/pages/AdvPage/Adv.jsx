@@ -9,6 +9,7 @@ import * as S from './Adv.styles'
 
 // переделать продает товары с ....
 // сделать картинки кликабельными
+// не сделаны отзывы
 
 export const Adv = () => {
   const { advID } = useParams()
@@ -17,7 +18,6 @@ export const Adv = () => {
   const adv = data?.filter((item) => {
     return item.id === +advID
   })[0]
-  //   console.log(adv)
   // скрытие кнопки "Наверх ↑"
   const [offSet, setOffSet] = useState('')
   window.addEventListener('scroll', () => {
@@ -86,7 +86,12 @@ export const Adv = () => {
             </S.InfoButton>
 
             <S.SalesmanBlock>
-              <S.SalesmanLogo></S.SalesmanLogo>
+              <S.SalesmanLogo>
+                <S.Img
+                  src={`http://localhost:8090/${adv.user.avatar}`}
+                  alt="fotoAvd"
+                ></S.Img>
+              </S.SalesmanLogo>
               <div>
                 <S.SalesmanName>{adv.user.name}</S.SalesmanName>
                 <S.SalesmanInfo>
