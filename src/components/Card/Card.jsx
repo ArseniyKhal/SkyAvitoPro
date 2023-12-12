@@ -27,7 +27,7 @@ export const Card = ({ dataCard }) => {
         <S.CardLink>
           <Link to={`/adv/${dataCard.id}`}>{dataCard?.title}</Link>
         </S.CardLink>
-        <S.CardPrice>{dataCard?.price} ₽</S.CardPrice>
+        <S.CardPrice>{dataCard?.price.toLocaleString()} ₽</S.CardPrice>
         <S.CardBlock>
           <S.CardLocation>{dataCard?.user.city}</S.CardLocation>
           <S.CardData>{formateDate(dataCard?.created_on)}</S.CardData>

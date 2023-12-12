@@ -7,14 +7,14 @@ export const formateDate = (data) => {
 }
 
 // преобразование номера телефона
-export const formateTel = (data) => {
-  return data.replace(/(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5')
-}
-
-export const formateTelNumber = (data) => {
-  return `${data.split('').splice(0, 4).join('')}XXXXXXX`
-}
-
-export const formateSecretTelNumber = (data) => {
-  //   return `${data.split('').splice(0, 4).join('')}XXXXXXX`
+export const formateTel = (data, isVisibliTelNum) => {
+  const phoneNumbers = data.replace(/ /g, '').split('').reverse().join('')
+  let PhoneN = phoneNumbers.substring(0, 7)
+  if (!isVisibliTelNum) {
+    PhoneN = 'XX XX XXX'
+  }
+  PhoneN = PhoneN.replace(/(\d{2})(\d{2})(\d{3})/, '$1 $2 $3')
+  const PhoneCode = phoneNumbers.substring(7, 10)
+  const CodeСountries = phoneNumbers.substring(11, 13)
+  return `${PhoneN} ${PhoneCode} ${CodeСountries}`.split('').reverse().join('')
 }

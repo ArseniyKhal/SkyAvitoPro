@@ -18,5 +18,6 @@ html {
 	border-color: inherit;
 	justify-content: space-between;
 	flex-direction: column;
-
+	grid-template-columns: 480px 1fr;
+	grid-auto-columns: auto;
 }

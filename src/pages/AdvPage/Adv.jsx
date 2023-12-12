@@ -3,14 +3,12 @@ import { Header } from 'components/Header/header'
 import { NavMenu } from 'components/NavMenu/NavMenu'
 import { useGetAllAdvsQuery } from 'services/servicesApi'
 import { useParams } from 'react-router-dom'
-import {
-  formateDate,
-  formateTelNumber,
-  formateSecretTelNumber,
-  formateTel,
-} from 'helpers/helpers'
+import { formateDate, formateTel } from 'helpers/helpers'
 import { Loader2 } from 'App.styles'
 import * as S from './Adv.styles'
+
+// переделать продает товары с ....
+// сделать картинки кликабельными
 
 export const Adv = () => {
   const { advID } = useParams()
@@ -29,7 +27,6 @@ export const Adv = () => {
   // картинки
   let bigImageAdv
   let mapImagesList
-  //   const image = data.images[0]?.url
   if (adv) {
     bigImageAdv = adv.images[0]?.url
 
@@ -37,29 +34,19 @@ export const Adv = () => {
     mapImagesList = adv.images?.map((image) => {
       return (
         <S.SmallPicture key={image.id}>
-          <S.CardImg
+          <S.Img
             src={
               bigImageAdv
                 ? `http://localhost:8090/${image.url}`
                 : '/img/noImage.jpg'
             }
             alt="fotoAvd"
-          ></S.CardImg>
+          ></S.Img>
         </S.SmallPicture>
       )
     })
   }
 
-  //   console.log(formateTelNumber(adv?.user.phone))
-  //   let phoneSeler
-  //   if (!isLoading) {
-  //     phoneSeler = adv.user?.phone?.replace(
-  //       /(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})/,
-  //       '$1 $2 $3 $4 $5',
-  //     )
-  //   }
-  //   const tel = adv.user.phone?.split('').splice(0, 4).join('')
-  //   //   console.log(`${tel}XXXXXXX`)
   return (
     <>
       <Header></Header>
@@ -70,14 +57,14 @@ export const Adv = () => {
         <S.AdvContent>
           <S.BlockPicture>
             <S.Picture>
-              <S.CardImg
+              <S.Img
                 src={
                   bigImageAdv
                     ? `http://localhost:8090/${bigImageAdv}`
                     : '/img/noImage.jpg'
                 }
                 alt="fotoAvd"
-              ></S.CardImg>
+              ></S.Img>
             </S.Picture>
             <S.PictureCarousel>{mapImagesList}</S.PictureCarousel>
           </S.BlockPicture>
@@ -86,18 +73,25 @@ export const Adv = () => {
             <S.InfoData>{formateDate(adv.created_on)}</S.InfoData>
             <S.InfoLocation>{adv.user.city}</S.InfoLocation>
             <S.InfoReviews>23 отзыва</S.InfoReviews>
-            <S.InfoPrice>{adv.price} ₽</S.InfoPrice>
+            <S.InfoPrice>{adv.price.toLocaleString()} ₽</S.InfoPrice>
             <S.InfoButton onClick={() => setVisibliTelNum(true)}>
               <span>Показать телефон</span>
               {adv.user.phone
-                ? `${formateTel(adv.user.phone)}`
+                ? `${
+                    isVisibliTelNum
+                      ? formateTel(adv.user.phone, isVisibliTelNum)
+                      : formateTel(adv.user.phone, isVisibliTelNum)
+                  }`
                 : 'номер не указан'}
             </S.InfoButton>
+
             <S.SalesmanBlock>
               <S.SalesmanLogo></S.SalesmanLogo>
               <div>
-                <S.SalesmanName>Кирилл</S.SalesmanName>
-                <S.SalesmanInfo>Продает товары с августа 2021</S.SalesmanInfo>
+                <S.SalesmanName>{adv.user.name}</S.SalesmanName>
+                <S.SalesmanInfo>
+                  Продает товары {formateDate(adv.user?.sells_from)}
+                </S.SalesmanInfo>
               </div>
             </S.SalesmanBlock>
           </S.BlockInfo>

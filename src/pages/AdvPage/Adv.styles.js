@@ -3,9 +3,11 @@ import { Button } from '../../App.styles'
 
 export const AdvContent = styled.div`
   padding-top: 30px;
-  display: flex;
-  flex-wrap: wrap;
+  //   display: flex;
+  display: grid;
+  //   flex-wrap: wrap;
   gap: 60px;
+  grid-template-columns: minmax(320px, 480px) 1fr;
 `
 export const BlockPicture = styled.div`
   width: 480px;
@@ -17,7 +19,7 @@ export const Picture = styled.div`
   background-color: #f0f0f0;
   margin-bottom: 30px;
 `
-export const CardImg = styled.img`
+export const Img = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -41,7 +43,9 @@ export const InfoTitle = styled.h2`
   margin-bottom: 20px;
   max-width: 480px;
 `
-export const BlockText = styled.div``
+export const BlockText = styled.div`
+  grid-column: span 2;
+`
 export const TextTitle = styled.h3`
   color: var(--text-color-black);
   font-size: 32px;
@@ -110,5 +114,5 @@ export const SalesmanInfo = styled.p`
 export const TextParagraph = styled.p`
   color: var(--text-color-black);
   line-height: 150%;
-  max-width: 792px;
+  max-width: 800px;
 `
