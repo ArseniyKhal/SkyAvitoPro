@@ -10,12 +10,13 @@ export const Card = ({ dataCard }) => {
   //   const toggleModalWindow = () => {
   //     setOpenModalWindow((isOpenModalWindow) => !isOpenModalWindow)
   //   }
+  //   console.log(dataCard.user.phone)
+  //   console.log(dataCard)
   const image = dataCard.images[0]?.url
-
   return (
     <S.Card>
       <S.CardPicture>
-        <Link to={`/adv/`}>
+        <Link to={`/adv/${dataCard.id}`}>
           <S.CardImg
             src={image ? `http://localhost:8090/${image}` : '/img/noImage.jpg'}
             alt="fotoAvd"
@@ -24,12 +25,12 @@ export const Card = ({ dataCard }) => {
       </S.CardPicture>
       <S.CardContent>
         <S.CardLink>
-          <Link to={`/adv/`}>{dataCard.title}</Link>
+          <Link to={`/adv/${dataCard.id}`}>{dataCard?.title}</Link>
         </S.CardLink>
-        <S.CardPrice>{dataCard.price} ₽</S.CardPrice>
+        <S.CardPrice>{dataCard?.price} ₽</S.CardPrice>
         <S.CardBlock>
-          <S.CardLocation>{dataCard.user.city}</S.CardLocation>
-          <S.CardData>{formateDate(dataCard.created_on)}</S.CardData>
+          <S.CardLocation>{dataCard?.user.city}</S.CardLocation>
+          <S.CardData>{formateDate(dataCard?.created_on)}</S.CardData>
         </S.CardBlock>
       </S.CardContent>
     </S.Card>

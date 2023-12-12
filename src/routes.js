@@ -32,7 +32,7 @@ export const AppRoutes = () => {
           }
         />
         <Route
-          path="adv/"
+          path="adv/:advID"
           element={
             <ProtectedRoute>
               <Adv />

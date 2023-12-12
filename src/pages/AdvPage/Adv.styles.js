@@ -17,6 +17,11 @@ export const Picture = styled.div`
   background-color: #f0f0f0;
   margin-bottom: 30px;
 `
+export const CardImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`
 export const PictureCarousel = styled.div`
   display: flex;
   gap: 10px;

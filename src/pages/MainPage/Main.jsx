@@ -5,11 +5,12 @@ import { Outlet } from 'react-router-dom'
 // import { getAllAds } from 'api'
 import { SearchSection } from 'components/Search/SearchSection'
 import { useGetAllAdvsQuery } from 'services/servicesApi'
+import { Loader, Loader2 } from 'App.styles'
 import * as S from './Main.styles'
 
 export const Main = () => {
   const { data, error, isLoading } = useGetAllAdvsQuery()
-
+  const dfg = true
   //   getAllAds().then((data) => console.log(data))
 
   // формируем список объявлений
@@ -29,12 +30,9 @@ export const Main = () => {
       <Header></Header>
       <SearchSection></SearchSection>
       <S.Title>Объявления</S.Title>
-      <S.MainList>
-        {mapAdvsList}
-        {/* <Card></Card>
-        <Card></Card>
-        <Card></Card> */}
-      </S.MainList>
+
+      {isLoading ? <Loader2></Loader2> : <S.MainList>{mapAdvsList}</S.MainList>}
+
       {offSet && (
         <S.MainFooter>
           <S.MainButton
