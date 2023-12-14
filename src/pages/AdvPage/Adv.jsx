@@ -3,8 +3,11 @@ import { Header } from 'components/Header/header'
 import { NavMenu } from 'components/NavMenu/NavMenu'
 import { useGetAllAdvsQuery } from 'services/servicesApi'
 import { useParams } from 'react-router-dom'
-import { formateDate, formateTel } from 'helpers/helpers'
+import { formateDate, formateComment } from 'helpers/helpers'
 import { Loader2 } from 'App.styles'
+import { Link } from 'react-router-dom'
+import { useGetAllCommentsAdQuery } from 'services/servicesApi'
+import { TelButton } from 'components/TelButton/TelButton'
 import * as S from './Adv.styles'
 
 // переделать продает товары с ....
@@ -14,10 +17,16 @@ import * as S from './Adv.styles'
 export const Adv = () => {
   const { advID } = useParams()
   const [isVisibliTelNum, setVisibliTelNum] = useState(false)
-  const { data, error, isLoading } = useGetAllAdvsQuery()
-  const adv = data?.filter((item) => {
+  const { data: advData, isLoading } = useGetAllAdvsQuery()
+  const adv = advData?.filter((item) => {
     return item.id === +advID
   })[0]
+
+  const { data: commentAdv, isLoading: isComment } =
+    useGetAllCommentsAdQuery(advID)
+  //   console.log(adv)
+  //   console.log(commentAdv)
+
   // скрытие кнопки "Наверх ↑"
   const [offSet, setOffSet] = useState('')
   window.addEventListener('scroll', () => {
@@ -72,28 +81,27 @@ export const Adv = () => {
             <S.InfoTitle>{adv.title}</S.InfoTitle>
             <S.InfoData>{formateDate(adv.created_on)}</S.InfoData>
             <S.InfoLocation>{adv.user.city}</S.InfoLocation>
-            <S.InfoReviews>23 отзыва</S.InfoReviews>
+            <S.InfoReviews>
+              {commentAdv?.length} отзыв
+              {formateComment(commentAdv?.length)}
+            </S.InfoReviews>
             <S.InfoPrice>{adv.price.toLocaleString()} ₽</S.InfoPrice>
-            <S.InfoButton onClick={() => setVisibliTelNum(true)}>
-              <span>Показать телефон</span>
-              {adv.user.phone
-                ? `${
-                    isVisibliTelNum
-                      ? formateTel(adv.user.phone, isVisibliTelNum)
-                      : formateTel(adv.user.phone, isVisibliTelNum)
-                  }`
-                : 'номер не указан'}
-            </S.InfoButton>
-
+            <TelButton TelNamber={adv.user.phone}></TelButton>
             <S.SalesmanBlock>
               <S.SalesmanLogo>
                 <S.Img
-                  src={`http://localhost:8090/${adv.user.avatar}`}
+                  src={
+                    adv.user.avatar
+                      ? `http://localhost:8090/${adv.user.avatar}`
+                      : '/img/userLogo.jpg'
+                  }
                   alt="fotoAvd"
                 ></S.Img>
               </S.SalesmanLogo>
               <div>
-                <S.SalesmanName>{adv.user.name}</S.SalesmanName>
+                <S.SalesmanName>
+                  <Link to={`/seller/${adv.user_id}`}>{adv.user.name} </Link>
+                </S.SalesmanName>
                 <S.SalesmanInfo>
                   Продает товары {formateDate(adv.user?.sells_from)}
                 </S.SalesmanInfo>

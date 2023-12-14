@@ -74,10 +74,10 @@ export const Profile = () => {
       <S.UsersProducts>
         <S.SubTitle>Мои товары</S.SubTitle>
         <S.MainList>
+          {/* <Card></Card>
           <Card></Card>
           <Card></Card>
-          <Card></Card>
-          <Card></Card>
+          <Card></Card> */}
         </S.MainList>
       </S.UsersProducts>
 

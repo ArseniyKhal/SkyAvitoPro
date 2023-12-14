@@ -12,7 +12,7 @@ export const Card = ({ dataCard }) => {
   //   }
   //   console.log(dataCard.user.phone)
   //   console.log(dataCard)
-  const image = dataCard.images[0]?.url
+  const image = dataCard?.images[0]?.url
   return (
     <S.Card>
       <S.CardPicture>

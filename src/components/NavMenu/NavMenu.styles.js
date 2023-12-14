@@ -15,6 +15,7 @@ export const Content = styled.div`
 `
 export const Logo = styled.div`
   margin-right: 50px;
+  cursor: pointer;
 `
 
 export const EnterButton = styled(Button)``

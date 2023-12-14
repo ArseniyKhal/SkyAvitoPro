@@ -6,15 +6,15 @@ export const formateDate = (data) => {
   return formatDistanceToNow(new Date(data), { locale: ru })
 }
 
-// преобразование номера телефона
-export const formateTel = (data, isVisibliTelNum) => {
-  const phoneNumbers = data.replace(/ /g, '').split('').reverse().join('')
-  let PhoneN = phoneNumbers.substring(0, 7)
-  if (!isVisibliTelNum) {
-    PhoneN = 'XX XX XXX'
+// формирует окончание слова ОТЗЫВов
+export const formateComment = (data) => {
+  if (data > 10 && data < 20) {
+    return 'ов'
+  } else if (data % 10 === 1) {
+    return ''
+  } else if (data % 10 > 1 && data % 10 < 5) {
+    return 'а'
+  } else {
+    return 'ов'
   }
-  PhoneN = PhoneN.replace(/(\d{2})(\d{2})(\d{3})/, '$1 $2 $3')
-  const PhoneCode = phoneNumbers.substring(7, 10)
-  const CodeСountries = phoneNumbers.substring(11, 13)
-  return `${PhoneN} ${PhoneCode} ${CodeСountries}`.split('').reverse().join('')
 }

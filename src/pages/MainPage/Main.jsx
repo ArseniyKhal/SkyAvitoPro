@@ -13,6 +13,8 @@ export const Main = () => {
   const dfg = true
   //   getAllAds().then((data) => console.log(data))
 
+  //   console.log(data)
+
   // формируем список объявлений
   const mapAdvsList = data?.map((advCard) => {
     return <Card key={advCard.id} dataCard={advCard}></Card>

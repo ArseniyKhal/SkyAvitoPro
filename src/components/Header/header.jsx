@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 // import { useRef, useState } from 'react'
 // import { useDispatch } from 'react-redux'
 // import { removeUser } from 'store/slices/userSlice'
 // import { useAuth } from 'hooks/use-auth'
 // import { useDropdownClose } from 'hooks/use-dropdown-close'
 // import { signOutUser } from 'api'
-import { useLocation, useNavigate } from 'react-router'
+import { useNavigate } from 'react-router'
 import * as S from './header.styles'
 
 export const Header = () => {
@@ -13,10 +13,6 @@ export const Header = () => {
   const navigate = useNavigate()
   //   const { isAuth, email } = useAuth()
   //   const [isProfileMenu, setProfileMenu] = useState(false)
-  let isMain = false
-  if (useLocation().pathname === '/') {
-    isMain = true
-  }
   let isAuth = false
 
   //   const node = useRef()

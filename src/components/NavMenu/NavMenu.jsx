@@ -7,7 +7,7 @@ export const NavMenu = () => {
   return (
     <>
       <S.Content>
-        <S.Logo>
+        <S.Logo onClick={() => navigate('/')}>
           <svg
             width="54"
             height="38"

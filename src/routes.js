@@ -40,7 +40,7 @@ export const AppRoutes = () => {
           }
         />
         <Route
-          path="seller/"
+          path="seller/:selID"
           element={
             <ProtectedRoute>
               <SellerProfile />

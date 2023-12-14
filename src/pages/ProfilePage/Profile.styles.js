@@ -43,14 +43,13 @@ export const AvatarImg = styled.img`
 export const BlokInfo = styled.div``
 export const SellerName = styled.p`
   color: var(--text-color-black);
-  margin-bottom: 4px;
   font-size: 20px;
   font-weight: 600;
   line-height: 200%;
 `
 export const SellerLocation = styled.p`
   color: var(--text-color-grey);
-  line-height: 130%;
+  line-height: 200%;
   margin-bottom: 4px;
 `
 export const TelButton = styled(Button)`
