@@ -16,6 +16,11 @@ export const advApi = createApi({
       query: (id) => `ads/${id}/comments`,
     }),
 
+    // получить все объявления текущего пользователя
+    getMyAdvs: builder.query({
+      query: () => 'ads/me',
+    }),
+
     // авторизовать пользователя
     loginUser: builder.mutation({
       query: (body) => {
@@ -42,7 +47,7 @@ export const advApi = createApi({
       // query: (body) => {
       //   return {
       //     url: 'user',
-      //     method: 'post',
+      //     method: 'get',
       //     body,
       //   }
       // },
@@ -53,6 +58,7 @@ export const advApi = createApi({
 export const {
   useGetAllAdvsQuery,
   useGetAllCommentsAdQuery,
+  useGetMyAdvsQuery,
   useLoginUserMutation,
   useRegisterUserMutation,
   useGetUserQuery,

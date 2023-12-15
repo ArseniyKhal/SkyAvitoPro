@@ -1,9 +1,14 @@
 import { Header } from 'components/Header/header'
 import { Card } from 'components/Card/Card'
 import { NavMenu } from 'components/NavMenu/NavMenu'
+import { useGetMyAdvsQuery, useGetUserQuery } from 'services/servicesApi'
+import { useAuth } from 'hooks/use-auth'
 import * as S from './Profile.styles'
 
 export const Profile = () => {
+  const { isAuth, email, access, refresh } = useAuth()
+  const { data } = useGetUserQuery()
+  console.log(data)
   return (
     <>
       <Header></Header>

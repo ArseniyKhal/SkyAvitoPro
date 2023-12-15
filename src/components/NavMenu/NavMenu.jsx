@@ -1,8 +1,13 @@
 import { useNavigate } from 'react-router'
+import { useDispatch } from 'react-redux'
+import { removeUser } from 'store/slices/userSlice'
+import { useAuth } from 'hooks/use-auth'
 import * as S from './NavMenu.styles'
 
 export const NavMenu = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const { isAuth } = useAuth()
 
   return (
     <>
@@ -73,6 +78,17 @@ export const NavMenu = () => {
         <S.EnterButton onClick={() => navigate('/')}>
           Вернуться на главную
         </S.EnterButton>
+        {isAuth && (
+          <S.EnterButton
+            onClick={() => {
+              navigate('/')
+              localStorage.removeItem('userSkyVito')
+              dispatch(removeUser())
+            }}
+          >
+            Выйти
+          </S.EnterButton>
+        )}
       </S.Content>
     </>
   )

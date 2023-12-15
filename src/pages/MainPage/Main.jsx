@@ -7,13 +7,8 @@ import { useGetAllAdvsQuery } from 'services/servicesApi'
 import { Loader, Loader2 } from 'App.styles'
 import * as S from './Main.styles'
 
-// обработать ошибку загрузки
-
 export const Main = () => {
-  const { data, error, isLoading } = useGetAllAdvsQuery()
-  const dfg = true
-  //   getAllAds().then((data) => console.log(data))
-  //   console.log(data)
+  const { data, isError, isLoading } = useGetAllAdvsQuery()
 
   // формируем список объявлений
   const mapAdvsList = data?.map((advCard) => {
@@ -33,7 +28,17 @@ export const Main = () => {
       <SearchSection></SearchSection>
       <S.Title>Объявления</S.Title>
 
-      {isLoading ? <Loader2></Loader2> : <S.MainList>{mapAdvsList}</S.MainList>}
+      {isLoading ? (
+        <Loader2></Loader2>
+      ) : (
+        <>
+          {isError ? (
+            'Сервер недоступен. Попробуйте позже.'
+          ) : (
+            <S.MainList>{mapAdvsList}</S.MainList>
+          )}
+        </>
+      )}
 
       {offSet && (
         <S.MainFooter>

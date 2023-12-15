@@ -12,8 +12,8 @@ export function useAuth() {
       dispatch(
         setUser({
           email: userData.email,
-          access: userData.access_token,
-          refresh: userData.refresh_token,
+          access: userData.access,
+          refresh: userData.refresh,
         }),
       )
     }

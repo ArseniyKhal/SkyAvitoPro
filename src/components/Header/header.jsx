@@ -33,9 +33,7 @@ export const Header = () => {
                 >
                   Разместить объявление
                 </S.EnterButton>
-                <S.EnterButton
-                  onClick={() => console.log('переход в Личный кабинет')}
-                >
+                <S.EnterButton onClick={() => navigate('/profile')}>
                   Личный кабинет
                 </S.EnterButton>
               </>
