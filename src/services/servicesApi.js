@@ -36,6 +36,17 @@ export const advApi = createApi({
         }
       },
     }),
+    // получить текущего пользователя
+    getUser: builder.query({
+      query: () => 'user',
+      // query: (body) => {
+      //   return {
+      //     url: 'user',
+      //     method: 'post',
+      //     body,
+      //   }
+      // },
+    }),
   }),
 })
 
@@ -44,4 +55,5 @@ export const {
   useGetAllCommentsAdQuery,
   useLoginUserMutation,
   useRegisterUserMutation,
+  useGetUserQuery,
 } = advApi

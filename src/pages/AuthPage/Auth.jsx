@@ -4,6 +4,8 @@ import {
   useLoginUserMutation,
   useRegisterUserMutation,
 } from 'services/servicesApi'
+import { useDispatch } from 'react-redux'
+import { setUser } from 'store/slices/userSlice'
 import * as S from './Auth.styles'
 
 const initialState = {
@@ -14,26 +16,23 @@ const initialState = {
   city: '',
 }
 
+const saveUserInfoInLocalStorage = (loginData, formValue) => {
+  const userInfo = JSON.stringify({
+    email: formValue.email,
+    access: loginData.data.access_token,
+    refresh: loginData.data.refresh_token,
+  })
+  localStorage.setItem('userSkyVito', userInfo)
+}
+
 export const Auth = ({ typeLogin }) => {
-  //   const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [inputError, setInputError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [formValue, setFormValue] = useState(initialState)
   const { email, password, name, surname, city } = formValue
   const [repPass, setRepPass] = useState('')
-  //   const [typeLogin, setTypeLogin] = useState(true)
-
-  //   const login = async () => {
-  //     //авторизация
-  //     const loginData = await loginUser({ email, password })
-  //     if (loginData.data) {
-  //       navigate('/')
-  //     } else {
-  //       setInputError(loginData.error.data.detail)
-  //       throw new Error(loginData.error.data.detail)
-  //     }
-  //   }
 
   const nameEnterBtn = typeLogin ? 'Войти' : 'Зарегистрироваться'
   const handleChange = (e) => {
@@ -44,22 +43,22 @@ export const Auth = ({ typeLogin }) => {
 
   // вход/регистрация
   const handleClick = async () => {
-    //  if (!formValue.email) {
-    //    return setInputError('Введите email')
-    //  }
-    //  if (!formValue.password) {
-    //    return setInputError('Введите пароль')
-    //  }
-    //  if (!typeLogin && formValue.password !== repPass) {
-    //    return setInputError('пароли не совпадают')
-    //  }
-    //  if (
-    //    !typeLogin &&
-    //    formValue.password.length < 8 &&
-    //    formValue.password.length > 0
-    //  ) {
-    //    return setInputError('Не менее 8 символов')
-    //  }
+    if (!formValue.email) {
+      return setInputError('Введите email')
+    }
+    if (!formValue.password) {
+      return setInputError('Введите пароль')
+    }
+    if (!typeLogin && formValue.password !== repPass) {
+      return setInputError('пароли не совпадают')
+    }
+    if (
+      !typeLogin &&
+      formValue.password.length < 8 &&
+      formValue.password.length > 0
+    ) {
+      return setInputError('Не менее 8 символов')
+    }
     try {
       setIsLoading(true)
       setInputError('')
@@ -67,6 +66,14 @@ export const Auth = ({ typeLogin }) => {
         //авторизация
         const loginData = await loginUser({ email, password })
         if (loginData.data) {
+          dispatch(
+            setUser({
+              email: formValue.email,
+              access: loginData.data.access_token,
+              refresh: loginData.data.refresh_token,
+            }),
+          )
+          saveUserInfoInLocalStorage(loginData, formValue)
           navigate('/')
         } else {
           setInputError(loginData.error.data.detail)
@@ -85,6 +92,7 @@ export const Auth = ({ typeLogin }) => {
         if (registerData.data) {
           const loginData = await loginUser({ email, password })
           if (loginData.data) {
+            saveUserInfoInLocalStorage(loginData, formValue)
             navigate('/')
           }
         } else {
@@ -99,10 +107,6 @@ export const Auth = ({ typeLogin }) => {
   }
 
   //   useEffect(() => {
-  //     //  if (isRegisterSuccess) {
-  //     //    toast.success('Зарегался!')
-  //     //    navigate('/')
-  //     //  }
   //   }, [])
 
   return (
