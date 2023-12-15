@@ -1,61 +1,109 @@
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import {
+  useLoginUserMutation,
+  useRegisterUserMutation,
+} from 'services/servicesApi'
 import * as S from './Auth.styles'
+
+const initialState = {
+  email: '',
+  password: '',
+  name: '',
+  surname: '',
+  city: '',
+}
 
 export const Auth = ({ typeLogin }) => {
   //   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [inputError, setInputError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
-  const [email, setEmail] = useState('')
-  const [pass, setPass] = useState('')
+  const [formValue, setFormValue] = useState(initialState)
+  const { email, password, name, surname, city } = formValue
   const [repPass, setRepPass] = useState('')
-  const [name, setName] = useState('')
-  const [surname, setSurname] = useState('')
-  const [city, setCity] = useState('')
   //   const [typeLogin, setTypeLogin] = useState(true)
 
-  const handleClick = async () => {
-    // try {
-    if (!email) {
-      return setInputError('Введите email')
-    }
-    if (!pass) {
-      return setInputError('Введите пароль')
-    }
-    if (!typeLogin && pass !== repPass) {
-      return setInputError('пароли не совпадают')
-    }
-    if (!typeLogin && pass.length < 8 && pass.length > 0) {
-      return setInputError('Не менее 8 символов')
-    }
-    console.log('вход')
-    //  setIsLoading(true)
-    //  setInputError('')
-    //  let user = {}
-    //  if (typeLogin) {
-    //    user = await login({ email, pass })
-    //  } else {
-    //    user = await registration({ email, pass })
-    //  }
-    //  if (user) {
-    //    dispatch(
-    //      setUser({
-    //        email: user.email,
-    //        id: user.uid,
-    //        token: user.accessToken,
-    //      }),
-    //    )
-    //    saveUserInfoInLocalStorage(user)
-    //    navigate('/')
-    //  }
-    // } catch (error) {
-    //   setInputError(error.message)
-    // } finally {
-    //   setIsLoading(false)
-    // }
-  }
+  //   const login = async () => {
+  //     //авторизация
+  //     const loginData = await loginUser({ email, password })
+  //     if (loginData.data) {
+  //       navigate('/')
+  //     } else {
+  //       setInputError(loginData.error.data.detail)
+  //       throw new Error(loginData.error.data.detail)
+  //     }
+  //   }
+
   const nameEnterBtn = typeLogin ? 'Войти' : 'Зарегистрироваться'
+  const handleChange = (e) => {
+    setFormValue({ ...formValue, [e.target.name]: e.target.value })
+  }
+  const [loginUser] = useLoginUserMutation()
+  const [registerUser] = useRegisterUserMutation()
+
+  // вход/регистрация
+  const handleClick = async () => {
+    //  if (!formValue.email) {
+    //    return setInputError('Введите email')
+    //  }
+    //  if (!formValue.password) {
+    //    return setInputError('Введите пароль')
+    //  }
+    //  if (!typeLogin && formValue.password !== repPass) {
+    //    return setInputError('пароли не совпадают')
+    //  }
+    //  if (
+    //    !typeLogin &&
+    //    formValue.password.length < 8 &&
+    //    formValue.password.length > 0
+    //  ) {
+    //    return setInputError('Не менее 8 символов')
+    //  }
+    try {
+      setIsLoading(true)
+      setInputError('')
+      if (typeLogin) {
+        //авторизация
+        const loginData = await loginUser({ email, password })
+        if (loginData.data) {
+          navigate('/')
+        } else {
+          setInputError(loginData.error.data.detail)
+          throw new Error(loginData.error.data.detail)
+        }
+      } else {
+        // регистрация
+        const registerData = await registerUser({
+          email,
+          password,
+          name,
+          surname,
+          city,
+        })
+        //   console.log(registerData)
+        if (registerData.data) {
+          const loginData = await loginUser({ email, password })
+          if (loginData.data) {
+            navigate('/')
+          }
+        } else {
+          setInputError('пользователь с такими данными уже существует')
+          throw new Error(registerData.error.data.details)
+        }
+      }
+    } catch (error) {
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  //   useEffect(() => {
+  //     //  if (isRegisterSuccess) {
+  //     //    toast.success('Зарегался!')
+  //     //    navigate('/')
+  //     //  }
+  //   }, [])
 
   return (
     <>
@@ -129,14 +177,14 @@ export const Auth = ({ typeLogin }) => {
             name="email"
             placeholder="Email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleChange}
           />
           <S.ModalInput
             type="password"
             name="password"
             placeholder="Пароль"
-            value={pass}
-            onChange={(e) => setPass(e.target.value)}
+            value={password}
+            onChange={handleChange}
           />
           {!typeLogin && (
             <>
@@ -152,21 +200,21 @@ export const Auth = ({ typeLogin }) => {
                 name="name"
                 placeholder="Имя (необязательно)"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={handleChange}
               />
               <S.ModalInput
                 type="text"
                 name="surname"
                 placeholder="Фамилия (необязательно)"
                 value={surname}
-                onChange={(e) => setSurname(e.target.value)}
+                onChange={handleChange}
               />
               <S.ModalInput
                 type="text"
                 name="city"
                 placeholder="Город (необязательно)"
                 value={city}
-                onChange={(e) => setCity(e.target.value)}
+                onChange={handleChange}
               />
             </>
           )}
@@ -177,7 +225,12 @@ export const Auth = ({ typeLogin }) => {
             {isLoading ? 'Логинимся' : nameEnterBtn}
           </S.PrimaryButton>
           {typeLogin && (
-            <S.SecondaryButton onClick={() => navigate('/registration')}>
+            <S.SecondaryButton
+              onClick={() => {
+                setInputError('')
+                navigate('/registration')
+              }}
+            >
               Зарегистрироваться
             </S.SecondaryButton>
           )}

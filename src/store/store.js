@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
-// import userReduser from './slices/userSlice'
 import { advApi } from 'services/servicesApi'
+import { setupListeners } from '@reduxjs/toolkit/query'
 
 export const store = configureStore({
   reducer: {
@@ -9,3 +9,5 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(advApi.middleware),
 })
+
+setupListeners(store.dispatch)

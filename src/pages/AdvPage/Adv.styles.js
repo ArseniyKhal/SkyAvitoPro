@@ -2,9 +2,7 @@ import { styled } from 'styled-components'
 
 export const AdvContent = styled.div`
   padding-top: 30px;
-  //   display: flex;
   display: grid;
-  //   flex-wrap: wrap;
   gap: 60px;
   grid-template-columns: minmax(320px, 480px) 1fr;
 `
@@ -39,8 +37,8 @@ export const InfoTitle = styled.h2`
   font-size: 32px;
   font-weight: 700;
   line-height: 140%;
-  margin-bottom: 20px;
   max-width: 480px;
+  margin-bottom: 10px;
 `
 export const BlockText = styled.div`
   grid-column: span 2;
@@ -76,6 +74,7 @@ export const InfoPrice = styled.p`
   margin-bottom: 20px;
 `
 export const SalesmanBlock = styled.div`
+  margin-top: 34px;
   display: flex;
   gap: 12px;
 `

@@ -73,7 +73,7 @@ export const SearchSection = () => {
         // onChange={(event) => {
         //   setSearchText(event.target.value)
         // }}
-        type="search"
+        type="text"
         placeholder="Поиск по объявлениям"
         name="search"
       />

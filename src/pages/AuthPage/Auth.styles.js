@@ -6,7 +6,8 @@ export const ModalForm = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 45px;
+  padding: 44px;
+  max-width: 366px;
 `
 export const ModalLogo = styled.div`
   display: flex;
@@ -81,4 +82,5 @@ export const Error = styled.div`
   line-height: 24px;
   margin-top: 20px;
   text-align: left;
+  width: 100%;
 `

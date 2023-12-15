@@ -15,7 +15,33 @@ export const advApi = createApi({
     getAllCommentsAd: builder.query({
       query: (id) => `ads/${id}/comments`,
     }),
+
+    // авторизовать пользователя
+    loginUser: builder.mutation({
+      query: (body) => {
+        return {
+          url: 'auth/login',
+          method: 'post',
+          body,
+        }
+      },
+    }),
+    // регистрация пользователя
+    registerUser: builder.mutation({
+      query: (body) => {
+        return {
+          url: 'auth/register',
+          method: 'post',
+          body,
+        }
+      },
+    }),
   }),
 })
 
-export const { useGetAllAdvsQuery, useGetAllCommentsAdQuery } = advApi
+export const {
+  useGetAllAdvsQuery,
+  useGetAllCommentsAdQuery,
+  useLoginUserMutation,
+  useRegisterUserMutation,
+} = advApi
