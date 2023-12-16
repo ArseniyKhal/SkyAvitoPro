@@ -8,6 +8,7 @@ const baseQuery = fetchBaseQuery({
     const token = getState().auth.access
     if (token) {
       headers.set('authorization', `Bearer ${token}`)
+      headers.set('content-type', `application/json`)
     }
     return headers
   },
@@ -32,7 +33,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   }
 
   // Делаем запрос за новым access токеном в API обновления токена
-  console.log('Делаем запрос за новым access токеном')
+  //   console.log('Делаем запрос за новым access токеном')
   const refreshResult = await baseQuery(
     {
       url: '/auth/login',
@@ -60,7 +61,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     }),
   )
   // Делаем повторный запрос с теми же параметрами что и исходный
-  console.log('Делаем повторный запрос с новым access токеном')
+  //   console.log('Делаем повторный запрос с новым access токеном')
   const retryResult = await baseQuery(args, api, extraOptions)
 
   // Если повторный запрос выполнился с 401 кодом, то что-то совсем пошло не так,
@@ -74,16 +75,6 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 export const advApi = createApi({
   reducerPath: 'advApi',
   baseQuery: baseQueryWithReauth,
-  //   baseQuery: fetchBaseQuery({
-  //     baseUrl: 'http://localhost:8090',
-  //     prepareHeaders: (headers, { getState }) => {
-  //       const token = getState().auth.access
-  //       if (token) {
-  //         headers.set('authorization', `Bearer ${token}`)
-  //       }
-  //       return headers
-  //     },
-  //   }),
   endpoints: (builder) => ({
     // Получить все объявления
     getAllAdvs: builder.query({
@@ -105,7 +96,7 @@ export const advApi = createApi({
       query: (body) => {
         return {
           url: 'auth/login',
-          method: 'post',
+          method: 'POST',
           body,
         }
       },
@@ -116,7 +107,7 @@ export const advApi = createApi({
       query: (body) => {
         return {
           url: 'auth/register',
-          method: 'post',
+          method: 'POST',
           body,
         }
       },
@@ -124,18 +115,24 @@ export const advApi = createApi({
     // получить текущего пользователя
     getUser: builder.query({
       query: () => 'user',
+      providesTags: () => ['User'],
     }),
 
     // изменить запись текущего пользователя
     patchUser: builder.mutation({
       query: (body) => {
+        for (const propName in body) {
+          if (body[propName] === '') {
+            delete body[propName]
+          }
+        }
         return {
           url: 'user',
-          mode: 'no-cors',
-          method: 'patch',
+          method: 'PATCH',
           body,
         }
       },
+      invalidatesTags: ['User'],
     }),
   }),
 })

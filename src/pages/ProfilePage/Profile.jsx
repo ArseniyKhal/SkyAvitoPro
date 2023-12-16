@@ -15,11 +15,10 @@ const initialState = {
 }
 
 export const Profile = () => {
-  //   const { isAuth, email, access, refresh } = useAuth()
+  const [isSending, setIsSending] = useState(false)
   const [patchUser] = usePatchUserMutation()
-
   const { data: user, isLoading, isError } = useGetUserQuery()
-  console.log(user)
+  //   console.log(user)
   const [formValue, setFormValue] = useState(initialState)
   const { name, surname, city, tel } = formValue
 
@@ -27,9 +26,19 @@ export const Profile = () => {
     setFormValue({ ...formValue, [e.target.name]: e.target.value })
   }
   const handleClick = async () => {
-    console.log('отправляю: ', formValue)
-    const patchUserData = await patchUser({ name, surname, city, tel })
-    console.log(patchUserData)
+    try {
+      setIsSending(true)
+      const patchUserData = await patchUser({ name, surname, city, tel })
+      if (patchUserData) {
+        console.log(patchUserData)
+        // добавить впсплывашку в случае удачи
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setFormValue(initialState)
+      setIsSending(false)
+    }
   }
   return (
     <>
@@ -104,7 +113,8 @@ export const Profile = () => {
                         !formValue.name &&
                         !formValue.surname &&
                         !formValue.city &&
-                        !formValue.tel
+                        !formValue.tel &&
+                        !isSending
                       }
                       onClick={() => handleClick()}
                     >
