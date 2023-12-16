@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { setUser } from 'store/slices/userSlice'
+import { setUser } from 'store/slices/authSlice'
 import { useEffect } from 'react'
 
 export function useAuth() {
@@ -18,7 +18,7 @@ export function useAuth() {
       )
     }
   }, [dispatch])
-  const { email, access, refresh } = useSelector((state) => state.user)
+  const { email, access, refresh } = useSelector((state) => state.auth)
 
   return {
     isAuth: !!email,

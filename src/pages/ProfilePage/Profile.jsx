@@ -4,6 +4,7 @@ import { NavMenu } from 'components/NavMenu/NavMenu'
 import { useGetUserQuery } from 'services/servicesApi'
 import { Loader2 } from 'App.styles'
 import { useState } from 'react'
+import { usePatchUserMutation } from 'services/servicesApi'
 import * as S from './Profile.styles'
 
 const initialState = {
@@ -15,6 +16,8 @@ const initialState = {
 
 export const Profile = () => {
   //   const { isAuth, email, access, refresh } = useAuth()
+  const [patchUser] = usePatchUserMutation()
+
   const { data: user, isLoading, isError } = useGetUserQuery()
   console.log(user)
   const [formValue, setFormValue] = useState(initialState)
@@ -23,7 +26,11 @@ export const Profile = () => {
   const handleChange = (e) => {
     setFormValue({ ...formValue, [e.target.name]: e.target.value })
   }
-  console.log(formValue)
+  const handleClick = async () => {
+    console.log('отправляю: ', formValue)
+    const patchUserData = await patchUser({ name, surname, city, tel })
+    console.log(patchUserData)
+  }
   return (
     <>
       <Header></Header>
@@ -93,8 +100,13 @@ export const Profile = () => {
                       />
                     </S.InputsBlockTel>
                     <S.EnterButton
-                      disabled={true}
-                      onClick={() => console.log('тык')}
+                      disabled={
+                        !formValue.name &&
+                        !formValue.surname &&
+                        !formValue.city &&
+                        !formValue.tel
+                      }
+                      onClick={() => handleClick()}
                     >
                       Сохранить
                     </S.EnterButton>

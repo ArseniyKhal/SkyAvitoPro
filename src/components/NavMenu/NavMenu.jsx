@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router'
 import { useDispatch } from 'react-redux'
-import { removeUser } from 'store/slices/userSlice'
+import { removeUser } from 'store/slices/authSlice'
 import { useAuth } from 'hooks/use-auth'
 import * as S from './NavMenu.styles'
 

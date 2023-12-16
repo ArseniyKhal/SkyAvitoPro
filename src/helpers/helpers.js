@@ -20,9 +20,9 @@ export const formateComment = (data) => {
 }
 
 // записывает данные пользователя в Local Storage
-export const saveUserInfoInLocalStorage = (loginData, formValue) => {
+export const saveUserInfoInLocalStorage = (loginData, email) => {
   const userInfo = JSON.stringify({
-    email: formValue.email,
+    email,
     access: loginData.data.access_token,
     refresh: loginData.data.refresh_token,
   })

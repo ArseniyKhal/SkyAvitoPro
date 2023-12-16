@@ -5,7 +5,7 @@ import {
   useRegisterUserMutation,
 } from 'services/servicesApi'
 import { useDispatch } from 'react-redux'
-import { setUser } from 'store/slices/userSlice'
+import { setUser } from 'store/slices/authSlice'
 import { saveUserInfoInLocalStorage } from 'helpers/helpers'
 import * as S from './Auth.styles'
 
@@ -65,7 +65,7 @@ export const Auth = ({ typeLogin }) => {
               refresh: loginData.data.refresh_token,
             }),
           )
-          saveUserInfoInLocalStorage(loginData, formValue)
+          saveUserInfoInLocalStorage(loginData, formValue.email)
           navigate('/')
         } else {
           setInputError(loginData.error.data.detail)

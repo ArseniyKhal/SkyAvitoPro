@@ -1,7 +1,7 @@
 // import { Link } from 'react-router-dom'
 // import { useRef, useState } from 'react'
 // import { useDispatch } from 'react-redux'
-// import { removeUser } from 'store/slices/userSlice'
+// import { removeUser } from 'store/slices/authSlice'
 import { useAuth } from 'hooks/use-auth'
 import { useNavigate } from 'react-router'
 import * as S from './header.styles'

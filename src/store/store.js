@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { advApi } from 'services/servicesApi'
 import { setupListeners } from '@reduxjs/toolkit/query'
-import userReduser from './slices/userSlice'
+import userReduser from './slices/authSlice'
 
 export const store = configureStore({
   reducer: {
-    user: userReduser,
+    auth: userReduser,
     [advApi.reducerPath]: advApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

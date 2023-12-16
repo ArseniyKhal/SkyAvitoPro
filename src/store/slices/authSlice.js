@@ -6,8 +6,8 @@ const initialState = {
   refresh: null,
 }
 
-const userSlice = createSlice({
-  name: 'user',
+const authSlice = createSlice({
+  name: 'auth',
   initialState,
   reducers: {
     setUser(state, action) {
@@ -24,6 +24,6 @@ const userSlice = createSlice({
   },
 })
 
-export const { setUser, removeUser } = userSlice.actions
+export const { setUser, removeUser } = authSlice.actions
 
-export default userSlice.reducer
+export default authSlice.reducer
