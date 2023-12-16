@@ -16,7 +16,7 @@ export const MainList = styled.ul`
   margin-bottom: 34px;
 `
 
-export const MainFooter = styled.div`
+export const MainFooter = styled.section`
   display: flex;
   justify-content: center;
 `

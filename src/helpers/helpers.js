@@ -18,3 +18,13 @@ export const formateComment = (data) => {
     return 'ов'
   }
 }
+
+// записывает данные пользователя в Local Storage
+export const saveUserInfoInLocalStorage = (loginData, formValue) => {
+  const userInfo = JSON.stringify({
+    email: formValue.email,
+    access: loginData.data.access_token,
+    refresh: loginData.data.refresh_token,
+  })
+  localStorage.setItem('userSkyVito', userInfo)
+}

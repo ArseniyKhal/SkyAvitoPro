@@ -12,13 +12,17 @@ export const Card = ({ dataCard }) => {
   //   }
   //   console.log(dataCard.user.phone)
   //   console.log(dataCard)
-  const image = dataCard?.images[0]?.url
+  //   const image = dataCard?.images[0]?.url
   return (
     <S.Card>
       <S.CardPicture>
         <Link to={`/adv/${dataCard.id}`}>
           <S.CardImg
-            src={image ? `http://localhost:8090/${image}` : '/img/noImage.jpg'}
+            src={
+              dataCard?.images[0]?.url
+                ? `http://localhost:8090/${dataCard?.images[0]?.url}`
+                : '/img/noImage.jpg'
+            }
             alt="fotoAvd"
           ></S.CardImg>
         </Link>

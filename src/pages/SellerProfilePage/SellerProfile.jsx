@@ -42,7 +42,7 @@ export const SellerProfile = () => {
                   src={
                     selerData.avatar
                       ? `http://localhost:8090/${selerData.avatar}`
-                      : '/img/userLogo.jpg'
+                      : '/img/userLogo.webp'
                   }
                   alt="avatarSeller"
                 ></S.AvatarImg>

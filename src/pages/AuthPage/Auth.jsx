@@ -6,6 +6,7 @@ import {
 } from 'services/servicesApi'
 import { useDispatch } from 'react-redux'
 import { setUser } from 'store/slices/userSlice'
+import { saveUserInfoInLocalStorage } from 'helpers/helpers'
 import * as S from './Auth.styles'
 
 const initialState = {
@@ -14,15 +15,6 @@ const initialState = {
   name: '',
   surname: '',
   city: '',
-}
-
-const saveUserInfoInLocalStorage = (loginData, formValue) => {
-  const userInfo = JSON.stringify({
-    email: formValue.email,
-    access: loginData.data.access_token,
-    refresh: loginData.data.refresh_token,
-  })
-  localStorage.setItem('userSkyVito', userInfo)
 }
 
 export const Auth = ({ typeLogin }) => {

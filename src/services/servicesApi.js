@@ -4,6 +4,13 @@ export const advApi = createApi({
   reducerPath: 'advApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:8090',
+    prepareHeaders: (headers, { getState }) => {
+      const token = getState().user.access
+      if (token) {
+        headers.set('authorization', `Bearer ${token}`)
+      }
+      return headers
+    },
   }),
   endpoints: (builder) => ({
     // Получить все объявления
@@ -31,6 +38,18 @@ export const advApi = createApi({
         }
       },
     }),
+
+    // Обновить токены
+    refreshTokens: builder.mutation({
+      query: (body) => {
+        return {
+          url: 'auth/login',
+          method: 'post',
+          body,
+        }
+      },
+    }),
+
     // регистрация пользователя
     registerUser: builder.mutation({
       query: (body) => {

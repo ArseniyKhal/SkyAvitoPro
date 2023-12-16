@@ -93,7 +93,7 @@ export const Adv = () => {
                   src={
                     adv.user.avatar
                       ? `http://localhost:8090/${adv.user.avatar}`
-                      : '/img/userLogo.jpg'
+                      : '/img/userLogo.webp'
                   }
                   alt="fotoAvd"
                 ></S.Img>
