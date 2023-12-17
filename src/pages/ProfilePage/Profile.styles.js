@@ -106,11 +106,6 @@ export const ProfileSettingsInput = styled.input`
   outline: none;
   font-size: 16px;
   fill: none;
-  //   &::placeholder {
-  //     font-size: 16px;
-  //     line-height: 24px;
-  //     color: #d0cece;
-  //   }
 `
 export const EnterButton = styled(Button)`
   padding: 0 37px;
@@ -124,4 +119,19 @@ export const MainList = styled.ul`
   justify-content: space-between;
   row-gap: 40px;
   margin-bottom: 34px;
+`
+
+export const SuccessBlock = styled.div`
+  padding: 70px 50px 0 50px;
+  font-size: 36px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+export const SuccessImg = styled.img`
+  width: 300px;
+  height: 100%;
+  object-fit: cover;
+  margin-top: 10px;
 `

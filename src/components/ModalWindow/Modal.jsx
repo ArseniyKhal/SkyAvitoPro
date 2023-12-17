@@ -1,15 +1,15 @@
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import * as S from './Modal.styles'
 
-export const Modal = ({ childComponent }) => {
-  //   const navigate = useNavigate()
+export const Modal = ({ childComponent, cross, closeFunction }) => {
+  const navigate = useNavigate()
   return (
     <S.ModalDarckBG>
       <S.ModalWindow>
-        {/* <S.Content style={{ width: `${width}px` }}>
-          <S.CloseBtn onClick={() => navigate(-1)}></S.CloseBtn> */}
+        {cross && (
+          <S.CloseBtn onClick={() => closeFunction(false)}></S.CloseBtn>
+        )}
         {childComponent}
-        {/* </S.Content> */}
       </S.ModalWindow>
     </S.ModalDarckBG>
   )

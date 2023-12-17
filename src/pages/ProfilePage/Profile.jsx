@@ -5,6 +5,7 @@ import { useGetUserQuery } from 'services/servicesApi'
 import { Loader2 } from 'App.styles'
 import { useState } from 'react'
 import { usePatchUserMutation } from 'services/servicesApi'
+import { Modal } from 'components/ModalWindow/Modal'
 import * as S from './Profile.styles'
 
 const initialState = {
@@ -16,6 +17,7 @@ const initialState = {
 
 export const Profile = () => {
   const [isSending, setIsSending] = useState(false)
+  const [isSuccessModal, setSuccessModal] = useState(false)
   const [patchUser] = usePatchUserMutation()
   const { data: user, isLoading, isError } = useGetUserQuery()
   //   console.log(user)
@@ -30,8 +32,10 @@ export const Profile = () => {
       setIsSending(true)
       const patchUserData = await patchUser({ name, surname, city, tel })
       if (patchUserData) {
-        console.log(patchUserData)
-        // добавить впсплывашку в случае удачи
+        setSuccessModal(true)
+        setTimeout(() => {
+          setSuccessModal(false)
+        }, 2000)
       }
     } catch (error) {
       console.log(error)
@@ -135,8 +139,29 @@ export const Profile = () => {
               </S.UsersProducts>
             </>
           )}
+          {isSuccessModal && (
+            <Modal
+              childComponent={<Success></Success>}
+              cross={true}
+              closeFunction={setSuccessModal}
+            ></Modal>
+          )}
         </>
       )}
+    </>
+  )
+}
+
+const Success = () => {
+  return (
+    <>
+      <S.SuccessBlock>
+        Успешный успех!!!
+        <S.SuccessImg
+          src={'/img/progressOk.png'}
+          alt="SuccessImg"
+        ></S.SuccessImg>
+      </S.SuccessBlock>
     </>
   )
 }

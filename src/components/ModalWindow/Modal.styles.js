@@ -21,22 +21,13 @@ export const ModalWindow = styled.div`
   border-radius: 12px;
   overflow: hidden;
 `
-export const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  width: 366px;
-  min-height: 440px;
-  position: relative;
-  padding: 45px;
-`
 export const CloseBtn = styled.div`
   position: absolute;
   top: 20px;
   right: 20px;
   width: 24px;
   height: 24px;
+  cursor: pointer;
   &:hover:before,
   &:hover:after {
     box-shadow: 0px 0px 4px #d9d9d9;
