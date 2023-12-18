@@ -6,7 +6,7 @@ import { Loader } from 'App.styles'
 import { useState } from 'react'
 import {
   usePatchUserMutation,
-  usePostAvatarUserMutation,
+  useUploadUserAvatarMutation,
 } from 'services/servicesApi'
 import { Modal } from 'components/ModalWindow/Modal'
 import * as S from './Profile.styles'
@@ -188,11 +188,12 @@ const Success = () => {
 }
 
 const ChangeAvatar = () => {
-  const [postAvatarUser] = usePostAvatarUserMutation()
-  const [image, setImage] = useState('')
+  const [uploadUserAvatar] = useUploadUserAvatarMutation()
+  const [file, setFile] = useState('')
   const handleClick = async () => {
-    const postAvatarUserData = await postAvatarUser(image)
-    console.log(postAvatarUserData)
+    const formData = new FormData()
+    formData.append('file', file)
+    const uploadUserAvatarData = await uploadUserAvatar(formData)
   }
   return (
     <>
@@ -204,13 +205,13 @@ const ChangeAvatar = () => {
           onChange={(e) => {
             const file = e.target.files[0]
             if (file && file.type.substring(0, 5) === 'image') {
-              setImage(file)
+              setFile(file)
             } else {
-              setImage(null)
+              setFile(null)
             }
           }}
         ></S.ChangeAvatarInput>
-        <S.ChangeAvatarBtn disabled={!image} onClick={() => handleClick()}>
+        <S.ChangeAvatarBtn disabled={!file} onClick={() => handleClick()}>
           Заменить
         </S.ChangeAvatarBtn>
       </S.ChangeAvatarBlock>
