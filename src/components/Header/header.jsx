@@ -1,9 +1,11 @@
 // import { Link } from 'react-router-dom'
-// import { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 // import { useDispatch } from 'react-redux'
 // import { removeUser } from 'store/slices/authSlice'
 import { useAuth } from 'hooks/use-auth'
 import { useNavigate } from 'react-router'
+import { Modal } from 'components/ModalWindow/Modal'
+import { NewAvd } from 'components/NewAvd/NewAvd'
 import * as S from './header.styles'
 
 export const Header = () => {
@@ -11,6 +13,11 @@ export const Header = () => {
   //   const [isProfileMenu, setProfileMenu] = useState(false)
   const navigate = useNavigate()
   const { isAuth } = useAuth()
+  const [isNewAvdModal, setNewAvdModal] = useState(false)
+
+  const handleClick = async () => {
+    setNewAvdModal(true)
+  }
 
   return (
     //  <S.Header ref={node}>
@@ -28,9 +35,7 @@ export const Header = () => {
             )}
             {isAuth && (
               <>
-                <S.EnterButton
-                  onClick={() => console.log('окно размещения объявления')}
-                >
+                <S.EnterButton onClick={() => handleClick()}>
                   Разместить объявление
                 </S.EnterButton>
                 <S.EnterButton onClick={() => navigate('/profile')}>
@@ -41,6 +46,13 @@ export const Header = () => {
           </S.HeaderContent>
         </S.HeaderContainer>
       </S.HeaderSection>
+      {isNewAvdModal && (
+        <Modal
+          childComponent={<NewAvd></NewAvd>}
+          cross={true}
+          closeFunction={setNewAvdModal}
+        ></Modal>
+      )}
     </>
   )
 }

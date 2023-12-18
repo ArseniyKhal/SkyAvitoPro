@@ -2,7 +2,7 @@ import { Header } from 'components/Header/header'
 import { Card } from 'components/Card/Card'
 import { NavMenu } from 'components/NavMenu/NavMenu'
 import { useParams } from 'react-router-dom'
-import { Loader2 } from 'App.styles'
+import { Loader } from 'App.styles'
 import { useGetAllAdvsQuery } from 'services/servicesApi'
 import { TelButton } from 'components/TelButton/TelButton'
 import { formateDate } from 'helpers/helpers'
@@ -31,7 +31,7 @@ export const SellerProfile = () => {
       <NavMenu></NavMenu>
       <S.Title>Профиль продавца</S.Title>
       {isLoading ? (
-        <Loader2></Loader2>
+        <Loader></Loader>
       ) : (
         <>
           <S.ProfileSettings>

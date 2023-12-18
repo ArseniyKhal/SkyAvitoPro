@@ -4,7 +4,7 @@ import { NavMenu } from 'components/NavMenu/NavMenu'
 import { useGetAllAdvsQuery } from 'services/servicesApi'
 import { useParams } from 'react-router-dom'
 import { formateDate, formateComment } from 'helpers/helpers'
-import { Loader2 } from 'App.styles'
+import { Loader } from 'App.styles'
 import { Link } from 'react-router-dom'
 import { useGetAllCommentsAdQuery } from 'services/servicesApi'
 import { TelButton } from 'components/TelButton/TelButton'
@@ -61,7 +61,7 @@ export const Adv = () => {
       <Header></Header>
       <NavMenu></NavMenu>
       {isLoading ? (
-        <Loader2></Loader2>
+        <Loader></Loader>
       ) : (
         <S.AdvContent>
           <S.BlockPicture>

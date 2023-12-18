@@ -39,25 +39,16 @@ export const SearchText = styled.input`
   }
   &::-webkit-input-placeholder {
     background-color: transparent;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
     line-height: 150%;
     color: var(--text-color-input);
   }
   &:-ms-input-placeholder {
     background-color: transparent;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
     line-height: 150%;
     color: var(--text-color-input);
   }
   &::placeholder {
     background-color: transparent;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
     line-height: 150%;
     color: var(--text-color-input);
   }

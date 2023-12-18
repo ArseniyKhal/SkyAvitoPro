@@ -4,7 +4,7 @@ import { Card } from 'components/Card/Card'
 import { Header } from 'components/Header/header'
 import { SearchSection } from 'components/Search/SearchSection'
 import { useGetAllAdvsQuery } from 'services/servicesApi'
-import { Loader, Loader2 } from 'App.styles'
+import { Loader } from 'App.styles'
 import * as S from './Main.styles'
 
 export const Main = () => {
@@ -38,7 +38,7 @@ export const Main = () => {
       <S.Title>Объявления</S.Title>
 
       {isLoading ? (
-        <Loader2></Loader2>
+        <Loader></Loader>
       ) : (
         <>
           {isError ? (

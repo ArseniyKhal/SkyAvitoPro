@@ -20,11 +20,12 @@ export const ModalWindow = styled.div`
   background-color: #ffffff;
   border-radius: 12px;
   overflow: hidden;
+  padding: 44px;
 `
 export const CloseBtn = styled.div`
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 40px;
+  right: 40px;
   width: 24px;
   height: 24px;
   cursor: pointer;

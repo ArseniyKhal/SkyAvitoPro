@@ -2,9 +2,12 @@ import { Header } from 'components/Header/header'
 import { Card } from 'components/Card/Card'
 import { NavMenu } from 'components/NavMenu/NavMenu'
 import { useGetUserQuery } from 'services/servicesApi'
-import { Loader2 } from 'App.styles'
+import { Loader } from 'App.styles'
 import { useState } from 'react'
-import { usePatchUserMutation } from 'services/servicesApi'
+import {
+  usePatchUserMutation,
+  usePostAvatarUserMutation,
+} from 'services/servicesApi'
 import { Modal } from 'components/ModalWindow/Modal'
 import * as S from './Profile.styles'
 
@@ -18,6 +21,7 @@ const initialState = {
 export const Profile = () => {
   const [isSending, setIsSending] = useState(false)
   const [isSuccessModal, setSuccessModal] = useState(false)
+  const [isChangeAvaModal, setChangeAvaModal] = useState(false)
   const [patchUser] = usePatchUserMutation()
   const { data: user, isLoading, isError } = useGetUserQuery()
   //   console.log(user)
@@ -50,7 +54,7 @@ export const Profile = () => {
       <NavMenu></NavMenu>
 
       {isLoading ? (
-        <Loader2></Loader2>
+        <Loader></Loader>
       ) : (
         <>
           {isError ? (
@@ -73,7 +77,13 @@ export const Profile = () => {
                         alt="avatarImg"
                       ></S.AvatarImg>
                     </S.AvatarPicture>
-                    <S.AvatarСhangeBtn>Заменить</S.AvatarСhangeBtn>
+                    <S.AvatarСhangeBtn
+                      onClick={() => {
+                        setChangeAvaModal(true)
+                      }}
+                    >
+                      Заменить
+                    </S.AvatarСhangeBtn>
                   </S.BlockAvatar>
                   <S.BlockSettings>
                     <S.InputsBlock>
@@ -82,6 +92,7 @@ export const Profile = () => {
                         type="text"
                         name="name"
                         value={name}
+                        placeholder={user.name}
                         onChange={handleChange}
                       />
                     </S.InputsBlock>
@@ -91,6 +102,7 @@ export const Profile = () => {
                         type="text"
                         name="surname"
                         value={surname}
+                        placeholder={user.surname}
                         onChange={handleChange}
                       />
                     </S.InputsBlock>
@@ -100,6 +112,7 @@ export const Profile = () => {
                         type="text"
                         name="city"
                         value={city}
+                        placeholder={user.city}
                         onChange={handleChange}
                       />
                     </S.InputsBlock>
@@ -109,6 +122,7 @@ export const Profile = () => {
                         type="tel"
                         name="tel"
                         value={tel}
+                        placeholder={user.phone}
                         onChange={handleChange}
                       />
                     </S.InputsBlockTel>
@@ -132,9 +146,9 @@ export const Profile = () => {
                 <S.SubTitle>Мои товары</S.SubTitle>
                 <S.MainList>
                   {/* <Card></Card>
-          <Card></Card>
-          <Card></Card>
-          <Card></Card> */}
+         				 <Card></Card>
+         				 <Card></Card>
+        					  <Card></Card> */}
                 </S.MainList>
               </S.UsersProducts>
             </>
@@ -144,6 +158,13 @@ export const Profile = () => {
               childComponent={<Success></Success>}
               cross={true}
               closeFunction={setSuccessModal}
+            ></Modal>
+          )}
+          {isChangeAvaModal && (
+            <Modal
+              childComponent={<ChangeAvatar></ChangeAvatar>}
+              cross={true}
+              closeFunction={setChangeAvaModal}
             ></Modal>
           )}
         </>
@@ -162,6 +183,37 @@ const Success = () => {
           alt="SuccessImg"
         ></S.SuccessImg>
       </S.SuccessBlock>
+    </>
+  )
+}
+
+const ChangeAvatar = () => {
+  const [postAvatarUser] = usePostAvatarUserMutation()
+  const [image, setImage] = useState('')
+  const handleClick = async () => {
+    const postAvatarUserData = await postAvatarUser(image)
+    console.log(postAvatarUserData)
+  }
+  return (
+    <>
+      <S.ChangeAvatarBlock>
+        <S.SuccessBlock>окно замены аватара</S.SuccessBlock>
+        <S.ChangeAvatarInput
+          type="file"
+          accept="/image/*"
+          onChange={(e) => {
+            const file = e.target.files[0]
+            if (file && file.type.substring(0, 5) === 'image') {
+              setImage(file)
+            } else {
+              setImage(null)
+            }
+          }}
+        ></S.ChangeAvatarInput>
+        <S.ChangeAvatarBtn disabled={!image} onClick={() => handleClick()}>
+          Заменить
+        </S.ChangeAvatarBtn>
+      </S.ChangeAvatarBlock>
     </>
   )
 }

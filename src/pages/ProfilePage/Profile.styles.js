@@ -106,6 +106,10 @@ export const ProfileSettingsInput = styled.input`
   outline: none;
   font-size: 16px;
   fill: none;
+  &:focus {
+    box-shadow: 0px 0px 5px var(--main-topic);
+    border: 1px solid var(--main-topic);
+  }
 `
 export const EnterButton = styled(Button)`
   padding: 0 37px;
@@ -122,7 +126,7 @@ export const MainList = styled.ul`
 `
 
 export const SuccessBlock = styled.div`
-  padding: 70px 50px 0 50px;
+  padding-top: 30px;
   font-size: 36px;
   text-align: center;
   display: flex;
@@ -135,3 +139,16 @@ export const SuccessImg = styled.img`
   object-fit: cover;
   margin-top: 10px;
 `
+export const ChangeAvatarBlock = styled.div`
+  font-size: 36px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+export const ChangeAvatarInput = styled.input`
+  //   display: inline-block;
+  padding: 20px;
+  font-size: 20px;
+`
+export const ChangeAvatarBtn = styled(Button)``

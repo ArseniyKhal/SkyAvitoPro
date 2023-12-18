@@ -98,9 +98,6 @@ export const Auth = ({ typeLogin }) => {
     }
   }
 
-  //   useEffect(() => {
-  //   }, [])
-
   return (
     <>
       <S.ModalForm>

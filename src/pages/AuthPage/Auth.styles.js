@@ -6,7 +6,6 @@ export const ModalForm = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 44px;
   max-width: 366px;
 `
 export const ModalLogo = styled.div`

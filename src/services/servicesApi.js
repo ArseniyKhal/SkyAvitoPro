@@ -8,7 +8,9 @@ const baseQuery = fetchBaseQuery({
     const token = getState().auth.access
     if (token) {
       headers.set('authorization', `Bearer ${token}`)
-      headers.set('content-type', `application/json`)
+    }
+    if (!headers.has('content-type')) {
+      headers.set('content-type', 'application/json')
     }
     return headers
   },
@@ -134,6 +136,20 @@ export const advApi = createApi({
       },
       invalidatesTags: ['User'],
     }),
+    // загрузить аватар пользователя
+    postAvatarUser: builder.mutation({
+      query: (body) => {
+        return {
+          url: 'user/avatar',
+          method: 'POST',
+          headers: {
+            'content-type': 'multipart/form-data',
+          },
+          body,
+        }
+      },
+      invalidatesTags: ['User'],
+    }),
   }),
 })
 
@@ -145,4 +161,5 @@ export const {
   useRegisterUserMutation,
   useGetUserQuery,
   usePatchUserMutation,
+  usePostAvatarUserMutation,
 } = advApi

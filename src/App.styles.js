@@ -103,31 +103,6 @@ export const Container = styled.div`
   padding: 0 15px;
   margin: 0 auto;
 `
-export const ButtonPurple = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  width: 278px;
-  height: 52px;
-  border-radius: 46px;
-  background: var(--palette-purple-90);
-  border: none;
-  color: #fff;
-  font-size: 18px;
-  line-height: 24px;
-  letter-spacing: -0.05px;
-  cursor: pointer;
-  &:disabled {
-    background-color: #303030;
-  }
-  &:hover {
-    background-color: #3f007d;
-  }
-  &:active {
-    background-color: var(--palette-purple-100);
-  }
-`
 export const Button = styled.button`
   color: #fff;
   height: 50px;
@@ -149,62 +124,12 @@ export const Button = styled.button`
   &:disabled {
     background-color: var(--btn-disabled);
   }
-
   //   &:active {
   //     background-color: var(--palette-purple-100);
   //   }
 `
-export const DarkBG = styled.div`
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  width: 100%;
-  min-height: 100vh;
-  background-color: var(--palette-purple-100);
-  overflow: hidden;
-`
-const moveY = keyframes`
-0% , 100% {top: 10%}
-45% , 55% {top: 59%}
-60% {top: 40%}	    
-`
-const rotate = keyframes`
-0% { transform: translate(-50%, -100%) rotate(0deg) scale(1 , 1)}
- 25%{ transform: translate(-50%, 0%) rotate(180deg) scale(1 , 1)}
- 45% , 55%{ transform: translate(-50%, 100%) rotate(180deg) scale(3 , 0.5)}
- 60%{ transform: translate(-50%, 100%) rotate(180deg) scale(1, 1)}
- 75%{ transform: translate(-50%, 0%) rotate(270deg) scale(1 , 1)}
- 100%{ transform: translate(-50%, -100%) rotate(360deg) scale(1 , 1)}	    
-`
-export const Loader = styled.div`
-  position: relative;
-  top: 20vh;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 164px;
-  height: 164px;
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    background-color: #00c1ff;
-    left: 50%;
-    top: 50%;
-    animation: ${rotate} 1s ease-in infinite;
-  }
-  &::after {
-    width: 20px;
-    height: 20px;
-    background-color: #bcec30;
-    animation:
-      ${rotate} 1s ease-in infinite,
-      ${moveY} 1s ease-in infinite;
-  }
-`
 
-const rotate2 = keyframes`
+const rotate = keyframes`
 	0% { transform: rotate(0deg) scale(0.8) }
 	50% { transform: rotate(360deg) scale(1.2) }
 	100% { transform: rotate(720deg) scale(0.8) }
@@ -238,11 +163,11 @@ const ball2 = keyframes`
 	}
  `
 
-export const Loader2 = styled.div`
+export const Loader = styled.div`
   position: relative;
   top: 20vh;
   left: 50%;
-  animation: ${rotate2} 3s infinite;
+  animation: ${rotate} 3s infinite;
   transform: translate(-50%, -50%);
   height: 50px;
   width: 50px;
@@ -266,64 +191,3 @@ export const Loader2 = styled.div`
     box-shadow: 30px 0 0 #00c1ff;
   }
 `
-// .loader {
-// 	animation: rotate 1s infinite;
-// 	height: 50px;
-// 	width: 50px;
-//  }
-
-//  .loader:before,
-//  .loader:after {
-// 	border-radius: 50%;
-// 	content: "";
-// 	display: block;
-// 	height: 20px;
-// 	width: 20px;
-//  }
-//  .loader:before {
-// 	animation: ball1 1s infinite;
-// 	background-color: #fff;
-// 	box-shadow: 30px 0 0 #ff3d00;
-// 	margin-bottom: 10px;
-//  }
-//  .loader:after {
-// 	animation: ball2 1s infinite;
-// 	background-color: #ff3d00;
-// 	box-shadow: 30px 0 0 #fff;
-//  }
-
-//  @keyframes rotate {
-// 	0% { transform: rotate(0deg) scale(0.8) }
-// 	50% { transform: rotate(360deg) scale(1.2) }
-// 	100% { transform: rotate(720deg) scale(0.8) }
-//  }
-
-//  @keyframes ball1 {
-// 	0% {
-// 	  box-shadow: 30px 0 0 #ff3d00;
-// 	}
-// 	50% {
-// 	  box-shadow: 0 0 0 #ff3d00;
-// 	  margin-bottom: 0;
-// 	  transform: translate(15px, 15px);
-// 	}
-// 	100% {
-// 	  box-shadow: 30px 0 0 #ff3d00;
-// 	  margin-bottom: 10px;
-// 	}
-//  }
-
-//  @keyframes ball2 {
-// 	0% {
-// 	  box-shadow: 30px 0 0 #fff;
-// 	}
-// 	50% {
-// 	  box-shadow: 0 0 0 #fff;
-// 	  margin-top: -20px;
-// 	  transform: translate(15px, 15px);
-// 	}
-// 	100% {
-// 	  box-shadow: 30px 0 0 #fff;
-// 	  margin-top: 0;
-// 	}
-//  }
