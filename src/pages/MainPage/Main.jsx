@@ -9,9 +9,18 @@ import * as S from './Main.styles'
 
 export const Main = () => {
   const { data, isError, isLoading } = useGetAllAdvsQuery()
+  const [searchAdv, setSearchAdv] = useState('')
+  let advList = data
+
+  // поиск объявлений
+  if (searchAdv.length) {
+    advList = data.filter((el) =>
+      el.title.toLowerCase().includes(searchAdv.toLowerCase()),
+    )
+  }
 
   // формируем список объявлений
-  const mapAdvsList = data?.map((advCard) => {
+  const mapAdvsList = advList?.map((advCard) => {
     return <Card key={advCard.id} dataCard={advCard}></Card>
   })
 
@@ -25,7 +34,7 @@ export const Main = () => {
     <>
       <Outlet />
       <Header></Header>
-      <SearchSection></SearchSection>
+      <SearchSection setSearchAdv={setSearchAdv}></SearchSection>
       <S.Title>Объявления</S.Title>
 
       {isLoading ? (

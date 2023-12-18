@@ -1,11 +1,14 @@
-import { Link } from 'react-router-dom'
-// import { useState } from 'react'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import * as S from './Search.styles'
 
-export const SearchSection = () => {
+export const SearchSection = ({ setSearchAdv }) => {
+  const navigate = useNavigate()
+  const [searchText, setSearchText] = useState('')
+
   return (
     <S.SearchSection>
-      <S.Logo>
+      <S.Logo onClick={() => setSearchAdv('')}>
         <svg
           width="54"
           height="38"
@@ -69,15 +72,19 @@ export const SearchSection = () => {
         </svg>
       </S.Logo>
       <S.SearchText
-        // value={searchText}
-        // onChange={(event) => {
-        //   setSearchText(event.target.value)
-        // }}
         type="text"
         placeholder="Поиск по объявлениям"
-        name="search"
+        value={searchText}
+        onChange={(e) => {
+          setSearchText(e.target.value)
+        }}
       />
-      <S.EnterButton onClick={() => console.log('ищем...')}>
+      <S.EnterButton
+        onClick={() => {
+          setSearchText('')
+          setSearchAdv(searchText)
+        }}
+      >
         Найти
       </S.EnterButton>
     </S.SearchSection>

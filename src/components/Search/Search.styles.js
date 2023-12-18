@@ -15,6 +15,7 @@ export const SearchSection = styled.div`
 `
 export const Logo = styled.div`
   margin-right: 50px;
+  cursor: pointer;
 `
 export const SearchText = styled.input`
   flex-shrink: 0;
