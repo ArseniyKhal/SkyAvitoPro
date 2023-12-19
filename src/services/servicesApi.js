@@ -138,11 +138,11 @@ export const advApi = createApi({
     }),
     // загрузить аватар пользователя
     uploadUserAvatar: builder.mutation({
-      query: (formData) => {
+      query: (body) => {
         return {
           url: 'user/avatar',
           method: 'POST',
-          body: formData,
+          body,
         }
       },
       invalidatesTags: ['User'],

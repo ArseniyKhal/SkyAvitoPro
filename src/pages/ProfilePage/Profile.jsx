@@ -3,7 +3,7 @@ import { Card } from 'components/Card/Card'
 import { NavMenu } from 'components/NavMenu/NavMenu'
 import { useGetUserQuery } from 'services/servicesApi'
 import { Loader } from 'App.styles'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import {
   usePatchUserMutation,
   useUploadUserAvatarMutation,
@@ -162,7 +162,12 @@ export const Profile = () => {
           )}
           {isChangeAvaModal && (
             <Modal
-              childComponent={<ChangeAvatar></ChangeAvatar>}
+              childComponent={
+                <ChangeAvatar
+                  setSuccessModal={setSuccessModal}
+                  setChangeAvaModal={setChangeAvaModal}
+                ></ChangeAvatar>
+              }
               cross={true}
               closeFunction={setChangeAvaModal}
             ></Modal>
@@ -187,34 +192,66 @@ const Success = () => {
   )
 }
 
-const ChangeAvatar = () => {
+const ChangeAvatar = ({ setSuccessModal, setChangeAvaModal }) => {
   const [uploadUserAvatar] = useUploadUserAvatarMutation()
+  const [isErrorChange, setErrorChange] = useState(null)
+  const imageRef = useRef(null)
   const [file, setFile] = useState('')
+  let uploadUserAvatarData
   const handleClick = async () => {
     const formData = new FormData()
     formData.append('file', file)
-    const uploadUserAvatarData = await uploadUserAvatar(formData)
+    uploadUserAvatarData = await uploadUserAvatar(formData)
+    if (uploadUserAvatarData.data) {
+      setChangeAvaModal(false)
+      setSuccessModal(true)
+      setTimeout(() => {
+        setSuccessModal(false)
+      }, 2000)
+    } else {
+      setErrorChange(uploadUserAvatarData.error.data.detail)
+    }
   }
+
+  function useDisplayImage() {
+    const [result, setResult] = useState('')
+    function uploader(e) {
+      const imageFile = e.target.files[0]
+      const reader = new FileReader()
+      reader.addEventListener('load', (e) => {
+        setResult(e.target.result)
+      })
+      reader.readAsDataURL(imageFile)
+    }
+    return { result, uploader }
+  }
+  const { result, uploader } = useDisplayImage()
+
   return (
     <>
-      <S.ChangeAvatarBlock>
-        <S.SuccessBlock>окно замены аватара</S.SuccessBlock>
-        <S.ChangeAvatarInput
-          type="file"
-          accept="/image/*"
-          onChange={(e) => {
-            const file = e.target.files[0]
-            if (file && file.type.substring(0, 5) === 'image') {
-              setFile(file)
-            } else {
-              setFile(null)
-            }
-          }}
-        ></S.ChangeAvatarInput>
-        <S.ChangeAvatarBtn disabled={!file} onClick={() => handleClick()}>
-          Заменить
-        </S.ChangeAvatarBtn>
-      </S.ChangeAvatarBlock>
+      {isErrorChange ? (
+        <S.Error>Ошибка: {isErrorChange}</S.Error>
+      ) : (
+        <S.ChangeAvatarBlock>
+          <S.ChangeAvatarInput
+            type="file"
+            name="file"
+            accept="/image/*"
+            id="file-input"
+            onChange={(e) => {
+              const file = e.target.files[0]
+              if (file && file.type.substring(0, 5) === 'image') {
+                setFile(file)
+                uploader(e)
+              }
+            }}
+          ></S.ChangeAvatarInput>
+          {result && <S.PreviewImg ref={imageRef} src={result} alt="" />}
+          <S.ChangeAvatarBtn disabled={!file} onClick={() => handleClick()}>
+            Заменить
+          </S.ChangeAvatarBtn>
+        </S.ChangeAvatarBlock>
+      )}
     </>
   )
 }
