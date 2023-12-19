@@ -22,4 +22,10 @@ html {
 	grid-template-columns: 480px 1fr;
 	grid-auto-columns: auto;
 	text-align: center;
+	display: flex;
+	border-radius: 50%;
+	background-color: red;
+	background-color: initial;
+	background-color: inherit;
+
 }

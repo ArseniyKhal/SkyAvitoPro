@@ -1,4 +1,4 @@
-import * as S from './NewAvd.styles'
+import * as S from './NewAdvert.styles'
 
 export const NewAvd = () => {
   return (

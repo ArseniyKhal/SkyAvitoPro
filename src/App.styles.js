@@ -80,6 +80,19 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active{
     -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
+
+::-webkit-scrollbar {
+	width: 6px;
+  }
+ ::-webkit-scrollbar-track {
+	background: #FFF;
+
+ }
+ ::-webkit-scrollbar-thumb {
+	background-color: #D9D9D9;
+	border-radius: 10px;
+ }
+
 html, body {
 	font-family: 'Roboto', sans-serif;
 	color: #000;
@@ -87,6 +100,8 @@ html, body {
 	font-style: normal;
 	font-weight: 400;
    user-select: none;
+	scrollbar-width: thin;
+	scrollbar-color:  #D9D9D9 #FFF;
 }
 `
 

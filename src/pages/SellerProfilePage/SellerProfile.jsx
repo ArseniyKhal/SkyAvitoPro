@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import { Loader } from 'App.styles'
 import { useGetAllAdvsQuery } from 'services/servicesApi'
 import { TelButton } from 'components/TelButton/TelButton'
-import { formateDate } from 'helpers/helpers'
+import { formatDateToDistance } from 'helpers/helpers'
 import * as S from '../SellerProfilePage/SellerProfile.styles'
 
 export const SellerProfile = () => {
@@ -52,7 +52,7 @@ export const SellerProfile = () => {
                   <S.SellerName>{selerData.name}</S.SellerName>
                   <S.SellerLocation>{selerData.city}</S.SellerLocation>
                   <S.SellerLocation>
-                    Продает товары {formateDate(selerData.sells_from)}
+                    Продает товары {formatDateToDistance(selerData.sells_from)}
                   </S.SellerLocation>
                 </S.InfoText>
                 <TelButton TelNamber={selerData.phone}></TelButton>

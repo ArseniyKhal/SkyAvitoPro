@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 // import { useState } from 'react'
 // import { ModalWindow } from 'components/ModalWindow/ModalWindow'
 // import { WorkoutSelectionWindow } from 'pages/profile-page/Profile'
-import { formateDate } from 'helpers/helpers'
+import { formatDateToDistance } from 'helpers/helpers'
 import * as S from './Card.styles'
 
 export const Card = ({ dataCard }) => {
@@ -34,7 +34,7 @@ export const Card = ({ dataCard }) => {
         <S.CardPrice>{dataCard?.price.toLocaleString()} ₽</S.CardPrice>
         <S.CardBlock>
           <S.CardLocation>{dataCard?.user.city}</S.CardLocation>
-          <S.CardData>{formateDate(dataCard?.created_on)}</S.CardData>
+          <S.CardData>{formatDateToDistance(dataCard?.created_on)}</S.CardData>
         </S.CardBlock>
       </S.CardContent>
     </S.Card>

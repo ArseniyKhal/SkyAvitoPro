@@ -1,8 +1,13 @@
-import { formatDistanceToNow } from 'date-fns'
+import { format, formatDistanceToNow } from 'date-fns'
 import { ru } from 'date-fns/locale'
 
 // преобразует дату
 export const formateDate = (data) => {
+  return format(new Date(data), 'd MMMM yyyy', { locale: ru })
+}
+
+// преобразует дату (прошедшее время с..)
+export const formatDateToDistance = (data) => {
   return formatDistanceToNow(new Date(data), { locale: ru })
 }
 

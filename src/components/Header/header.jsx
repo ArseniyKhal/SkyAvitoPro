@@ -5,7 +5,7 @@ import { useRef, useState } from 'react'
 import { useAuth } from 'hooks/use-auth'
 import { useNavigate } from 'react-router'
 import { Modal } from 'components/ModalWindow/Modal'
-import { NewAvd } from 'components/NewAvd/NewAvd'
+import { NewAvd } from 'components/NewAdvert/NewAdvert'
 import * as S from './header.styles'
 
 export const Header = () => {
