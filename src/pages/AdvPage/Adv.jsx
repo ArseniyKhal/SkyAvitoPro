@@ -3,16 +3,13 @@ import { Header } from 'components/Header/header'
 import { NavMenu } from 'components/NavMenu/NavMenu'
 import { useGetAllAdvsQuery } from 'services/servicesApi'
 import { useParams } from 'react-router-dom'
-import {
-  formateDate,
-  formatDateToDistance,
-  formateComment,
-} from 'helpers/helpers'
+import { formatDateToDistance, formateComment } from 'helpers/helpers'
 import { Loader } from 'App.styles'
 import { Link } from 'react-router-dom'
 import { useGetAllCommentsAdQuery } from 'services/servicesApi'
 import { TelButton } from 'components/TelButton/TelButton'
 import { Modal } from 'components/ModalWindow/Modal'
+import { Comments } from 'components/Comments/Comments'
 import * as S from './Adv.styles'
 
 // переделать продает товары с ....
@@ -121,63 +118,13 @@ export const Adv = () => {
       )}
       {isCommentVisible && (
         <Modal
-          childComponent={<Comments commentList={commentAdv}></Comments>}
+          childComponent={
+            <Comments commentList={commentAdv} advID={advID}></Comments>
+          }
           cross={true}
           closeFunction={setCommentVisible}
         ></Modal>
       )}
-    </>
-  )
-}
-
-const Comments = ({ commentList }) => {
-  // формируем список комментариев
-  const mapCommentsList = commentList?.map((com) => {
-    return (
-      <>
-        <S.Comment key={com.id}>
-          <S.ComAvatar>
-            <S.Img3
-              src={
-                com.author.avatar
-                  ? `http://localhost:8090/${com.author.avatar}`
-                  : '/img/userLogo.webp'
-              }
-              alt="avatar"
-            ></S.Img3>
-          </S.ComAvatar>
-          <S.ComContent>
-            <S.ComHeader>
-              {com.author.name}
-              <span>{formateDate(com.created_on)}</span>
-            </S.ComHeader>
-            <S.ComParagraph>Комментарий</S.ComParagraph>
-            <S.ComText>{com.text}</S.ComText>
-          </S.ComContent>
-        </S.Comment>
-      </>
-    )
-  })
-  return (
-    <>
-      <S.NewAdvForm>
-        <S.Title>Отзывы о товаре</S.Title>
-        <S.InputsLable htmlFor="review">Добавить отзыв</S.InputsLable>
-        <S.TextArea
-          name="review"
-          id="review"
-          //  value={name}
-          placeholder={'Введите отзыв'}
-          //  onChange={handleChange}
-        />
-        <S.EnterButton
-        //  disabled={    }
-        //  onClick={() => handleClick()}
-        >
-          Опубликовать
-        </S.EnterButton>
-      </S.NewAdvForm>
-      <S.CommentsBlock>{mapCommentsList}</S.CommentsBlock>
     </>
   )
 }

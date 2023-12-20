@@ -29,24 +29,7 @@ export const CloseBtn = styled.div`
   width: 24px;
   height: 24px;
   cursor: pointer;
-  &:hover:before,
-  &:hover:after {
-    box-shadow: 0px 0px 4px #d9d9d9;
-  }
-  &:before {
-    content: '';
-    position: absolute;
-    display: inline-block;
-    width: 30px;
-    height: 3px;
-    border-radius: 2px;
-    top: -1px;
-    left: -3px;
-    transform: rotate(45deg);
-    background-color: #d9d9d9;
-    position: relative;
-    z-index: 7;
-  }
+  &:before,
   &:after {
     content: '';
     position: absolute;
@@ -54,11 +37,23 @@ export const CloseBtn = styled.div`
     width: 30px;
     height: 3px;
     border-radius: 2px;
+    transition: background-color 0.3s ease;
+    background-color: var(--btn-disabled);
+    position: relative;
+    z-index: 7;
+  }
+  &:before {
+    top: -1px;
+    left: -3px;
+    transform: rotate(45deg);
+  }
+  &:after {
     top: -20px;
     left: -3px;
-    background-color: #d9d9d9;
-    position: relative;
     transform: rotate(135deg);
-    z-index: 7;
+  }
+  &:hover:before,
+  &:hover:after {
+    background-color: var(--main-topic);
   }
 `

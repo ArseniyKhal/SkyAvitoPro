@@ -83,6 +83,19 @@ export const advApi = createApi({
     // Получить все комментарии по объявлению
     getAllCommentsAd: builder.query({
       query: (id) => `ads/${id}/comments`,
+      providesTags: () => ['Comments'],
+    }),
+
+    // Создать комментарий к объявлению
+    postCommentAdv: builder.mutation({
+      query: ({ id, text }) => {
+        return {
+          url: `ads/${id}/comments`,
+          method: 'POST',
+          body: { text },
+        }
+      },
+      invalidatesTags: ['Comments'],
     }),
 
     // получить все объявления текущего пользователя
@@ -97,9 +110,6 @@ export const advApi = createApi({
           url: 'auth/login',
           method: 'POST',
           body,
-          headers: {
-            'content-type': 'application/json',
-          },
         }
       },
     }),
@@ -114,6 +124,7 @@ export const advApi = createApi({
         }
       },
     }),
+
     // получить текущего пользователя
     getUser: builder.query({
       query: () => 'user',
@@ -136,6 +147,7 @@ export const advApi = createApi({
       },
       invalidatesTags: ['User'],
     }),
+
     // загрузить аватар пользователя
     uploadUserAvatar: builder.mutation({
       query: (body) => {
@@ -153,6 +165,7 @@ export const advApi = createApi({
 export const {
   useGetAllAdvsQuery,
   useGetAllCommentsAdQuery,
+  usePostCommentAdvMutation,
   useGetMyAdvsQuery,
   useLoginUserMutation,
   useRegisterUserMutation,
