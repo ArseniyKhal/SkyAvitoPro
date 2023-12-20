@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Button } from 'App.styles'
 
-export const NewAvdForm = styled.form`
+export const NewAvdForm = styled.div`
   padding: 0px 6px;
   margin-top: -24px;
   margin-bottom: -2px;
@@ -17,7 +17,11 @@ export const Title = styled.h2`
 export const InputsName = styled.p`
   color: var(--text-color-black);
   line-height: 150%;
-  margin-bottom: 4px;
+  margin-bottom: 10px;
+  & span {
+    color: var(--text-color-input);
+    margin-left: 10px;
+  }
 `
 export const NewAvdInput = styled.input`
   width: 100%;
@@ -73,7 +77,8 @@ export const TextArea = styled.textarea`
     border: 1px solid var(--main-topic);
   }
   &::placeholder {
-    color: rgba(0, 0, 0, 0.3);
+    font-family: Roboto;
+    color: var(--text-color-input);
     line-height: 150%;
   }
 `
@@ -81,6 +86,11 @@ export const PriceInput = styled(NewAvdInput)`
   width: 200px;
   padding: 0px 30px 0px 19px;
   margin-bottom: 30px;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `
 export const PriceInputSpan = styled.span`
   position: relative;

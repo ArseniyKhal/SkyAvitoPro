@@ -48,7 +48,7 @@ export const Header = () => {
       </S.HeaderSection>
       {isNewAvdModal && (
         <Modal
-          childComponent={<NewAvd></NewAvd>}
+          childComponent={<NewAvd closeFunction={setNewAvdModal}></NewAvd>}
           cross={true}
           closeFunction={setNewAvdModal}
         ></Modal>

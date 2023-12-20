@@ -12,3 +12,17 @@ export const Modal = ({ childComponent, cross, closeFunction }) => {
     </S.ModalDarckBG>
   )
 }
+
+export const Success = () => {
+  return (
+    <>
+      <S.SuccessBlock>
+        Успешный успех!!!
+        <S.SuccessImg
+          src={'/img/progressOk.png'}
+          alt="SuccessImg"
+        ></S.SuccessImg>
+      </S.SuccessBlock>
+    </>
+  )
+}

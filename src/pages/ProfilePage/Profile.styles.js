@@ -123,18 +123,3 @@ export const MainList = styled.ul`
   row-gap: 40px;
   margin-bottom: 34px;
 `
-
-export const SuccessBlock = styled.div`
-  padding-top: 30px;
-  font-size: 36px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
-export const SuccessImg = styled.img`
-  width: 300px;
-  height: 100%;
-  object-fit: cover;
-  margin-top: 10px;
-`

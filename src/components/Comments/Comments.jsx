@@ -37,7 +37,6 @@ export const Comments = ({ commentList, advID }) => {
   const handleClick = async () => {
     try {
       const Data = await postCommentAdv({ id: advID, text: inputComment })
-      console.log(Data)
     } catch (error) {
       console.log(error)
     } finally {

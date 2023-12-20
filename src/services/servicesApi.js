@@ -78,6 +78,20 @@ export const advApi = createApi({
     // Получить все объявления
     getAllAdvs: builder.query({
       query: () => 'ads',
+      providesTags: () => ['Adverts'],
+    }),
+
+    // Создать объявление без изображений
+    postAdvert: builder.mutation({
+      query: (body) => {
+        console.log(body)
+        return {
+          url: `adstext`,
+          method: 'POST',
+          body,
+        }
+      },
+      invalidatesTags: ['Adverts'],
     }),
 
     // Получить все комментарии по объявлению
@@ -164,6 +178,7 @@ export const advApi = createApi({
 
 export const {
   useGetAllAdvsQuery,
+  usePostAdvertMutation,
   useGetAllCommentsAdQuery,
   usePostCommentAdvMutation,
   useGetMyAdvsQuery,

@@ -5,8 +5,9 @@ import { useGetUserQuery } from 'services/servicesApi'
 import { Loader } from 'App.styles'
 import { useState } from 'react'
 import { usePatchUserMutation } from 'services/servicesApi'
-import { Modal } from 'components/ModalWindow/Modal'
+import { Modal, Success } from 'components/ModalWindow/Modal'
 import { ChangeAvatar } from 'components/ChangeAvatar/ChangeAvatar'
+
 import * as S from './Profile.styles'
 
 const initialState = {
@@ -172,20 +173,6 @@ export const Profile = () => {
           )}
         </>
       )}
-    </>
-  )
-}
-
-const Success = () => {
-  return (
-    <>
-      <S.SuccessBlock>
-        Успешный успех!!!
-        <S.SuccessImg
-          src={'/img/progressOk.png'}
-          alt="SuccessImg"
-        ></S.SuccessImg>
-      </S.SuccessBlock>
     </>
   )
 }
