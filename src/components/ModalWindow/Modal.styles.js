@@ -37,7 +37,7 @@ export const CloseBtn = styled.div`
     width: 30px;
     height: 3px;
     border-radius: 2px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.1s ease;
     background-color: var(--btn-disabled);
     position: relative;
     z-index: 7;
@@ -57,7 +57,7 @@ export const CloseBtn = styled.div`
     background-color: var(--main-topic);
   }
 `
-export const SuccessBlock = styled.div`
+export const ContentBlock = styled.div`
   padding-top: 30px;
   font-size: 36px;
   text-align: center;

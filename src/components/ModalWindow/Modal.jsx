@@ -13,16 +13,30 @@ export const Modal = ({ childComponent, cross, closeFunction }) => {
   )
 }
 
-export const Success = () => {
+export const Success = ({ text }) => {
   return (
     <>
-      <S.SuccessBlock>
+      <S.ContentBlock>
         Успешный успех!!!
+        <br />
+        {text}
         <S.SuccessImg
           src={'/img/progressOk.png'}
           alt="SuccessImg"
         ></S.SuccessImg>
-      </S.SuccessBlock>
+      </S.ContentBlock>
+    </>
+  )
+}
+
+export const Error = ({ text }) => {
+  return (
+    <>
+      <S.ContentBlock>
+        Ошибка!
+        <br />
+        {text}
+      </S.ContentBlock>
     </>
   )
 }

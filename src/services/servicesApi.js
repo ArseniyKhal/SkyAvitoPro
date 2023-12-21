@@ -81,14 +81,42 @@ export const advApi = createApi({
       providesTags: () => ['Adverts'],
     }),
 
+    // Получить объявление по ID
+    getAdvID: builder.query({
+      query: (id) => `ads/${id}/`,
+    }),
+
+    // Создать объявление
+    postAdvertWithFoto: builder.mutation({
+      query: (body) => {
+        return {
+          url: `ads`,
+          method: 'POST',
+          body,
+        }
+      },
+      invalidatesTags: ['Adverts'],
+    }),
+
     // Создать объявление без изображений
     postAdvert: builder.mutation({
       query: (body) => {
-        console.log(body)
         return {
           url: `adstext`,
           method: 'POST',
           body,
+        }
+      },
+      invalidatesTags: ['Adverts'],
+    }),
+
+    // Удалить объявление по ID
+    delAdvert: builder.mutation({
+      query: (id) => {
+        return {
+          url: `ads/${id}/`,
+          //  url: `ads/`,
+          method: 'DELETE',
         }
       },
       invalidatesTags: ['Adverts'],
@@ -178,7 +206,10 @@ export const advApi = createApi({
 
 export const {
   useGetAllAdvsQuery,
+  useGetAdvIDQuery,
+  usePostAdvertWithFotoMutation,
   usePostAdvertMutation,
+  useDelAdvertMutation,
   useGetAllCommentsAdQuery,
   usePostCommentAdvMutation,
   useGetMyAdvsQuery,

@@ -57,8 +57,56 @@ export const FotoContainer = styled.div`
   gap: 10px;
   margin-bottom: 30px;
 `
-export const FotoInput = styled.div`
+export const FotoInputBlock = styled.div`
+  width: 90px;
+  height: 90px;
+  position: relative;
+  overflow: hidden;
+`
+export const FotoInputLabel = styled.label`
   cursor: pointer;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  background-color: #f0f0f0;
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    width: 30px;
+    height: 3px;
+    transition: background-color 0.1s ease;
+    background-color: var(--btn-disabled);
+    top: 50%;
+    left: 50%;
+  }
+  &:before {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+  &:after {
+    transform: translate(-50%, -50%);
+  }
+  &:hover:before,
+  &:hover:after {
+    background-color: var(--main-topic);
+  }
+`
+export const FotoPreview = styled.img`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+`
+export const FotoInput = styled.input`
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 `
 export const TextArea = styled.textarea`
   width: 100%;
@@ -72,6 +120,8 @@ export const TextArea = styled.textarea`
   fill: none;
   resize: none;
   margin-bottom: 20px;
+  font-family: Roboto;
+  line-height: 150%;
   &:focus {
     box-shadow: 0px 0px 5px var(--main-topic);
     border: 1px solid var(--main-topic);

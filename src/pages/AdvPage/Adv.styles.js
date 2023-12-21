@@ -105,5 +105,9 @@ export const TextParagraph = styled.p`
 `
 
 export const EnterButton = styled(Button)`
-  width: 181px;
+  padding: 0 37px;
+`
+export const ButtonsContainer = styled.div`
+  display: flex;
+  gap: 10px;
 `

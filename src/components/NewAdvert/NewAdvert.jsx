@@ -1,5 +1,8 @@
 import { useState } from 'react'
-import { usePostAdvertMutation } from 'services/servicesApi'
+import {
+  usePostAdvertMutation,
+  usePostAdvertWithFotoMutation,
+} from 'services/servicesApi'
 import { Success } from 'components/ModalWindow/Modal'
 import * as S from './NewAdvert.styles'
 
@@ -9,15 +12,15 @@ const initialState = {
   priceStr: '',
 }
 export const NewAvd = ({ closeFunction }) => {
-  //   const [titleValue, setTitleValue] = useState('')
-  //   const [descriptionValue, setDescriptionValue] = useState('')
-  //   const [priceValue, setPriceValue] = useState(0)
-
   const [formValue, setFormValue] = useState(initialState)
   const [isSuccessPost, setSuccessPost] = useState(false)
-  const [formFoto, setFormFoto] = useState('')
+  const [selectedImage, setSelectedImage] = useState(null)
+  const [images, setImages] = useState([])
+  const [imageSrc, setImageSrc] = useState([])
   const [postAdvert] = usePostAdvertMutation()
+  const [postAdvertWithFoto] = usePostAdvertWithFotoMutation()
   const { title, description, priceStr } = formValue
+
   const handleChange = (e) => {
     setFormValue({ ...formValue, [e.target.name]: e.target.value })
   }
@@ -25,30 +28,64 @@ export const NewAvd = ({ closeFunction }) => {
 
   const handleClick = async () => {
     try {
-      if (formFoto) {
+      const price = Number(priceStr)
+      const postAdvertData = await postAdvert({
+        title,
+        description,
+        price,
+      })
+      if (selectedImage) {
         console.log('функция С фото')
-      } else {
-        console.log('функция БЕЗ фото')
-        const price = Number(priceStr)
-        const postAdvertData = await postAdvert({
+        const formData = new FormData()
+        images.forEach((image) => {
+          formData.append('file', image)
+        })
+        postAdvertDatafoto = await postAdvertWithFoto({
           title,
           description,
           price,
+          images: images,
         })
-        console.log(postAdvertData)
-        if (postAdvertData) {
-          setSuccessPost(true)
-          setTimeout(() => {
-            setSuccessPost(false)
-            closeFunction(false)
-          }, 2000)
-        }
+        console.log(postAdvertDatafoto)
+      }
+      if (postAdvertData) {
+        setSuccessPost(true)
+        setTimeout(() => {
+          setSuccessPost(false)
+          closeFunction(false)
+        }, 2000)
       }
     } catch (error) {
       console.log(error)
     } finally {
       setFormValue(initialState)
       //   setIsSending(false)
+    }
+  }
+
+  const uploadContent = (e) => {
+    e.preventDefault()
+    if (e.target.files[0]) {
+      setImages([...images, ...e.target.files])
+
+      const newImageSrc = []
+      if (
+        e.target.files[0].type &&
+        !e.target.files[0].type.startsWith('image/')
+      ) {
+        console.log(
+          'File is not an image.',
+          e.target.files[0].type,
+          e.target.files[0],
+        )
+        return
+      }
+      const reader = new FileReader()
+      reader.addEventListener('load', () => {
+        newImageSrc.push(reader.result)
+        setImageSrc([...imageSrc, ...newImageSrc])
+      })
+      reader.readAsDataURL(e.target.files[0])
     }
   }
 
@@ -78,71 +115,59 @@ export const NewAvd = ({ closeFunction }) => {
             Фотографии товара<span>не более 5 фотографий</span>
           </S.InputsName>
           <S.FotoContainer>
-            <S.FotoInput>
-              <svg
-                width="90"
-                height="90"
-                viewBox="0 0 90 90"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <rect width="90" height="90" fill="#F0F0F0" />
-                <path d="M45 30V60" stroke="#D9D9D9" strokeWidth="3" />
-                <path d="M60 45H30" stroke="#D9D9D9" strokeWidth="3" />
-              </svg>{' '}
-            </S.FotoInput>
-            <S.FotoInput>
-              <svg
-                width="90"
-                height="90"
-                viewBox="0 0 90 90"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <rect width="90" height="90" fill="#F0F0F0" />
-                <path d="M45 30V60" stroke="#D9D9D9" strokeWidth="3" />
-                <path d="M60 45H30" stroke="#D9D9D9" strokeWidth="3" />
-              </svg>{' '}
-            </S.FotoInput>
-            <S.FotoInput>
-              <svg
-                width="90"
-                height="90"
-                viewBox="0 0 90 90"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <rect width="90" height="90" fill="#F0F0F0" />
-                <path d="M45 30V60" stroke="#D9D9D9" strokeWidth="3" />
-                <path d="M60 45H30" stroke="#D9D9D9" strokeWidth="3" />
-              </svg>{' '}
-            </S.FotoInput>
-            <S.FotoInput>
-              <svg
-                width="90"
-                height="90"
-                viewBox="0 0 90 90"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <rect width="90" height="90" fill="#F0F0F0" />
-                <path d="M45 30V60" stroke="#D9D9D9" strokeWidth="3" />
-                <path d="M60 45H30" stroke="#D9D9D9" strokeWidth="3" />
-              </svg>{' '}
-            </S.FotoInput>
-            <S.FotoInput>
-              <svg
-                width="90"
-                height="90"
-                viewBox="0 0 90 90"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <rect width="90" height="90" fill="#F0F0F0" />
-                <path d="M45 30V60" stroke="#D9D9D9" strokeWidth="3" />
-                <path d="M60 45H30" stroke="#D9D9D9" strokeWidth="3" />
-              </svg>{' '}
-            </S.FotoInput>
+            <S.FotoInputBlock>
+              <S.FotoInputLabel htmlFor="upload-photo"></S.FotoInputLabel>
+              {imageSrc[0] && (
+                <S.FotoPreview src={imageSrc[0]} alt="Preview"></S.FotoPreview>
+              )}
+              <S.FotoInput
+                type="file"
+                name="file"
+                accept="/image/*"
+                id="upload-photo"
+                //  onChange={(e) => {
+                //    const file = e.target.files[0]
+                //    if (file && file.type.substring(0, 5) === 'image') {
+                //      console.log(file)
+                //      setSelectedImage(URL.createObjectURL(file))
+                //    }
+                //  }}
+                onChange={(e) => {
+                  uploadContent(e)
+                }}
+              ></S.FotoInput>
+            </S.FotoInputBlock>
+
+            <S.FotoInputBlock>
+              <S.FotoInputLabel htmlFor="upload-photo"></S.FotoInputLabel>
+              {imageSrc[1] && (
+                <S.FotoPreview src={imageSrc[1]} alt="Preview"></S.FotoPreview>
+              )}
+              <S.FotoInput
+                type="file"
+                name="file"
+                accept="/image/*"
+                id="upload-photo"
+                onChange={(e) => {
+                  uploadContent(e)
+                }}
+              ></S.FotoInput>
+            </S.FotoInputBlock>
+            <S.FotoInputBlock>
+              <S.FotoInputLabel htmlFor="upload-photo"></S.FotoInputLabel>
+              {imageSrc[2] && (
+                <S.FotoPreview src={imageSrc[2]} alt="Preview"></S.FotoPreview>
+              )}
+              <S.FotoInput
+                type="file"
+                name="file"
+                accept="/image/*"
+                id="upload-photo"
+                onChange={(e) => {
+                  uploadContent(e)
+                }}
+              ></S.FotoInput>
+            </S.FotoInputBlock>
           </S.FotoContainer>
           <S.InputsLable htmlFor="priceStr">Цена</S.InputsLable>
           <S.PriceInput

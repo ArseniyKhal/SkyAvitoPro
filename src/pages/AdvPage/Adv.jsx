@@ -1,33 +1,29 @@
 import { useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Header } from 'components/Header/header'
 import { NavMenu } from 'components/NavMenu/NavMenu'
-import { useGetAllAdvsQuery } from 'services/servicesApi'
-import { useParams } from 'react-router-dom'
+import {
+  useGetAdvIDQuery,
+  useGetAllCommentsAdQuery,
+  useGetUserQuery,
+  useDelAdvertMutation,
+} from 'services/servicesApi'
 import { formatDateToDistance, formateComment } from 'helpers/helpers'
 import { Loader } from 'App.styles'
-import { Link } from 'react-router-dom'
-import { useGetAllCommentsAdQuery } from 'services/servicesApi'
 import { TelButton } from 'components/TelButton/TelButton'
-import { Modal } from 'components/ModalWindow/Modal'
+import { Modal, Success, Error } from 'components/ModalWindow/Modal'
 import { Comments } from 'components/Comments/Comments'
 import * as S from './Adv.styles'
 
-// переделать продает товары с ....
-// сделать картинки кликабельными
-// не сделаны отзывы
-
 export const Adv = () => {
   const { advID } = useParams()
-  const [isVisibliTelNum, setVisibliTelNum] = useState(false)
+  const navigate = useNavigate()
+  const { data: adv, isError, isLoading } = useGetAdvIDQuery(advID)
+  const { data: user } = useGetUserQuery()
+  const [isModal, setModal] = useState(false)
+  const [delAdvert] = useDelAdvertMutation()
   const [isCommentVisible, setCommentVisible] = useState(false)
-  const { data: advData, isLoading } = useGetAllAdvsQuery()
-  const adv = advData?.filter((item) => {
-    return item.id === +advID
-  })[0]
-
   const { data: commentAdv } = useGetAllCommentsAdQuery(advID)
-  //   console.log(adv)
-  //   console.log(commentAdv)
 
   // скрытие кнопки "Наверх ↑"
   const [offSet, setOffSet] = useState('')
@@ -58,6 +54,25 @@ export const Adv = () => {
     })
   }
 
+  // кнопка Снять с публикации
+  const handleClickDelete = () => {
+    delAdvert(advID).then((result) => {
+      try {
+        if (!result.error) {
+          setModal(<Success text="Объявление снято с публикации"></Success>)
+          setTimeout(() => {
+            setModal(false)
+            navigate('/')
+          }, 2000)
+        } else {
+          setModal(<Error text={result.error.data.detail}></Error>)
+          throw new Error(result.error.data.detail)
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    })
+  }
   return (
     <>
       <Header></Header>
@@ -80,15 +95,31 @@ export const Adv = () => {
             <S.PictureCarousel>{mapImagesList}</S.PictureCarousel>
           </S.BlockPicture>
           <S.BlockInfo>
-            <S.InfoTitle>{adv.title}</S.InfoTitle>
-            <S.InfoData>{formatDateToDistance(adv.created_on)}</S.InfoData>
+            <S.InfoTitle>{adv?.title}</S.InfoTitle>
+            <S.InfoData>{formatDateToDistance(adv?.created_on)}</S.InfoData>
             <S.InfoLocation>{adv.user.city}</S.InfoLocation>
             <S.InfoReviews onClick={() => setCommentVisible(true)}>
               {commentAdv?.length} отзыв
               {formateComment(commentAdv?.length)}
             </S.InfoReviews>
-            <S.InfoPrice>{adv.price.toLocaleString()} ₽</S.InfoPrice>
-            <TelButton TelNamber={adv.user.phone}></TelButton>
+            <S.InfoPrice>{adv?.price.toLocaleString()} ₽</S.InfoPrice>
+            <S.ButtonsContainer>
+              {adv?.user.id === user?.id ? (
+                <>
+                  <S.EnterButton
+                  //  onClick={() => handleClick()}
+                  >
+                    Редактировать
+                  </S.EnterButton>
+                  <S.EnterButton onClick={() => handleClickDelete()}>
+                    Снять с публикации
+                  </S.EnterButton>
+                </>
+              ) : (
+                <TelButton TelNamber={adv.user.phone}></TelButton>
+              )}
+            </S.ButtonsContainer>
+
             <S.SalesmanBlock>
               <S.SalesmanLogo>
                 <S.Img
@@ -123,6 +154,13 @@ export const Adv = () => {
           }
           cross={true}
           closeFunction={setCommentVisible}
+        ></Modal>
+      )}
+      {isModal && (
+        <Modal
+          childComponent={isModal}
+          cross={true}
+          closeFunction={setModal}
         ></Modal>
       )}
     </>
