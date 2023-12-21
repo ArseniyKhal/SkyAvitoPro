@@ -5,7 +5,7 @@ import { useRef, useState } from 'react'
 import { useAuth } from 'hooks/use-auth'
 import { useNavigate } from 'react-router'
 import { Modal } from 'components/ModalWindow/Modal'
-import { NewAvd } from 'components/NewAdvert/NewAdvert'
+import { NewAdvert } from 'components/NewAdvert/NewAdvert'
 import * as S from './header.styles'
 
 export const Header = () => {
@@ -48,7 +48,9 @@ export const Header = () => {
       </S.HeaderSection>
       {isNewAvdModal && (
         <Modal
-          childComponent={<NewAvd closeFunction={setNewAvdModal}></NewAvd>}
+          childComponent={
+            <NewAdvert closeFunction={setNewAvdModal}></NewAdvert>
+          }
           cross={true}
           closeFunction={setNewAvdModal}
         ></Modal>

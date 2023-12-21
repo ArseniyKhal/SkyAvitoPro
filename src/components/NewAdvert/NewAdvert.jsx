@@ -1,17 +1,19 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   usePostAdvertMutation,
   usePostAdvertWithFotoMutation,
+  useAddFotoToAdvertMutation,
+  useChangeAdvertMutation,
 } from 'services/servicesApi'
 import { Success } from 'components/ModalWindow/Modal'
 import * as S from './NewAdvert.styles'
 
-const initialState = {
+let initialState = {
   title: '',
   description: '',
   priceStr: '',
 }
-export const NewAvd = ({ closeFunction }) => {
+export const NewAdvert = ({ closeFunction, adv }) => {
   const [formValue, setFormValue] = useState(initialState)
   const [isSuccessPost, setSuccessPost] = useState(false)
   const [selectedImage, setSelectedImage] = useState(null)
@@ -19,47 +21,91 @@ export const NewAvd = ({ closeFunction }) => {
   const [imageSrc, setImageSrc] = useState([])
   const [postAdvert] = usePostAdvertMutation()
   const [postAdvertWithFoto] = usePostAdvertWithFotoMutation()
+  const [addFotoToAdvert] = useAddFotoToAdvertMutation()
+  const [changeAdvert] = useChangeAdvertMutation()
   const { title, description, priceStr } = formValue
+
+  useEffect(() => {
+    if (adv) {
+      setFormValue({
+        title: adv.title,
+        description: adv.description,
+        priceStr: adv.price,
+      })
+    }
+  }, [adv])
 
   const handleChange = (e) => {
     setFormValue({ ...formValue, [e.target.name]: e.target.value })
   }
-  //   console.log(formValue)
 
+  // отправляем данные
   const handleClick = async () => {
+    console.log(formValue)
     try {
+      let postAdvertData
       const price = Number(priceStr)
-      const postAdvertData = await postAdvert({
-        title,
-        description,
-        price,
-      })
-      if (selectedImage) {
-        console.log('функция С фото')
-        const formData = new FormData()
-        images.forEach((image) => {
-          formData.append('file', image)
+      if (adv) {
+        postAdvertData = await changeAdvert({
+          id: adv.id,
+          formValue,
         })
-        postAdvertDatafoto = await postAdvertWithFoto({
+      } else {
+        postAdvertData = await postAdvert({
           title,
           description,
           price,
-          images: images,
         })
-        console.log(postAdvertDatafoto)
       }
+      let addfotoData = null
+      if (images.length) {
+        for (let i = 0; i < images.length; i++) {
+          const formData = new FormData()
+          formData.append('file', images[i])
+
+          console.log('отправляем фото')
+          const advId = postAdvertData.data.id
+          addfotoData = await addFotoToAdvert({
+            id: advId,
+            pic: images[i],
+          })
+        }
+
+        console.log(addfotoData)
+      }
+
+      // if (postAdvertData && images.length && !addfotoData.error) {
+      //   setImages([])
+      //   setSuccessPost(true)
+      //   setFormValue(initialState)
+      //   setTimeout(() => {
+      //     setSuccessPost(false)
+      //     closeFunction(false)
+      //   }, 1000)
+      //   console.log('без фото')
+      // } else if (postAdvertData && images.length === 0) {
+      //   setSuccessPost(true)
+      //   setFormValue(initialState)
+      //   setTimeout(() => {
+      //     setSuccessPost(false)
+      //     closeFunction(false)
+      //   }, 1000)
+      //   console.log('с фото')
+      // }
       if (postAdvertData) {
+        setImages([])
         setSuccessPost(true)
+        setFormValue(initialState)
         setTimeout(() => {
           setSuccessPost(false)
           closeFunction(false)
-        }, 2000)
+        }, 1000)
+      } else {
+        console.log('ошибка')
+        return
       }
     } catch (error) {
       console.log(error)
-    } finally {
-      setFormValue(initialState)
-      //   setIsSending(false)
     }
   }
 

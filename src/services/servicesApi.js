@@ -84,18 +84,7 @@ export const advApi = createApi({
     // Получить объявление по ID
     getAdvID: builder.query({
       query: (id) => `ads/${id}/`,
-    }),
-
-    // Создать объявление
-    postAdvertWithFoto: builder.mutation({
-      query: (body) => {
-        return {
-          url: `ads`,
-          method: 'POST',
-          body,
-        }
-      },
-      invalidatesTags: ['Adverts'],
+      providesTags: () => ['AdvertID'],
     }),
 
     // Создать объявление без изображений
@@ -110,12 +99,49 @@ export const advApi = createApi({
       invalidatesTags: ['Adverts'],
     }),
 
+    // Изменить объявление
+    changeAdvert: builder.mutation({
+      query: ({ id, formValue }) => {
+        return {
+          url: `ads/${id}`,
+          method: 'PATCH',
+          body: formValue,
+        }
+      },
+      invalidatesTags: ['AdvertID', 'Adverts'],
+    }),
+
+    // Загрузить картинку в объявление
+    addFotoToAdvert: builder.mutation({
+      query: ({ id, pic }) => {
+        console.log(pic)
+        console.log(id)
+        return {
+          url: `ads/${id}/image`,
+          method: 'POST',
+          body: pic,
+        }
+      },
+      invalidatesTags: ['Adverts'],
+    }),
+
+    // Создать объявление
+    postAdvertWithFoto: builder.mutation({
+      query: (body) => {
+        return {
+          url: `ads`,
+          method: 'POST',
+          body,
+        }
+      },
+      invalidatesTags: ['Adverts'],
+    }),
+
     // Удалить объявление по ID
     delAdvert: builder.mutation({
       query: (id) => {
         return {
           url: `ads/${id}/`,
-          //  url: `ads/`,
           method: 'DELETE',
         }
       },
@@ -208,7 +234,9 @@ export const {
   useGetAllAdvsQuery,
   useGetAdvIDQuery,
   usePostAdvertWithFotoMutation,
+  useChangeAdvertMutation,
   usePostAdvertMutation,
+  useAddFotoToAdvertMutation,
   useDelAdvertMutation,
   useGetAllCommentsAdQuery,
   usePostCommentAdvMutation,

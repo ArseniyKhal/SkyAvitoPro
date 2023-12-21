@@ -6,6 +6,7 @@ import {
   useGetAdvIDQuery,
   useGetAllCommentsAdQuery,
   useGetUserQuery,
+  useChangeAdvertMutation,
   useDelAdvertMutation,
 } from 'services/servicesApi'
 import { formatDateToDistance, formateComment } from 'helpers/helpers'
@@ -13,6 +14,7 @@ import { Loader } from 'App.styles'
 import { TelButton } from 'components/TelButton/TelButton'
 import { Modal, Success, Error } from 'components/ModalWindow/Modal'
 import { Comments } from 'components/Comments/Comments'
+import { NewAdvert } from 'components/NewAdvert/NewAdvert'
 import * as S from './Adv.styles'
 
 export const Adv = () => {
@@ -22,6 +24,7 @@ export const Adv = () => {
   const { data: user } = useGetUserQuery()
   const [isModal, setModal] = useState(false)
   const [delAdvert] = useDelAdvertMutation()
+  const [changeAdvert] = useChangeAdvertMutation()
   const [isCommentVisible, setCommentVisible] = useState(false)
   const { data: commentAdv } = useGetAllCommentsAdQuery(advID)
 
@@ -54,24 +57,47 @@ export const Adv = () => {
     })
   }
 
+  // кнопка Редактирования
+  const handleClickСhange = () => {
+    setModal(<NewAdvert adv={adv} closeFunction={setModal}></NewAdvert>)
+
+    try {
+      // changeAdvert({ id: advID }).then((result) => {
+      //   //   if (!result.error) {
+      //   //     setModal(<Success text="Объявление снято с публикации"></Success>)
+      //   //     setTimeout(() => {
+      //   //       setModal(false)
+      //   //       navigate('/')
+      //   //     }, 1000)
+      //   //   } else {
+      //   //     setModal(<Error text={result.error.data.detail}></Error>)
+      //   //     throw new Error(result.error.data.detail)
+      //   //   }
+      //   console.log(result)
+      // })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   // кнопка Снять с публикации
   const handleClickDelete = () => {
-    delAdvert(advID).then((result) => {
-      try {
+    try {
+      delAdvert(advID).then((result) => {
         if (!result.error) {
           setModal(<Success text="Объявление снято с публикации"></Success>)
           setTimeout(() => {
             setModal(false)
             navigate('/')
-          }, 2000)
+          }, 1000)
         } else {
           setModal(<Error text={result.error.data.detail}></Error>)
           throw new Error(result.error.data.detail)
         }
-      } catch (err) {
-        console.log(err)
-      }
-    })
+      })
+    } catch (err) {
+      console.log(err)
+    }
   }
   return (
     <>
@@ -106,9 +132,7 @@ export const Adv = () => {
             <S.ButtonsContainer>
               {adv?.user.id === user?.id ? (
                 <>
-                  <S.EnterButton
-                  //  onClick={() => handleClick()}
-                  >
+                  <S.EnterButton onClick={() => handleClickСhange()}>
                     Редактировать
                   </S.EnterButton>
                   <S.EnterButton onClick={() => handleClickDelete()}>
