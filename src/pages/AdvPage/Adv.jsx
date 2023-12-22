@@ -60,24 +60,6 @@ export const Adv = () => {
   // кнопка Редактирования
   const handleClickСhange = () => {
     setModal(<NewAdvert adv={adv} closeFunction={setModal}></NewAdvert>)
-
-    try {
-      // changeAdvert({ id: advID }).then((result) => {
-      //   //   if (!result.error) {
-      //   //     setModal(<Success text="Объявление снято с публикации"></Success>)
-      //   //     setTimeout(() => {
-      //   //       setModal(false)
-      //   //       navigate('/')
-      //   //     }, 1000)
-      //   //   } else {
-      //   //     setModal(<Error text={result.error.data.detail}></Error>)
-      //   //     throw new Error(result.error.data.detail)
-      //   //   }
-      //   console.log(result)
-      // })
-    } catch (err) {
-      console.log(err)
-    }
   }
 
   // кнопка Снять с публикации

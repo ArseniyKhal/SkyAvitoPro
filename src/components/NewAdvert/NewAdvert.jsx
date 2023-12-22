@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import {
   usePostAdvertMutation,
-  usePostAdvertWithFotoMutation,
   useAddFotoToAdvertMutation,
   useChangeAdvertMutation,
 } from 'services/servicesApi'
@@ -16,11 +15,9 @@ let initialState = {
 export const NewAdvert = ({ closeFunction, adv }) => {
   const [formValue, setFormValue] = useState(initialState)
   const [isSuccessPost, setSuccessPost] = useState(false)
-  const [selectedImage, setSelectedImage] = useState(null)
   const [images, setImages] = useState([])
   const [imageSrc, setImageSrc] = useState([])
   const [postAdvert] = usePostAdvertMutation()
-  const [postAdvertWithFoto] = usePostAdvertWithFotoMutation()
   const [addFotoToAdvert] = useAddFotoToAdvertMutation()
   const [changeAdvert] = useChangeAdvertMutation()
   const { title, description, priceStr } = formValue
@@ -41,7 +38,6 @@ export const NewAdvert = ({ closeFunction, adv }) => {
 
   // отправляем данные
   const handleClick = async () => {
-    console.log(formValue)
     try {
       let postAdvertData
       const price = Number(priceStr)
@@ -57,41 +53,18 @@ export const NewAdvert = ({ closeFunction, adv }) => {
           price,
         })
       }
-      let addfotoData = null
-      if (images.length) {
-        for (let i = 0; i < images.length; i++) {
-          const formData = new FormData()
-          formData.append('file', images[i])
 
-          console.log('отправляем фото')
-          const advId = postAdvertData.data.id
+      let addfotoData
+      if (images.length) {
+        const advId = postAdvertData.data.id
+        images.forEach(async (image) => {
           addfotoData = await addFotoToAdvert({
             id: advId,
-            pic: images[i],
+            image,
           })
-        }
-
-        console.log(addfotoData)
+        })
       }
 
-      // if (postAdvertData && images.length && !addfotoData.error) {
-      //   setImages([])
-      //   setSuccessPost(true)
-      //   setFormValue(initialState)
-      //   setTimeout(() => {
-      //     setSuccessPost(false)
-      //     closeFunction(false)
-      //   }, 1000)
-      //   console.log('без фото')
-      // } else if (postAdvertData && images.length === 0) {
-      //   setSuccessPost(true)
-      //   setFormValue(initialState)
-      //   setTimeout(() => {
-      //     setSuccessPost(false)
-      //     closeFunction(false)
-      //   }, 1000)
-      //   console.log('с фото')
-      // }
       if (postAdvertData) {
         setImages([])
         setSuccessPost(true)
@@ -100,30 +73,21 @@ export const NewAdvert = ({ closeFunction, adv }) => {
           setSuccessPost(false)
           closeFunction(false)
         }, 1000)
-      } else {
-        console.log('ошибка')
-        return
       }
     } catch (error) {
       console.log(error)
     }
   }
 
-  const uploadContent = (e) => {
-    e.preventDefault()
-    if (e.target.files[0]) {
-      setImages([...images, ...e.target.files])
+  const uploadContent = (event) => {
+    event.preventDefault()
+    const selectedFile = event.target.files[0]
 
+    if (selectedFile) {
+      setImages([...images, selectedFile])
       const newImageSrc = []
-      if (
-        e.target.files[0].type &&
-        !e.target.files[0].type.startsWith('image/')
-      ) {
-        console.log(
-          'File is not an image.',
-          e.target.files[0].type,
-          e.target.files[0],
-        )
+      if (selectedFile.type && !selectedFile.type.startsWith('image/')) {
+        console.log('File is not an image.', selectedFile.type, selectedFile)
         return
       }
       const reader = new FileReader()
@@ -131,7 +95,7 @@ export const NewAdvert = ({ closeFunction, adv }) => {
         newImageSrc.push(reader.result)
         setImageSrc([...imageSrc, ...newImageSrc])
       })
-      reader.readAsDataURL(e.target.files[0])
+      reader.readAsDataURL(selectedFile)
     }
   }
 

@@ -113,25 +113,30 @@ export const advApi = createApi({
 
     // Загрузить картинку в объявление
     addFotoToAdvert: builder.mutation({
-      query: ({ id, pic }) => {
-        console.log(pic)
-        console.log(id)
+      query: ({ id, image }) => {
+        const fD = new FormData()
+        fD.append('file', image)
         return {
           url: `ads/${id}/image`,
           method: 'POST',
-          body: pic,
+          body: fD,
         }
       },
       invalidatesTags: ['Adverts'],
     }),
 
-    // Создать объявление
+    // Создать объявление (не работает)
     postAdvertWithFoto: builder.mutation({
-      query: (body) => {
+      query: ({ title, description, price, image }) => {
+        const fD = new FormData()
+        fD.append('file', image)
         return {
           url: `ads`,
           method: 'POST',
-          body,
+          title: title,
+          description: description,
+          price: price,
+          body: fD,
         }
       },
       invalidatesTags: ['Adverts'],
@@ -218,11 +223,13 @@ export const advApi = createApi({
 
     // загрузить аватар пользователя
     uploadUserAvatar: builder.mutation({
-      query: (body) => {
+      query: (image) => {
+        const formData = new FormData()
+        formData.append('file', image)
         return {
           url: 'user/avatar',
           method: 'POST',
-          body,
+          body: formData,
         }
       },
       invalidatesTags: ['User'],

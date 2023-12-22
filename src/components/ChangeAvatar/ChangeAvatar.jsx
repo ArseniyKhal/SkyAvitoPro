@@ -7,11 +7,10 @@ export const ChangeAvatar = ({ setSuccessModal, setChangeAvaModal }) => {
   const [isErrorChange, setErrorChange] = useState(null)
   const imageRef = useRef(null)
   const [file, setFile] = useState('')
+
   let uploadUserAvatarData
   const handleClick = async () => {
-    const formData = new FormData()
-    formData.append('file', file)
-    uploadUserAvatarData = await uploadUserAvatar(formData)
+    uploadUserAvatarData = await uploadUserAvatar(file)
     if (uploadUserAvatarData.data) {
       setChangeAvaModal(false)
       setSuccessModal(true)
