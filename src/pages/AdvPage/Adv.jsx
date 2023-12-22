@@ -6,7 +6,6 @@ import {
   useGetAdvIDQuery,
   useGetAllCommentsAdQuery,
   useGetUserQuery,
-  useChangeAdvertMutation,
   useDelAdvertMutation,
 } from 'services/servicesApi'
 import { formatDateToDistance, formateComment } from 'helpers/helpers'
@@ -24,8 +23,6 @@ export const Adv = () => {
   const { data: user } = useGetUserQuery()
   const [isModal, setModal] = useState(false)
   const [delAdvert] = useDelAdvertMutation()
-  const [changeAdvert] = useChangeAdvertMutation()
-  const [isCommentVisible, setCommentVisible] = useState(false)
   const { data: commentAdv } = useGetAllCommentsAdQuery(advID)
 
   // скрытие кнопки "Наверх ↑"
@@ -59,7 +56,12 @@ export const Adv = () => {
 
   // кнопка Редактирования
   const handleClickСhange = () => {
-    setModal(<NewAdvert adv={adv} closeFunction={setModal}></NewAdvert>)
+    setModal(<NewAdvert adv={adv} titleMod="Редактировать"></NewAdvert>)
+  }
+
+  // кнопка Отзывы
+  const handleClickComment = () => {
+    setModal(<Comments advID={advID}></Comments>)
   }
 
   // кнопка Снять с публикации
@@ -106,7 +108,7 @@ export const Adv = () => {
             <S.InfoTitle>{adv?.title}</S.InfoTitle>
             <S.InfoData>{formatDateToDistance(adv?.created_on)}</S.InfoData>
             <S.InfoLocation>{adv.user.city}</S.InfoLocation>
-            <S.InfoReviews onClick={() => setCommentVisible(true)}>
+            <S.InfoReviews onClick={() => handleClickComment()}>
               {commentAdv?.length} отзыв
               {formateComment(commentAdv?.length)}
             </S.InfoReviews>
@@ -125,7 +127,6 @@ export const Adv = () => {
                 <TelButton TelNamber={adv.user.phone}></TelButton>
               )}
             </S.ButtonsContainer>
-
             <S.SalesmanBlock>
               <S.SalesmanLogo>
                 <S.Img
@@ -152,15 +153,6 @@ export const Adv = () => {
             <S.TextParagraph>{adv.description}</S.TextParagraph>
           </S.BlockText>
         </S.AdvContent>
-      )}
-      {isCommentVisible && (
-        <Modal
-          childComponent={
-            <Comments commentList={commentAdv} advID={advID}></Comments>
-          }
-          cross={true}
-          closeFunction={setCommentVisible}
-        ></Modal>
       )}
       {isModal && (
         <Modal

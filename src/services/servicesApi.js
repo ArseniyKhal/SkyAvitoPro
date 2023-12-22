@@ -122,7 +122,7 @@ export const advApi = createApi({
           body: fD,
         }
       },
-      invalidatesTags: ['Adverts'],
+      invalidatesTags: ['Adverts', 'AdvertID'],
     }),
 
     // Создать объявление (не работает)

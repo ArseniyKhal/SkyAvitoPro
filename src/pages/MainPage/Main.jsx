@@ -12,6 +12,7 @@ export const Main = () => {
   const [searchAdv, setSearchAdv] = useState('')
   let advList = data
   //   console.log(data)
+
   // поиск объявлений
   if (searchAdv.length) {
     advList = data.filter((el) =>

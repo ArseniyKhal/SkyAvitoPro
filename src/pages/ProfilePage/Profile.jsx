@@ -4,7 +4,7 @@ import { NavMenu } from 'components/NavMenu/NavMenu'
 import { useGetUserQuery } from 'services/servicesApi'
 import { Loader } from 'App.styles'
 import { useState } from 'react'
-import { usePatchUserMutation } from 'services/servicesApi'
+import { usePatchUserMutation, useGetAllAdvsQuery } from 'services/servicesApi'
 import { Modal, Success } from 'components/ModalWindow/Modal'
 import { ChangeAvatar } from 'components/ChangeAvatar/ChangeAvatar'
 
@@ -18,26 +18,26 @@ const initialState = {
 }
 
 export const Profile = () => {
+  const { data: adverts } = useGetAllAdvsQuery()
   const [isSending, setIsSending] = useState(false)
-  const [isSuccessModal, setSuccessModal] = useState(false)
-  const [isChangeAvaModal, setChangeAvaModal] = useState(false)
+  const [isModal, setModal] = useState(false)
   const [patchUser] = usePatchUserMutation()
   const { data: user, isLoading, isError } = useGetUserQuery()
-  //   console.log(user)
   const [formValue, setFormValue] = useState(initialState)
   const { name, surname, city, tel } = formValue
 
   const handleChange = (e) => {
     setFormValue({ ...formValue, [e.target.name]: e.target.value })
   }
+
   const handleClick = async () => {
     try {
       setIsSending(true)
       const patchUserData = await patchUser({ name, surname, city, tel })
       if (patchUserData) {
-        setSuccessModal(true)
+        setModal(<Success />)
         setTimeout(() => {
-          setSuccessModal(false)
+          setModal(null)
         }, 2000)
       }
     } catch (error) {
@@ -47,6 +47,20 @@ export const Profile = () => {
       setIsSending(false)
     }
   }
+
+  // кнопка смены аватара
+  const handleClickСhangeAvatar = () => {
+    setModal(<ChangeAvatar setModal={setModal}></ChangeAvatar>)
+  }
+
+  // формируем список объявлений
+  const advList = adverts?.filter((el) => {
+    return el.user.id === user?.id
+  })
+  const mapAdvsList = advList?.map((advCard) => {
+    return <Card key={advCard?.id} dataCard={advCard}></Card>
+  })
+
   return (
     <>
       <Header></Header>
@@ -78,7 +92,7 @@ export const Profile = () => {
                     </S.AvatarPicture>
                     <S.AvatarСhangeBtn
                       onClick={() => {
-                        setChangeAvaModal(true)
+                        handleClickСhangeAvatar()
                       }}
                     >
                       Заменить
@@ -144,6 +158,7 @@ export const Profile = () => {
               <S.UsersProducts>
                 <S.SubTitle>Мои товары</S.SubTitle>
                 <S.MainList>
+                  {mapAdvsList}
                   {/* <Card></Card>
          				 <Card></Card>
          				 <Card></Card>
@@ -152,23 +167,12 @@ export const Profile = () => {
               </S.UsersProducts>
             </>
           )}
-          {isSuccessModal && (
+
+          {isModal && (
             <Modal
-              childComponent={<Success></Success>}
+              childComponent={isModal}
               cross={true}
-              closeFunction={setSuccessModal}
-            ></Modal>
-          )}
-          {isChangeAvaModal && (
-            <Modal
-              childComponent={
-                <ChangeAvatar
-                  setSuccessModal={setSuccessModal}
-                  setChangeAvaModal={setChangeAvaModal}
-                ></ChangeAvatar>
-              }
-              cross={true}
-              closeFunction={setChangeAvaModal}
+              closeFunction={setModal}
             ></Modal>
           )}
         </>

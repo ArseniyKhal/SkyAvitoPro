@@ -1,36 +1,39 @@
 import { formateDate } from 'helpers/helpers'
 import { useState } from 'react'
-import { usePostCommentAdvMutation } from 'services/servicesApi'
+import {
+  usePostCommentAdvMutation,
+  useGetAllCommentsAdQuery,
+} from 'services/servicesApi'
 import * as S from './Comments.styles'
 
-export const Comments = ({ commentList, advID }) => {
+export const Comments = ({ advID }) => {
   const [inputComment, setInputComment] = useState('')
   const [postCommentAdv] = usePostCommentAdvMutation()
+  const { data } = useGetAllCommentsAdQuery(advID)
+
   // формируем список комментариев
-  const mapCommentsList = commentList?.map((com) => {
+  const mapCommentsList = data?.map((com) => {
     return (
-      <>
-        <S.Comment key={com.id}>
-          <S.ComAvatar>
-            <S.Img
-              src={
-                com.author.avatar
-                  ? `http://localhost:8090/${com.author.avatar}`
-                  : '/img/userLogo.webp'
-              }
-              alt="avatar"
-            ></S.Img>
-          </S.ComAvatar>
-          <S.ComContent>
-            <S.ComHeader>
-              {com.author.name}
-              <span>{formateDate(com.created_on)}</span>
-            </S.ComHeader>
-            <S.ComParagraph>Комментарий</S.ComParagraph>
-            <S.ComText>{com.text}</S.ComText>
-          </S.ComContent>
-        </S.Comment>
-      </>
+      <S.Comment key={com.id}>
+        <S.ComAvatar>
+          <S.Img
+            src={
+              com.author.avatar
+                ? `http://localhost:8090/${com.author.avatar}`
+                : '/img/userLogo.webp'
+            }
+            alt="avatar"
+          ></S.Img>
+        </S.ComAvatar>
+        <S.ComContent>
+          <S.ComHeader>
+            {com.author.name}
+            <span>{formateDate(com.created_on)}</span>
+          </S.ComHeader>
+          <S.ComParagraph>Комментарий</S.ComParagraph>
+          <S.ComText>{com.text}</S.ComText>
+        </S.ComContent>
+      </S.Comment>
     )
   })
 
