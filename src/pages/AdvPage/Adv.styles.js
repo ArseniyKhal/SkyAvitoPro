@@ -78,6 +78,7 @@ export const SalesmanBlock = styled.div`
   margin-top: 34px;
   display: flex;
   gap: 12px;
+  cursor: pointer;
 `
 export const SalesmanLogo = styled.div`
   width: 40px;
@@ -91,7 +92,6 @@ export const SalesmanName = styled.p`
   font-size: 20px;
   font-weight: 600;
   line-height: 130%;
-  cursor: pointer;
 `
 export const SalesmanInfo = styled.p`
   color: var(--text-color-grey);

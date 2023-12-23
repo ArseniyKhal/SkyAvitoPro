@@ -27,9 +27,9 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
   const { auth } = api.getState()
   // Если в сторе нет refresh токена, разлогиниваем его и отправляем авторизоваться руками
-  if (!auth.refresh) {
-    return forceLogout()
-  }
+  //   if (!auth.refresh) {
+  //     return forceLogout()
+  //   }
 
   // Делаем запрос за новым access токеном в API обновления токена
   //   console.log('Делаем запрос за новым access токеном')
@@ -50,6 +50,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   if (!refreshResult.data.access_token) {
     return forceLogout()
   }
+
   // получили новый access токен, сохраняем его в стор и сторож
   saveUserInfoInLocalStorage(refreshResult, auth.email)
   api.dispatch(

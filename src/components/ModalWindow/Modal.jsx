@@ -32,11 +32,7 @@ export const Success = ({ text }) => {
 export const Error = ({ text }) => {
   return (
     <>
-      <S.ContentBlock>
-        Ошибка!
-        <br />
-        {text}
-      </S.ContentBlock>
+      <S.ContentBlock>{text}</S.ContentBlock>
     </>
   )
 }

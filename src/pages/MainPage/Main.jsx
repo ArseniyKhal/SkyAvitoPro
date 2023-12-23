@@ -11,7 +11,6 @@ export const Main = () => {
   const { data, isError, isLoading } = useGetAllAdvsQuery()
   const [searchAdv, setSearchAdv] = useState('')
   let advList = data
-  //   console.log(data)
 
   // поиск объявлений
   if (searchAdv.length) {

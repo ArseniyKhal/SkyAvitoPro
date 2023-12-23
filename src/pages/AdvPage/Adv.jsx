@@ -14,6 +14,7 @@ import { TelButton } from 'components/TelButton/TelButton'
 import { Modal, Success, Error } from 'components/ModalWindow/Modal'
 import { Comments } from 'components/Comments/Comments'
 import { NewAdvert } from 'components/NewAdvert/NewAdvert'
+import { useAuth } from 'hooks/use-auth'
 import * as S from './Adv.styles'
 
 export const Adv = () => {
@@ -24,6 +25,7 @@ export const Adv = () => {
   const [isModal, setModal] = useState(false)
   const [delAdvert] = useDelAdvertMutation()
   const { data: commentAdv } = useGetAllCommentsAdQuery(advID)
+  const { isAuth } = useAuth()
 
   // скрытие кнопки "Наверх ↑"
   const [offSet, setOffSet] = useState('')
@@ -59,9 +61,28 @@ export const Adv = () => {
     setModal(<NewAdvert adv={adv} titleMod="Редактировать"></NewAdvert>)
   }
 
+  // клик по продавцу
+  const handleClickNavigate = () => {
+    if (isAuth) {
+      navigate(`/seller/${adv.user_id}`)
+    } else {
+      setModal(<Error text={`Пожалуйста авторизуйтесь!`}></Error>)
+      setTimeout(() => {
+        setModal(false)
+      }, 2000)
+    }
+  }
+
   // кнопка Отзывы
   const handleClickComment = () => {
-    setModal(<Comments advID={advID}></Comments>)
+    if (isAuth) {
+      setModal(<Comments advID={advID}></Comments>)
+    } else {
+      setModal(<Error text={`Пожалуйста авторизуйтесь!`}></Error>)
+      setTimeout(() => {
+        setModal(false)
+      }, 2000)
+    }
   }
 
   // кнопка Снять с публикации
@@ -75,7 +96,7 @@ export const Adv = () => {
             navigate('/')
           }, 1000)
         } else {
-          setModal(<Error text={result.error.data.detail}></Error>)
+          setModal(<Error text={`Ошибка! ${result.error.data.detail}`}></Error>)
           throw new Error(result.error.data.detail)
         }
       })
@@ -124,10 +145,14 @@ export const Adv = () => {
                   </S.EnterButton>
                 </>
               ) : (
-                <TelButton TelNamber={adv.user.phone}></TelButton>
+                <TelButton
+                  TelNamber={adv.user.phone}
+                  setModal={setModal}
+                ></TelButton>
               )}
             </S.ButtonsContainer>
-            <S.SalesmanBlock>
+
+            <S.SalesmanBlock onClick={() => handleClickNavigate()}>
               <S.SalesmanLogo>
                 <S.Img
                   src={
@@ -139,9 +164,7 @@ export const Adv = () => {
                 ></S.Img>
               </S.SalesmanLogo>
               <div>
-                <S.SalesmanName>
-                  <Link to={`/seller/${adv.user_id}`}>{adv.user.name} </Link>
-                </S.SalesmanName>
+                <S.SalesmanName>{adv.user.name}</S.SalesmanName>
                 <S.SalesmanInfo>
                   Продает товары {formatDateToDistance(adv.user?.sells_from)}
                 </S.SalesmanInfo>

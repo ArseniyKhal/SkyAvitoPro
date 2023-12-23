@@ -10,13 +10,9 @@ import * as S from '../SellerProfilePage/SellerProfile.styles'
 
 export const SellerProfile = () => {
   const { selID } = useParams()
-  const { data: advData, isLoading } = useGetAllAdvsQuery()
+  const { data: alladvert, isLoading } = useGetAllAdvsQuery()
 
-  const selerData = advData?.filter((item) => {
-    return item.id === +selID
-  })[0].user
-
-  const selerAdvs = advData?.filter((item) => {
+  const selerAdvs = alladvert?.filter((item) => {
     return item.user_id === +selID
   })
 
@@ -40,8 +36,8 @@ export const SellerProfile = () => {
               <S.AvatarPicture>
                 <S.AvatarImg
                   src={
-                    selerData.avatar
-                      ? `http://localhost:8090/${selerData.avatar}`
+                    selerAdvs[0].user.avatar
+                      ? `http://localhost:8090/${selerAdvs[0].user.avatar}`
                       : '/img/userLogo.webp'
                   }
                   alt="avatarSeller"
@@ -49,13 +45,14 @@ export const SellerProfile = () => {
               </S.AvatarPicture>
               <S.BlockInfo>
                 <S.InfoText>
-                  <S.SellerName>{selerData.name}</S.SellerName>
-                  <S.SellerLocation>{selerData.city}</S.SellerLocation>
+                  <S.SellerName>{selerAdvs[0].user.name}</S.SellerName>
+                  <S.SellerLocation>{selerAdvs[0].user.city}</S.SellerLocation>
                   <S.SellerLocation>
-                    Продает товары {formatDateToDistance(selerData.sells_from)}
+                    Продает товары{' '}
+                    {formatDateToDistance(selerAdvs[0].user.sells_from)}
                   </S.SellerLocation>
                 </S.InfoText>
-                <TelButton TelNamber={selerData.phone}></TelButton>
+                <TelButton TelNamber={selerAdvs[0].user.phone}></TelButton>
               </S.BlockInfo>
             </S.ProfileSettingsContent>
           </S.ProfileSettings>

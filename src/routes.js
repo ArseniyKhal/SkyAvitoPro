@@ -23,19 +23,12 @@ export const AppRoutes = () => {
             element={<Modal childComponent={<Auth typeLogin={false} />} />}
           />
         </Route>
+        <Route path="/adv/:advID" element={<Adv />}></Route>
         <Route
           path="profile"
           element={
             <ProtectedRoute>
               <Profile />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="adv/:advID"
-          element={
-            <ProtectedRoute>
-              <Adv />
             </ProtectedRoute>
           }
         />
