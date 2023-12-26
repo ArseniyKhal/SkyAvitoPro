@@ -8,6 +8,9 @@ export const HeaderSection = styled.div`
   position: absolute;
   top: 0;
   left: 0px;
+  @media (width <= 800px) {
+    height: 55px;
+  }
 `
 export const HeaderContainer = styled.div`
   max-width: 1190px;
@@ -23,11 +26,23 @@ export const HeaderContent = styled.div`
   width: 100%;
   display: flex;
   gap: 10px;
+  @media (width <= 800px) {
+    justify-content: flex-start;
+  }
 `
 export const EnterButton = styled(Button)`
   border: 1px solid var(--text-color-white);
   height: 40px;
   &:hover {
     background: var(--btn-hover-BG);
+  }
+  @media (width <= 800px) {
+    display: none;
+  }
+`
+export const HeaderLogo = styled.div`
+  cursor: pointer;
+  @media (width > 800px) {
+    display: none;
   }
 `

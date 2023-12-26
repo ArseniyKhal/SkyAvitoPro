@@ -16,6 +16,7 @@ export const Picture = styled.div`
   height: 480px;
   background-color: #f0f0f0;
   margin-bottom: 30px;
+  cursor: pointer;
 `
 export const Img = styled.img`
   width: 100%;
@@ -31,6 +32,7 @@ export const SmallPicture = styled.div`
   width: 88px;
   height: 88px;
   background-color: #f0f0f0;
+  cursor: pointer;
 `
 export const BlockInfo = styled.div``
 export const InfoTitle = styled.h2`

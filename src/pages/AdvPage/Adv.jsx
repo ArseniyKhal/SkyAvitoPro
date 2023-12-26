@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
-import { Header } from 'components/Header/header'
+import { useNavigate, useParams } from 'react-router-dom'
+import { Header } from 'components/Header/Header'
 import { NavMenu } from 'components/NavMenu/NavMenu'
 import {
   useGetAdvIDQuery,
@@ -23,6 +23,7 @@ export const Adv = () => {
   const { data: adv, isError, isLoading } = useGetAdvIDQuery(advID)
   const { data: user } = useGetUserQuery()
   const [isModal, setModal] = useState(false)
+  const [bigPic, setBigPic] = useState(null)
   const [delAdvert] = useDelAdvertMutation()
   const { data: commentAdv } = useGetAllCommentsAdQuery(advID)
   const { isAuth } = useAuth()
@@ -35,26 +36,26 @@ export const Adv = () => {
 
   // картинки
   let bigImageAdv
-  let mapImagesList
-  if (adv) {
-    bigImageAdv = adv.images[0]?.url
-
-    // формируем список картинок
-    mapImagesList = adv.images?.map((image) => {
-      return (
-        <S.SmallPicture key={image.id}>
-          <S.Img
-            src={
-              bigImageAdv
-                ? `http://localhost:8090/${image.url}`
-                : '/img/noImage.jpg'
-            }
-            alt="fotoAvd"
-          ></S.Img>
-        </S.SmallPicture>
-      )
-    })
+  if (bigPic) {
+    bigImageAdv = bigPic
+  } else {
+    bigImageAdv = adv?.images[0]?.url
   }
+
+  const mapImagesList = adv?.images.map((image) => {
+    return (
+      <S.SmallPicture key={image.id} onClick={() => setBigPic(image.url)}>
+        <S.Img
+          src={
+            bigImageAdv
+              ? `http://localhost:8090/${image.url}`
+              : '/img/noImage.jpg'
+          }
+          alt="fotoAvd"
+        ></S.Img>
+      </S.SmallPicture>
+    )
+  })
 
   // кнопка Редактирования
   const handleClickСhange = () => {
@@ -104,6 +105,12 @@ export const Adv = () => {
       console.log(err)
     }
   }
+
+  // клик по картинке
+  const handleClickPicture = () => {
+    setModal(<BigPic src={bigImageAdv}></BigPic>)
+  }
+
   return (
     <>
       <Header></Header>
@@ -113,7 +120,7 @@ export const Adv = () => {
       ) : (
         <S.AdvContent>
           <S.BlockPicture>
-            <S.Picture>
+            <S.Picture onClick={() => handleClickPicture()}>
               <S.Img
                 src={
                   bigImageAdv
@@ -184,6 +191,16 @@ export const Adv = () => {
           closeFunction={setModal}
         ></Modal>
       )}
+    </>
+  )
+}
+
+const BigPic = ({ src }) => {
+  return (
+    <>
+      <div>
+        <S.Img src={`http://localhost:8090/${src}`} alt="fotoAvd"></S.Img>
+      </div>
     </>
   )
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Card } from 'components/Card/Card'
-import { Header } from 'components/Header/header'
+import { Header } from 'components/Header/Header'
 import { SearchSection } from 'components/Search/SearchSection'
 import { useGetAllAdvsQuery } from 'services/servicesApi'
 import { Loader } from 'App.styles'
@@ -51,13 +51,13 @@ export const Main = () => {
 
       {offSet && (
         <S.MainFooter>
-          <S.MainButton
+          <S.UpButton
             onClick={() => {
               window.scrollTo({ top: 0, behavior: 'smooth' })
             }}
           >
             Наверх ↑
-          </S.MainButton>
+          </S.UpButton>
         </S.MainFooter>
       )}
     </>

@@ -21,6 +21,7 @@ export const ModalWindow = styled.div`
   border-radius: 12px;
   overflow: hidden;
   padding: 44px;
+  max-width: 600px;
 `
 export const CloseBtn = styled.div`
   position: absolute;

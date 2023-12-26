@@ -1,4 +1,4 @@
-import { Header } from 'components/Header/header'
+import { Header } from 'components/Header/Header'
 import { Card } from 'components/Card/Card'
 import { NavMenu } from 'components/NavMenu/NavMenu'
 import { useParams } from 'react-router-dom'
