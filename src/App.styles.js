@@ -139,9 +139,10 @@ export const Button = styled.button`
   &:disabled {
     background-color: var(--btn-disabled);
   }
-  //   &:active {
-  //     background-color: var(--palette-purple-100);
-  //   }
+  @media (width <= 600px) {
+    height: 40px;
+    font-size: 14px;
+  }
 `
 
 const rotate = keyframes`

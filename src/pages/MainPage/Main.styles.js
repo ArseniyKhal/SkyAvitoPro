@@ -6,6 +6,12 @@ export const Title = styled.h1`
   font-size: 40px;
   font-weight: 500;
   line-height: 220%;
+  @media (width <= 600px) {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 24px;
+    line-height: 120%;
+  }
 `
 
 export const MainList = styled.ul`
@@ -29,6 +35,9 @@ export const MainFooter = styled.section`
 `
 export const UpButton = styled(Button)`
   margin-bottom: 60px;
+  @media (width <= 600px) {
+    margin-bottom: 40px;
+  }
 `
 export const BlockError = styled.div`
   color: var(--orange-90);

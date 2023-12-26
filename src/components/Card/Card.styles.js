@@ -1,15 +1,20 @@
 import { styled } from 'styled-components'
 
 export const Card = styled.li`
-  //   width: 270px;
-  //   height: 440px;
   overflow: hidden;
   position: relative;
   transition: transform 0.3s ease;
+  @media (width <= 800px) {
+    border-radius: 6px;
+    box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.1);
+  }
 `
 export const CardPicture = styled.div`
   height: 270px;
   background-color: #f0f0f0;
+  @media (width <= 600px) {
+    height: 137px;
+  }
 `
 export const CardImg = styled.img`
   width: 100%;
@@ -17,7 +22,10 @@ export const CardImg = styled.img`
   object-fit: cover;
 `
 export const CardContent = styled.div`
-  margin-top: 20px;
+  padding-top: 20px;
+  @media (width <= 800px) {
+    padding: 10px 10px 20px 10px;
+  }
 `
 export const CardLink = styled.p`
   color: var(--main-topic);
@@ -28,11 +36,13 @@ export const CardLink = styled.p`
   font-size: 22px;
   font-weight: 500;
   line-height: 120%;
-  //   min-height: 52px;
   margin-bottom: 10px;
   cursor: pointer;
   &:hover {
     color: #ff6163;
+  }
+  @media (width <= 600px) {
+    font-size: 14px;
   }
 `
 export const CardPrice = styled.p`
@@ -41,10 +51,16 @@ export const CardPrice = styled.p`
   font-weight: 500;
   line-height: 150%;
   margin-bottom: 10px;
+  @media (width <= 600px) {
+    font-size: 16px;
+  }
 `
 export const CardBlock = styled.div`
   color: var(--text-color-grey);
   line-height: 130%;
+  @media (width <= 600px) {
+    font-size: 12px;
+  }
 `
 export const CardLocation = styled.p`
   margin-bottom: 4px;

@@ -51,19 +51,3 @@ export const FooterButtonCenter = styled(FooterButton)`
     transform: translate(-50%, -50%);
   }
 `
-export const EnterButton = styled(Button)`
-  border: 1px solid var(--text-color-white);
-  height: 40px;
-  &:hover {
-    background: var(--btn-hover-BG);
-  }
-  //   @media (width <= 800px) {
-  //     display: none;
-  //   }
-`
-export const HeaderLogo = styled.div`
-  cursor: pointer;
-  @media (width > 800px) {
-    display: none;
-  }
-`

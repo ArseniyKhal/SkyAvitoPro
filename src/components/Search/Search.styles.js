@@ -12,10 +12,20 @@ export const SearchSection = styled.div`
   display: flex;
   gap: 10px;
   justify-content: space-between;
+  position: relative;
+  //   z-index: 2;
+  @media (width <= 800px) {
+    margin-top: 0px;
+    height: 55px;
+    padding-left: 42px;
+  }
 `
 export const Logo = styled.div`
   margin-right: 50px;
   cursor: pointer;
+  @media (width <= 800px) {
+    display: none;
+  }
 `
 export const SearchText = styled.input`
   flex-shrink: 0;
@@ -52,7 +62,17 @@ export const SearchText = styled.input`
     line-height: 150%;
     color: var(--text-color-input);
   }
+  @media (width <= 800px) {
+    height: 32px;
+    border-radius: 32px;
+    background: #fff;
+    border: none;
+  }
 `
 export const EnterButton = styled(Button)`
   width: 158px;
+  @media (width <= 800px) {
+    background-color: red;
+    display: none;
+  }
 `
