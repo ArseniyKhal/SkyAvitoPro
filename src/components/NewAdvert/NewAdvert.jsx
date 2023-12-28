@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   usePostAdvertMutation,
+  useDelFotoToAdvertMutation,
   useAddFotoToAdvertMutation,
   useChangeAdvertMutation,
 } from 'services/servicesApi'
@@ -22,6 +23,7 @@ export const NewAdvert = ({ closeFunction, adv, titleMod }) => {
   const [postAdvert] = usePostAdvertMutation()
   const [addFotoToAdvert] = useAddFotoToAdvertMutation()
   const [changeAdvert] = useChangeAdvertMutation()
+  const [delFotoToAdvert] = useDelFotoToAdvertMutation()
   const { title, description, price } = formValue
 
   useEffect(() => {
@@ -78,10 +80,9 @@ export const NewAdvert = ({ closeFunction, adv, titleMod }) => {
 
   // формируем Preview
   const arr = [0, 1, 2, 3, 4]
-  let mapPreviewList
   let counter = 0
   let ImgSrc = null
-  mapPreviewList = arr?.map((index) => {
+  let mapPreviewList = arr?.map((index) => {
     if (adv?.images[index]) {
       ImgSrc = `http://localhost:8090/${adv.images[index].url}`
     } else if (imageSrc[counter]) {
@@ -94,6 +95,13 @@ export const NewAdvert = ({ closeFunction, adv, titleMod }) => {
       <S.FotoInputBlock key={index}>
         <S.FotoInputLabel htmlFor="upload-photo"></S.FotoInputLabel>
         {ImgSrc && <S.FotoPreview src={ImgSrc} alt="Preview"></S.FotoPreview>}
+        {ImgSrc && (
+          <S.FotoDelBtn
+            onClick={() => {
+              hendleClickDel({ index })
+            }}
+          ></S.FotoDelBtn>
+        )}
         <S.FotoInput
           type="file"
           name="file"
@@ -106,6 +114,19 @@ export const NewAdvert = ({ closeFunction, adv, titleMod }) => {
       </S.FotoInputBlock>
     )
   })
+
+  // клик для удаления картинки
+  const hendleClickDel = async ({ index }) => {
+    //  try {
+    //    const result = await delFotoToAdvert({
+    //      id: adv.id,
+    //      file_url: images[index].url,
+    //    })
+    //    console.log(result)
+    //  } catch (error) {
+    //    console.log(error)
+    //  }
+  }
 
   const uploadContent = (event) => {
     event.preventDefault()
@@ -126,6 +147,9 @@ export const NewAdvert = ({ closeFunction, adv, titleMod }) => {
       reader.readAsDataURL(selectedFile)
     }
   }
+
+  //   useEffect(() => {}, [dispatch])
+
   return (
     <>
       {!isSuccessPost ? (

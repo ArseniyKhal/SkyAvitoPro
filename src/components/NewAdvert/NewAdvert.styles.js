@@ -114,6 +114,43 @@ export const FotoPreview = styled.img`
   left: 0;
   object-fit: cover;
 `
+export const FotoDelBtn = styled.div`
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  border-radius: 50%;
+  cursor: pointer;
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    width: 14px;
+    height: 2px;
+    border-radius: 2px;
+    transition: background-color 0.1s ease;
+    background-color: var(--btn-disabled);
+    position: relative;
+    //  z-index: 7;
+  }
+  &:before {
+    top: -5px;
+    left: 3px;
+    transform: rotate(45deg);
+  }
+  &:after {
+    top: -24px;
+    left: 3px;
+    transform: rotate(135deg);
+  }
+  &:hover:before,
+  &:hover:after {
+    background-color: var(--main-topic);
+  }
+`
 export const FotoInput = styled.input`
   opacity: 0;
   position: absolute;

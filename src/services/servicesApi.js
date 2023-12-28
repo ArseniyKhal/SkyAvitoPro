@@ -126,6 +126,18 @@ export const advApi = createApi({
       invalidatesTags: ['Adverts', 'AdvertID'],
     }),
 
+    // Удалить картинку в объявлении
+    delFotoToAdvert: builder.mutation({
+      query: ({ id, file_url }) => {
+        return {
+          url: `ads/${id}/image`,
+          method: 'DELETE',
+          file_url,
+        }
+      },
+      invalidatesTags: ['AdvertID', 'Adverts'],
+    }),
+
     // Создать объявление (не работает)
     postAdvertWithFoto: builder.mutation({
       query: ({ title, description, price, image }) => {
@@ -134,9 +146,9 @@ export const advApi = createApi({
         return {
           url: `ads`,
           method: 'POST',
-          title: title,
-          description: description,
-          price: price,
+          title,
+          description,
+          price,
           body: fD,
         }
       },
@@ -245,6 +257,7 @@ export const {
   useChangeAdvertMutation,
   usePostAdvertMutation,
   useAddFotoToAdvertMutation,
+  useDelFotoToAdvertMutation,
   useDelAdvertMutation,
   useGetAllCommentsAdQuery,
   usePostCommentAdvMutation,

@@ -25,21 +25,14 @@ export const AppRoutes = () => {
           />
         </Route>
 
-        <Route path="/adv/:advID" element={<Adv />}></Route>
+        <Route path="adv/:advID" element={<Adv />} />
+        <Route path="seller/:selID" element={<SellerProfile />} />
 
         <Route
           path="profile"
           element={
             <ProtectedRoute>
               <Profile />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="seller/:selID"
-          element={
-            <ProtectedRoute>
-              <SellerProfile />
             </ProtectedRoute>
           }
         />

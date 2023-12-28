@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import { useAuth } from 'hooks/use-auth'
-import { Error } from 'components/ModalWindow/Modal'
 import * as S from './TelButton.styles'
 
 // преобразование номера телефона
@@ -17,23 +15,11 @@ export const formateTel = (data, isVisibliTelNum) => {
   return `${PhoneN} ${PhoneCode} ${CodeСountries}`.split('').reverse().join('')
 }
 
-export const TelButton = ({ TelNamber, setModal }) => {
-  const { isAuth } = useAuth()
+export const TelButton = ({ TelNamber }) => {
   const [isVisibliTelNum, setVisibliTelNum] = useState(false)
 
-  const handleClick = () => {
-    if (isAuth) {
-      setVisibliTelNum(true)
-    } else {
-      setModal(<Error text={`Пожалуйста авторизуйтесь!`}></Error>)
-      setTimeout(() => {
-        setModal(false)
-      }, 2000)
-    }
-  }
-
   return (
-    <S.InfoButton onClick={() => handleClick()}>
+    <S.InfoButton onClick={() => setVisibliTelNum(true)}>
       {TelNamber && <span>Показать телефон</span>}
       {TelNamber
         ? `${

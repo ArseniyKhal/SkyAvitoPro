@@ -21,7 +21,7 @@ import * as S from './Adv.styles'
 export const Adv = () => {
   const { advID } = useParams()
   const navigate = useNavigate()
-  const { data: adv, isError, isLoading } = useGetAdvIDQuery(advID)
+  const { data: adv, isLoading } = useGetAdvIDQuery(advID)
   const { data: user } = useGetUserQuery()
   const [isModal, setModal] = useState(false)
   const [bigPic, setBigPic] = useState(null)
@@ -62,35 +62,12 @@ export const Adv = () => {
   const handleClickСhange = () => {
     setModal(
       <NewAdvert
+        advID={+advID}
         adv={adv}
         titleMod="Редактировать"
         closeFunction={setModal}
       ></NewAdvert>,
     )
-  }
-
-  // клик по продавцу
-  const handleClickNavigate = () => {
-    if (isAuth) {
-      navigate(`/seller/${adv.user_id}`)
-    } else {
-      setModal(<Error text={`Пожалуйста авторизуйтесь!`}></Error>)
-      setTimeout(() => {
-        setModal(false)
-      }, 2000)
-    }
-  }
-
-  // кнопка Отзывы
-  const handleClickComment = () => {
-    if (isAuth) {
-      setModal(<Comments advID={advID}></Comments>)
-    } else {
-      setModal(<Error text={`Пожалуйста авторизуйтесь!`}></Error>)
-      setTimeout(() => {
-        setModal(false)
-      }, 2000)
-    }
   }
 
   // кнопка Снять с публикации
@@ -152,7 +129,9 @@ export const Adv = () => {
             <S.InfoTitle>{adv?.title}</S.InfoTitle>
             <S.InfoData>{formatDateToDistance(adv?.created_on)}</S.InfoData>
             <S.InfoLocation>{adv.user.city}</S.InfoLocation>
-            <S.InfoReviews onClick={() => handleClickComment()}>
+            <S.InfoReviews
+              onClick={() => setModal(<Comments advID={advID}></Comments>)}
+            >
               {commentAdv?.length} отзыв
               {formateComment(commentAdv?.length)}
             </S.InfoReviews>
@@ -168,14 +147,11 @@ export const Adv = () => {
                   </S.EnterButton>
                 </>
               ) : (
-                <TelButton
-                  TelNamber={adv.user.phone}
-                  setModal={setModal}
-                ></TelButton>
+                <TelButton TelNamber={adv.user.phone}></TelButton>
               )}
             </S.ButtonsContainer>
 
-            <S.SalesmanBlock onClick={() => handleClickNavigate()}>
+            <S.SalesmanBlock onClick={() => navigate(`/seller/${adv.user_id}`)}>
               <S.SalesmanAvatar>
                 <S.AvatarImg
                   src={

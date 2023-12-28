@@ -4,9 +4,13 @@ import {
   usePostCommentAdvMutation,
   useGetAllCommentsAdQuery,
 } from 'services/servicesApi'
+import { useAuth } from 'hooks/use-auth'
+import { Error } from 'components/ModalWindow/Modal'
 import * as S from './Comments.styles'
 
 export const Comments = ({ advID }) => {
+  const { isAuth } = useAuth()
+  const [isModal, setModal] = useState(false)
   const [inputComment, setInputComment] = useState('')
   const [postCommentAdv] = usePostCommentAdvMutation()
   const { data } = useGetAllCommentsAdQuery(advID)
@@ -38,32 +42,48 @@ export const Comments = ({ advID }) => {
   })
 
   const handleClick = async () => {
-    try {
-      await postCommentAdv({ id: advID, text: inputComment })
-    } catch (err) {
-      console.log(err)
-    } finally {
-      setInputComment('')
+    if (isAuth) {
+      try {
+        await postCommentAdv({ id: advID, text: inputComment })
+      } catch (err) {
+        console.log(err)
+      } finally {
+        setInputComment('')
+      }
+    } else {
+      setModal(<Error text={`Пожалуйста авторизуйтесь!`}></Error>)
+      setTimeout(() => {
+        setModal(false)
+      }, 2000)
     }
   }
 
   return (
     <>
-      <S.NewAdvForm>
-        <S.Title>Отзывы о товаре</S.Title>
-        <S.InputsLable htmlFor="review">Добавить отзыв</S.InputsLable>
-        <S.TextArea
-          name="review"
-          id="review"
-          value={inputComment}
-          placeholder={'Введите отзыв'}
-          onChange={(e) => setInputComment(e.target.value)}
-        />
-        <S.EnterButton disabled={!inputComment} onClick={() => handleClick()}>
-          Опубликовать
-        </S.EnterButton>
-      </S.NewAdvForm>
-      <S.CommentsBlock>{mapCommentsList}</S.CommentsBlock>
+      {isModal ? (
+        isModal
+      ) : (
+        <>
+          <S.NewAdvForm>
+            <S.Title>Отзывы о товаре</S.Title>
+            <S.InputsLable htmlFor="review">Добавить отзыв</S.InputsLable>
+            <S.TextArea
+              name="review"
+              id="review"
+              value={inputComment}
+              placeholder={'Введите отзыв'}
+              onChange={(e) => setInputComment(e.target.value)}
+            />
+            <S.EnterButton
+              disabled={!inputComment}
+              onClick={() => handleClick()}
+            >
+              Опубликовать
+            </S.EnterButton>
+          </S.NewAdvForm>
+          <S.CommentsBlock>{mapCommentsList}</S.CommentsBlock>
+        </>
+      )}
     </>
   )
 }
