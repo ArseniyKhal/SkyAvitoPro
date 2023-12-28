@@ -1,0 +1,10 @@
+html {
+	--main-topic: #009EE4;
+	--btn-hover: #0080C1;
+	--btn-hover-BG: rgba(255, 255, 255, 0.15);
+	--btn-disabled: #D9D9D9;
+	--text-color-white: #fff;
+	--text-color-black: #000;
+	--text-color-grey: #5f5f5f;
+	--text-color-input: rgba(0, 0, 0, 0.30);
+}
