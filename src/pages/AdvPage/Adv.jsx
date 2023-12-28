@@ -15,6 +15,7 @@ import { Modal, Success, Error } from 'components/ModalWindow/Modal'
 import { Comments } from 'components/Comments/Comments'
 import { NewAdvert } from 'components/NewAdvert/NewAdvert'
 import { useAuth } from 'hooks/use-auth'
+import { CloseBtn } from 'components/ClouseBtn/ClouseBtn'
 import * as S from './Adv.styles'
 
 export const Adv = () => {
@@ -59,7 +60,13 @@ export const Adv = () => {
 
   // кнопка Редактирования
   const handleClickСhange = () => {
-    setModal(<NewAdvert adv={adv} titleMod="Редактировать"></NewAdvert>)
+    setModal(
+      <NewAdvert
+        adv={adv}
+        titleMod="Редактировать"
+        closeFunction={setModal}
+      ></NewAdvert>,
+    )
   }
 
   // клик по продавцу
@@ -115,6 +122,15 @@ export const Adv = () => {
     <>
       <Header></Header>
       <NavMenu></NavMenu>
+      {window.innerWidth <= 800 && (
+        <div
+          onClick={() => {
+            navigate(-1)
+          }}
+        >
+          <CloseBtn />
+        </div>
+      )}
       {isLoading ? (
         <Loader></Loader>
       ) : (
@@ -160,16 +176,16 @@ export const Adv = () => {
             </S.ButtonsContainer>
 
             <S.SalesmanBlock onClick={() => handleClickNavigate()}>
-              <S.SalesmanLogo>
-                <S.Img
+              <S.SalesmanAvatar>
+                <S.AvatarImg
                   src={
                     adv.user.avatar
                       ? `http://localhost:8090/${adv.user.avatar}`
                       : '/img/userLogo.webp'
                   }
                   alt="fotoAvd"
-                ></S.Img>
-              </S.SalesmanLogo>
+                ></S.AvatarImg>
+              </S.SalesmanAvatar>
               <div>
                 <S.SalesmanName>{adv.user.name}</S.SalesmanName>
                 <S.SalesmanInfo>

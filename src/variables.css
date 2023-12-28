@@ -22,6 +22,8 @@ html {
 	flex-direction: column;
 	grid-template-columns: 480px 1fr;
 	grid-auto-columns: auto;
+	grid-template-areas: "";
+	grid-area: ;
 	text-align: center;
 	display: flex;
 	border-radius: 50%;
@@ -29,4 +31,6 @@ html {
 	background-color: initial;
 	background-color: inherit;
 	transition: all 0.3s ease;
+	text-align: center;
+	visibility: ;
 }

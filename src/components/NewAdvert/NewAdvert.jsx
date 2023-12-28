@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
   usePostAdvertMutation,
   useAddFotoToAdvertMutation,
@@ -10,9 +11,10 @@ import * as S from './NewAdvert.styles'
 let initialState = {
   title: '',
   description: '',
-  priceStr: '',
+  price: '',
 }
 export const NewAdvert = ({ closeFunction, adv, titleMod }) => {
+  const navigate = useNavigate()
   const [formValue, setFormValue] = useState(initialState)
   const [isSuccessPost, setSuccessPost] = useState(false)
   const [images, setImages] = useState([])
@@ -20,14 +22,14 @@ export const NewAdvert = ({ closeFunction, adv, titleMod }) => {
   const [postAdvert] = usePostAdvertMutation()
   const [addFotoToAdvert] = useAddFotoToAdvertMutation()
   const [changeAdvert] = useChangeAdvertMutation()
-  const { title, description, priceStr } = formValue
+  const { title, description, price } = formValue
 
   useEffect(() => {
     if (adv) {
       setFormValue({
         title: adv.title,
         description: adv.description,
-        priceStr: adv.price,
+        price: adv.price,
       })
       setImages(adv.images)
     }
@@ -41,18 +43,13 @@ export const NewAdvert = ({ closeFunction, adv, titleMod }) => {
   const handleClick = async () => {
     try {
       let postAdvertData
-      const price = Number(priceStr)
       if (adv) {
         postAdvertData = await changeAdvert({
           id: adv.id,
           formValue,
         })
       } else {
-        postAdvertData = await postAdvert({
-          title,
-          description,
-          price,
-        })
+        postAdvertData = await postAdvert(formValue)
       }
 
       if (images.length) {
@@ -64,13 +61,14 @@ export const NewAdvert = ({ closeFunction, adv, titleMod }) => {
           })
         })
       }
-      if (postAdvertData) {
+      if (postAdvertData.data) {
         setImages([])
         setSuccessPost(true)
         setFormValue(initialState)
         setTimeout(() => {
           setSuccessPost(false)
           closeFunction(false)
+          navigate(`/adv/${postAdvertData.data.id}`)
         }, 1000)
       }
     } catch (error) {
@@ -154,18 +152,21 @@ export const NewAdvert = ({ closeFunction, adv, titleMod }) => {
             Фотографии товара<span>не более 5 фотографий</span>
           </S.InputsName>
           <S.FotoContainer>{mapPreviewList}</S.FotoContainer>
-          <S.InputsLable htmlFor="priceStr">Цена</S.InputsLable>
-          <S.PriceInput
-            type="number"
-            name="priceStr"
-            id="priceStr"
-            value={priceStr}
-            onChange={handleChange}
-          />
-          <S.PriceInputSpan>₽</S.PriceInputSpan>
+          <div style={{ position: 'relative' }}>
+            <S.InputsLable htmlFor="price">Цена</S.InputsLable>
+            <S.PriceInput
+              type="number"
+              name="price"
+              id="price"
+              value={price}
+              onChange={handleChange}
+            />
+            <S.PriceInputSpan>₽</S.PriceInputSpan>
+          </div>
+
           <S.EnterButton
             disabled={
-              !formValue.title || !formValue.description || !formValue.priceStr
+              !formValue.title || !formValue.description || !formValue.price
             }
             onClick={() => handleClick()}
           >

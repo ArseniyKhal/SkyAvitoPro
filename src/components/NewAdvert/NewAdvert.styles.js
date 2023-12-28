@@ -6,6 +6,9 @@ export const NewAvdForm = styled.div`
   margin-top: -24px;
   margin-bottom: -2px;
   width: 512px;
+  @media (width <= 800px) {
+    width: 100%;
+  }
 `
 export const Title = styled.h2`
   color: var(--text-color-black);
@@ -13,6 +16,11 @@ export const Title = styled.h2`
   font-weight: 500;
   line-height: 220%;
   margin-bottom: 10px;
+  @media (width <= 800px) {
+    font-size: 22px;
+    text-align: center;
+    margin-top: 10px;
+  }
 `
 export const InputsName = styled.p`
   color: var(--text-color-black);
@@ -42,6 +50,9 @@ export const NewAvdInput = styled.input`
     color: rgba(0, 0, 0, 0.3);
     line-height: 150%;
   }
+  @media (width <= 800px) {
+    border-radius: 30px;
+  }
 `
 export const InputsLable = styled.label`
   color: var(--text-color-black);
@@ -55,6 +66,8 @@ export const FotoContainer = styled.div`
   height: 90px;
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
+  overflow: hidden;
   margin-bottom: 30px;
 `
 export const FotoInputBlock = styled.div`
@@ -131,21 +144,35 @@ export const TextArea = styled.textarea`
     color: var(--text-color-input);
     line-height: 150%;
   }
+  @media (width <= 800px) {
+    border-radius: 30px;
+  }
 `
 export const PriceInput = styled(NewAvdInput)`
   width: 200px;
-  padding: 0px 30px 0px 19px;
+  padding: 0px 38px 0px 19px;
   margin-bottom: 30px;
+  position: relative;
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
+  @media (width <= 800px) {
+    width: 100%;
+  }
 `
 export const PriceInputSpan = styled.span`
-  position: relative;
+  position: absolute;
   right: 24px;
+  top: 39px;
+  @media (width > 800px) {
+    right: 320px;
+  }
 `
 export const EnterButton = styled(Button)`
   width: 181px;
+  @media (width <= 800px) {
+    width: 100%;
+  }
 `

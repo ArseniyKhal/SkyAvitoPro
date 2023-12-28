@@ -71,11 +71,10 @@ export const Profile = () => {
       ) : (
         <>
           {isError ? (
-            'Какая то ошибка'
+            'Пожалуйста, авторизуйтесь заново'
           ) : (
             <>
               <S.Title>Здравствуйте, {user.name || user.email}!</S.Title>
-              {/* блок Настройки профиля */}
               <S.ProfileSettings>
                 <S.SubTitle>Настройки профиля</S.SubTitle>
                 <S.ProfileSettingsContent>
@@ -154,16 +153,9 @@ export const Profile = () => {
                   </S.BlockSettings>
                 </S.ProfileSettingsContent>
               </S.ProfileSettings>
-              {/* Блок Мои товары */}
               <S.UsersProducts>
                 <S.SubTitle>Мои товары</S.SubTitle>
-                <S.MainList>
-                  {mapAdvsList}
-                  {/* <Card></Card>
-         				 <Card></Card>
-         				 <Card></Card>
-        					  <Card></Card> */}
-                </S.MainList>
+                <S.ProductsList>{mapAdvsList}</S.ProductsList>
               </S.UsersProducts>
             </>
           )}

@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { Button } from 'App.styles'
 
 export const Footer = styled.div`
   height: 54px;
@@ -9,9 +8,10 @@ export const Footer = styled.div`
   padding: 0 15px;
   display: flex;
   align-items: center;
-  position: absolute;
+  position: fixed;
   bottom: 0;
-  left: 0px;
+  left: 0;
+  z-index: 6;
   @media (width > 800px) {
     display: none;
   }

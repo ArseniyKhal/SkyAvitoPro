@@ -13,11 +13,11 @@ export const SearchSection = styled.div`
   gap: 10px;
   justify-content: space-between;
   position: relative;
-  //   z-index: 2;
   @media (width <= 800px) {
     margin-top: 0px;
     height: 55px;
     padding-left: 42px;
+    padding: 0 17px 3px 57px;
   }
 `
 export const Logo = styled.div`

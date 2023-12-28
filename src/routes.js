@@ -18,12 +18,15 @@ export const AppRoutes = () => {
             path="/auth"
             element={<Modal childComponent={<Auth typeLogin={true} />} />}
           />
+
           <Route
             path="/registration"
             element={<Modal childComponent={<Auth typeLogin={false} />} />}
           />
         </Route>
+
         <Route path="/adv/:advID" element={<Adv />}></Route>
+
         <Route
           path="profile"
           element={

@@ -6,11 +6,11 @@ export const Title = styled.h1`
   font-size: 40px;
   font-weight: 500;
   line-height: 220%;
-  @media (width <= 600px) {
-    margin-top: 20px;
-    margin-bottom: 20px;
+  @media (width <= 800px) {
+    margin: 20px 0;
     font-size: 24px;
     line-height: 120%;
+    padding: 15px 15px 0 15px;
   }
 `
 
@@ -26,6 +26,7 @@ export const MainList = styled.ul`
   }
   @media (width <= 800px) {
     grid-template: auto/ repeat(2, 1fr);
+    padding: 0 15px;
   }
 `
 

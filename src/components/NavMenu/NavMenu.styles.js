@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Button } from 'App.styles'
 
-export const Content = styled.div`
+export const Content = styled.section`
   height: 136px;
   width: 100%;
   display: flex;
@@ -12,6 +12,9 @@ export const Content = styled.div`
   gap: 10px;
   justify-content: flex-start;
   margin-top: 80px;
+  @media (width <= 800px) {
+    display: none;
+  }
 `
 export const Logo = styled.div`
   margin-right: 50px;

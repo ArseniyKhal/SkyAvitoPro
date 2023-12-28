@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const ModalDarckBG = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
@@ -13,7 +13,7 @@ export const ModalDarckBG = styled.div`
   z-index: 5;
 `
 export const ModalWindow = styled.div`
-  position: absolute;
+  position: fixed;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -21,41 +21,14 @@ export const ModalWindow = styled.div`
   border-radius: 12px;
   overflow: hidden;
   padding: 44px;
-  max-width: 600px;
-`
-export const CloseBtn = styled.div`
-  position: absolute;
-  top: 40px;
-  right: 40px;
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
-  &:before,
-  &:after {
-    content: '';
-    position: absolute;
-    display: inline-block;
-    width: 30px;
-    height: 3px;
-    border-radius: 2px;
-    transition: background-color 0.1s ease;
-    background-color: var(--btn-disabled);
-    position: relative;
-    z-index: 7;
-  }
-  &:before {
-    top: -1px;
-    left: -3px;
-    transform: rotate(45deg);
-  }
-  &:after {
-    top: -20px;
-    left: -3px;
-    transform: rotate(135deg);
-  }
-  &:hover:before,
-  &:hover:after {
-    background-color: var(--main-topic);
+  @media (width <= 800px) {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform: none;
+    border-radius: 0;
+    padding: 85px 15px 54px 15px;
   }
 `
 export const ContentBlock = styled.div`
@@ -71,4 +44,9 @@ export const SuccessImg = styled.img`
   height: 100%;
   object-fit: cover;
   margin-top: 10px;
+`
+export const ModalHeader = styled.div`
+  @media (width > 800px) {
+    display: none;
+  }
 `

@@ -36,7 +36,6 @@ export const Main = () => {
       <Header></Header>
       <SearchSection setSearchAdv={setSearchAdv}></SearchSection>
       <S.Title>Объявления</S.Title>
-
       {isLoading ? (
         <Loader></Loader>
       ) : (

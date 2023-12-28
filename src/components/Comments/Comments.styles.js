@@ -7,6 +7,10 @@ export const NewAdvForm = styled.div`
   margin-bottom: -2px;
   width: 652px;
   margin-bottom: 30px;
+  @media (width <= 800px) {
+    width: 100%;
+    margin-top: 0px;
+  }
 `
 export const Title = styled.h2`
   color: var(--text-color-black);
@@ -14,6 +18,11 @@ export const Title = styled.h2`
   font-weight: 500;
   line-height: 220%;
   margin-bottom: 20px;
+  @media (width <= 800px) {
+    font-size: 24px;
+    line-height: 120%;
+    text-align: center;
+  }
 `
 export const InputsLable = styled.label`
   color: var(--text-color-black);
@@ -23,6 +32,9 @@ export const InputsLable = styled.label`
   top: -5px;
   display: block;
   margin-bottom: 14px;
+  @media (width <= 800px) {
+    display: none;
+  }
 `
 export const TextArea = styled.textarea`
   width: 100%;
@@ -44,9 +56,16 @@ export const TextArea = styled.textarea`
     color: rgba(0, 0, 0, 0.3);
     line-height: 150%;
   }
+  @media (width <= 800px) {
+    border-radius: 30px;
+    border: 1px solid #d9d9d9;
+  }
 `
 export const EnterButton = styled(Button)`
   width: 181px;
+  @media (width <= 800px) {
+    width: 100%;
+  }
 `
 export const CommentsBlock = styled.ul`
   max-height: 480px;

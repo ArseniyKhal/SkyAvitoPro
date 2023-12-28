@@ -7,9 +7,19 @@ export const Title = styled.h1`
   font-weight: 500;
   line-height: 220%;
   margin-bottom: 10px;
+  @media (width <= 800px) {
+    margin: 85px 0 20px 0;
+    font-size: 24px;
+    line-height: 120%;
+    padding: 0 15px;
+  }
 `
 export const ProfileSettings = styled.div`
   margin-bottom: 50px;
+  @media (width <= 800px) {
+    margin-bottom: 40px;
+    padding: 0 15px;
+  }
 `
 export const SubTitle = styled.h3`
   color: var(--text-color-black);
@@ -17,10 +27,19 @@ export const SubTitle = styled.h3`
   font-weight: 500;
   line-height: 220%;
   margin-bottom: 20px;
+  @media (width <= 800px) {
+    font-size: 18px;
+    line-height: 100%;
+    margin-bottom: 30px;
+  }
 `
 export const ProfileSettingsContent = styled.div`
   display: flex;
   gap: 50px;
+  @media (width <= 800px) {
+    flex-direction: column;
+    gap: 30px;
+  }
 `
 export const BlockAvatar = styled.div`
   display: flex;
@@ -34,54 +53,39 @@ export const AvatarPicture = styled.div`
   border-radius: 50%;
   background-color: #f0f0f0;
   overflow: hidden;
+  @media (width <= 800px) {
+    width: 132px;
+    height: 132px;
+  }
 `
 export const AvatarImg = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
 `
-export const BlokInfo = styled.div``
-export const SellerName = styled.p`
-  color: var(--text-color-black);
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 200%;
-`
-export const SellerLocation = styled.p`
-  color: var(--text-color-grey);
-  line-height: 200%;
-  margin-bottom: 4px;
-`
-export const TelButton = styled(Button)`
-  display: flex;
-  flex-direction: column;
-  padding: 0 37px;
-  font-size: 14px;
-  line-height: 140%;
-  margin-top: 30px;
-  & span {
-    font-size: 16px;
-    font-weight: 600;
-  }
-`
-
 export const AvatarСhangeBtn = styled.div`
   color: var(--main-topic);
   line-height: 150%;
   cursor: pointer;
 `
 
-export const BlockSettings = styled.div`
+export const BlockSettings = styled.form`
   display: flex;
   width: 614px;
   flex-wrap: wrap;
   row-gap: 48px;
   padding-top: 21px;
   justify-content: space-between;
+  @media (width <= 800px) {
+    width: 100%;
+  }
 `
 export const InputsBlock = styled.div`
   position: relative;
   width: 300px;
+  @media (width <= 800px) {
+    width: 100%;
+  }
 `
 export const InputsBlockTel = styled(InputsBlock)`
   width: 100%;
@@ -92,8 +96,13 @@ export const Label = styled.label`
   line-height: 150%;
   position: relative;
   display: inline-block;
+  left: 0;
   top: -40px;
   width: 0px;
+  @media (width <= 800px) {
+    font-size: 14px;
+    left: 20px;
+  }
 `
 export const ProfileSettingsInput = styled.input`
   width: 100%;
@@ -109,17 +118,43 @@ export const ProfileSettingsInput = styled.input`
     box-shadow: 0px 0px 5px var(--main-topic);
     border: 1px solid var(--main-topic);
   }
+  &::placeholder {
+    color: var(--text-color-black);
+    font-size: 16px;
+    line-height: 150%;
+  }
+  @media (width <= 800px) {
+    border-radius: 30px;
+    border: 1px solid var(--main-topic);
+    &::placeholder {
+      font-size: 14px;
+    }
+  }
 `
 export const EnterButton = styled(Button)`
   padding: 0 37px;
   margin-top: -20px;
+  @media (width <= 800px) {
+    width: 100%;
+  }
 `
 
-export const UsersProducts = styled.div``
-export const MainList = styled.ul`
+export const UsersProducts = styled.div`
+  @media (width <= 800px) {
+    padding: 0 15px;
+  }
+`
+export const ProductsList = styled.ul`
   display: grid;
   grid-template: auto/ repeat(4, 270px);
   justify-content: space-between;
   row-gap: 40px;
+  column-gap: 26px;
   margin-bottom: 34px;
+  @media (width < 1200px) {
+    grid-template: auto/ repeat(3, 1fr);
+  }
+  @media (width <= 800px) {
+    grid-template: auto/ repeat(2, 1fr);
+  }
 `

@@ -7,9 +7,11 @@ export const InfoButton = styled(Button)`
   padding: 0 37px;
   font-size: 14px;
   line-height: 140%;
-  //   margin-bottom: 34px;
   & span {
     font-size: 16px;
     font-weight: 600;
+  }
+  @media (width <= 600px) {
+    width: 100%;
   }
 `

@@ -117,6 +117,9 @@ export const Container = styled.div`
   max-width: 1190px;
   padding: 0 15px;
   margin: 0 auto;
+  @media (width <= 800px) {
+    padding: 0;
+  }
 `
 export const Button = styled.button`
   color: #fff;
@@ -140,7 +143,7 @@ export const Button = styled.button`
     background-color: var(--btn-disabled);
   }
   @media (width <= 600px) {
-    height: 40px;
+    height: 46px;
     font-size: 14px;
   }
 `
