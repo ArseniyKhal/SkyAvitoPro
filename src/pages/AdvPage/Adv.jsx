@@ -62,7 +62,6 @@ export const Adv = () => {
   const handleClickСhange = () => {
     setModal(
       <NewAdvert
-        advID={+advID}
         adv={adv}
         titleMod="Редактировать"
         closeFunction={setModal}

@@ -95,13 +95,13 @@ export const NewAdvert = ({ closeFunction, adv, titleMod }) => {
       <S.FotoInputBlock key={index}>
         <S.FotoInputLabel htmlFor="upload-photo"></S.FotoInputLabel>
         {ImgSrc && <S.FotoPreview src={ImgSrc} alt="Preview"></S.FotoPreview>}
-        {ImgSrc && (
+        {/* {ImgSrc && (
           <S.FotoDelBtn
             onClick={() => {
               hendleClickDel({ index })
             }}
           ></S.FotoDelBtn>
-        )}
+        )} */}
         <S.FotoInput
           type="file"
           name="file"
@@ -116,17 +116,17 @@ export const NewAdvert = ({ closeFunction, adv, titleMod }) => {
   })
 
   // клик для удаления картинки
-  const hendleClickDel = async ({ index }) => {
-    //  try {
-    //    const result = await delFotoToAdvert({
-    //      id: adv.id,
-    //      file_url: images[index].url,
-    //    })
-    //    console.log(result)
-    //  } catch (error) {
-    //    console.log(error)
-    //  }
-  }
+  //   const hendleClickDel = async ({ index }) => {
+  //  try {
+  //    const result = await delFotoToAdvert({
+  //      id: adv.id,
+  //      file_url: images[index].url,
+  //    })
+  //    console.log(result)
+  //  } catch (error) {
+  //    console.log(error)
+  //  }
+  //   }
 
   const uploadContent = (event) => {
     event.preventDefault()
@@ -194,7 +194,7 @@ export const NewAdvert = ({ closeFunction, adv, titleMod }) => {
             }
             onClick={() => handleClick()}
           >
-            Опубликовать
+            {adv ? 'Редактировать' : 'Опубликовать'}
           </S.EnterButton>
         </S.NewAvdForm>
       ) : (
