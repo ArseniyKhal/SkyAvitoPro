@@ -8,3 +8,10 @@ html {
 	--text-color-grey: #5f5f5f;
 	--text-color-input: rgba(0, 0, 0, 0.30);
 }
+
+.dfhg {
+	background-color: red;
+	justify-content: space-between;
+	transition: all 0.3 ease;
+	opacity: 0;
+}

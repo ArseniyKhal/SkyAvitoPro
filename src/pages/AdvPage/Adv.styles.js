@@ -20,18 +20,85 @@ export const BlockPicture = styled.div`
     width: 100%;
   }
 `
+export const Arrows = styled.div`
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  z-index: 8;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+`
 export const Picture = styled.div`
   width: 100%;
-  max-height: 480px;
+  height: 480px;
   background-color: #f0f0f0;
-  cursor: pointer;
+  position: relative;
+  &:hover ${Arrows} {
+    opacity: 0.9;
+  }
 `
 export const Img = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  @media (width <= 800px) {
-    object-fit: contain;
+`
+export const SmallImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`
+export const Arrow = styled.div`
+  width: 24px;
+  height: 42px;
+  transition: all 0.3s ease;
+  position: relative;
+  &:before,
+  &:after {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 3px;
+    border-radius: 2px;
+    transition: background-color 0.1s ease;
+    background-color: #fff;
+    position: relative;
+  }
+  &:before {
+    top: 15px;
+    left: 0px;
+    transform: rotate(45deg);
+  }
+  &:after {
+    top: -20px;
+    left: 0px;
+    transform: rotate(135deg);
+  }
+`
+export const ArrowLineBlock = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  z-index: 8;
+`
+export const ArrowLine = styled.div`
+  width: 70px;
+  height: 100%;
+  background-color: #000;
+  transition: all 0.3s ease;
+  position: relative;
+  cursor: pointer;
+  opacity: 0;
+  &:hover {
+    opacity: 0.3;
   }
 `
 export const PictureCarousel = styled.div`
@@ -159,4 +226,16 @@ export const TextParagraph = styled.p`
   color: var(--text-color-black);
   line-height: 150%;
   max-width: 800px;
+`
+export const BigPic = styled.div`
+  margin: 30px 0;
+  position: relative;
+  &:hover ${Arrows} {
+    opacity: 0.9;
+  }
+`
+export const BigImg = styled.img`
+  max-height: 60vh;
+  max-width: 80vh;
+  object-fit: cover;
 `

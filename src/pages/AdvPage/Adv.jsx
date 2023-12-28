@@ -14,7 +14,6 @@ import { TelButton } from 'components/TelButton/TelButton'
 import { Modal, Success, Error } from 'components/ModalWindow/Modal'
 import { Comments } from 'components/Comments/Comments'
 import { NewAdvert } from 'components/NewAdvert/NewAdvert'
-import { useAuth } from 'hooks/use-auth'
 import { CloseBtn } from 'components/ClouseBtn/ClouseBtn'
 import * as S from './Adv.styles'
 
@@ -24,10 +23,9 @@ export const Adv = () => {
   const { data: adv, isLoading } = useGetAdvIDQuery(advID)
   const { data: user } = useGetUserQuery()
   const [isModal, setModal] = useState(false)
-  const [bigPic, setBigPic] = useState(null)
+  const [pictureIndex, setPictureIndex] = useState(0)
   const [delAdvert] = useDelAdvertMutation()
   const { data: commentAdv } = useGetAllCommentsAdQuery(advID)
-  const { isAuth } = useAuth()
 
   // скрытие кнопки "Наверх ↑"
   const [offSet, setOffSet] = useState('')
@@ -36,24 +34,17 @@ export const Adv = () => {
   })
 
   // картинки
-  let bigImageAdv
-  if (bigPic) {
-    bigImageAdv = bigPic
-  } else {
-    bigImageAdv = adv?.images[0]?.url
-  }
-
-  const mapImagesList = adv?.images.map((image) => {
+  const mapImagesList = adv?.images.map((image, index) => {
     return (
-      <S.SmallPicture key={image.id} onClick={() => setBigPic(image.url)}>
-        <S.Img
+      <S.SmallPicture key={image.id} onClick={() => setPictureIndex(index)}>
+        <S.SmallImg
           src={
-            bigImageAdv
+            adv?.images[pictureIndex]?.url
               ? `http://localhost:8090/${image.url}`
               : '/img/noImage.jpg'
           }
           alt="fotoAvd"
-        ></S.Img>
+        ></S.SmallImg>
       </S.SmallPicture>
     )
   })
@@ -88,10 +79,16 @@ export const Adv = () => {
       console.log(err)
     }
   }
-
   // клик по картинке
-  const handleClickPicture = () => {
-    setModal(<BigPic src={bigImageAdv}></BigPic>)
+  const handleClickPicture = (pictureIndex) => {
+    if (adv.images.length) {
+      setModal(
+        <FullScreenPicture
+          images={adv.images}
+          index={pictureIndex}
+        ></FullScreenPicture>,
+      )
+    }
   }
 
   return (
@@ -112,11 +109,44 @@ export const Adv = () => {
       ) : (
         <S.AdvContent>
           <S.BlockPicture>
-            <S.Picture onClick={() => handleClickPicture()}>
+            <S.Picture
+              onClick={() => handleClickPicture(pictureIndex)}
+              style={{ cursor: adv.images.length && 'pointer' }}
+            >
+              {adv.images?.length > 1 && (
+                <>
+                  <S.Arrows>
+                    <S.Arrow></S.Arrow>
+                    <S.Arrow style={{ transform: 'rotate(180deg)' }}></S.Arrow>
+                  </S.Arrows>
+                  <S.ArrowLineBlock>
+                    <S.ArrowLine
+                      onClick={(event) => {
+                        event.stopPropagation()
+                        if (pictureIndex !== 0) {
+                          setPictureIndex(pictureIndex - 1)
+                        } else {
+                          setPictureIndex(adv.images.length - 1)
+                        }
+                      }}
+                    />
+                    <S.ArrowLine
+                      onClick={(event) => {
+                        event.stopPropagation()
+                        if (pictureIndex !== adv.images.length - 1) {
+                          setPictureIndex(pictureIndex + 1)
+                        } else {
+                          setPictureIndex(0)
+                        }
+                      }}
+                    />
+                  </S.ArrowLineBlock>
+                </>
+              )}
               <S.Img
                 src={
-                  bigImageAdv
-                    ? `http://localhost:8090/${bigImageAdv}`
+                  adv?.images[pictureIndex]?.url
+                    ? `http://localhost:8090/${adv?.images[pictureIndex]?.url}`
                     : '/img/noImage.jpg'
                 }
                 alt="fotoAvd"
@@ -186,12 +216,44 @@ export const Adv = () => {
   )
 }
 
-const BigPic = ({ src }) => {
+const FullScreenPicture = ({ images, index }) => {
+  const [pictureBigIndex, setPictureBigIndex] = useState(index)
   return (
     <>
-      <div>
-        <S.Img src={`http://localhost:8090/${src}`} alt="fotoAvd"></S.Img>
-      </div>
+      <S.BigPic>
+        {images?.length > 1 && (
+          <>
+            <S.Arrows>
+              <S.Arrow></S.Arrow>
+              <S.Arrow style={{ transform: 'rotate(180deg)' }}></S.Arrow>
+            </S.Arrows>
+            <S.ArrowLineBlock>
+              <S.ArrowLine
+                onClick={() => {
+                  if (pictureBigIndex !== 0) {
+                    setPictureBigIndex(pictureBigIndex - 1)
+                  } else {
+                    setPictureBigIndex(images.length - 1)
+                  }
+                }}
+              />
+              <S.ArrowLine
+                onClick={() => {
+                  if (pictureBigIndex !== images.length - 1) {
+                    setPictureBigIndex(pictureBigIndex + 1)
+                  } else {
+                    setPictureBigIndex(0)
+                  }
+                }}
+              />
+            </S.ArrowLineBlock>
+          </>
+        )}
+        <S.BigImg
+          src={`http://localhost:8090/${images[pictureBigIndex]?.url}`}
+          alt="fotoAvd"
+        ></S.BigImg>
+      </S.BigPic>
     </>
   )
 }

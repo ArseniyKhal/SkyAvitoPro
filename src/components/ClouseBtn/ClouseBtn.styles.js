@@ -10,7 +10,6 @@ export const CloseBtn = styled.div`
   &:before,
   &:after {
     content: '';
-    position: absolute;
     display: inline-block;
     width: 30px;
     height: 3px;
@@ -18,7 +17,6 @@ export const CloseBtn = styled.div`
     transition: background-color 0.1s ease;
     background-color: var(--btn-disabled);
     position: relative;
-    z-index: 7;
     @media (width <= 800px) {
       background-color: #000;
       width: 16px;

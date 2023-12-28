@@ -10,7 +10,7 @@ export const ModalDarckBG = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 5;
+  z-index: 10;
 `
 export const ModalWindow = styled.div`
   position: fixed;
@@ -21,6 +21,7 @@ export const ModalWindow = styled.div`
   border-radius: 12px;
   overflow: hidden;
   padding: 44px;
+  //   width: 100%;
   @media (width <= 800px) {
     width: 100%;
     height: 100%;
