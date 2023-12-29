@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { removeUser } from 'store/slices/authSlice'
 import { useAuth } from 'hooks/use-auth'

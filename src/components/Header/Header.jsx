@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useAuth } from 'hooks/use-auth'
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import { Modal } from 'components/ModalWindow/Modal'
 import { NewAdvert } from 'components/NewAdvert/NewAdvert'
 import * as S from './Header.styles'

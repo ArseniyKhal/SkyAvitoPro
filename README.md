@@ -19,7 +19,8 @@ To get started with the project, follow these steps:
 
 Important information
 
-The project is deployed in docker at http://localhost:3000, the backend is located at: http://localhost:8090, Swagger UI API is used for the backend with witch the project is directly related. The backend repository can be [downloaded] from (https://drive.google.com/file/d/1pFE-NRANTsWmQwTyURjHXuECMmoKCFjO/view)
+The project is deployed in docker at http://localhost:3000, the backend is located at: http://localhost:8090, Swagger UI API is used for the backend with witch the project is directly related. The backend repository can be downloaded from https://drive.google.com/file/d/1pFE-NRANTsWmQwTyURjHXuECMmoKCFjO/view
+
 Technology stack
 
     Programming language: JavaScript
