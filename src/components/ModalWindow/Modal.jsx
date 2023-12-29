@@ -1,4 +1,4 @@
-import { Header } from 'components/Header-2/Header'
+import { Header } from 'components/Header/Header'
 import { CloseBtn } from 'components/ClouseBtn/ClouseBtn'
 import * as S from './Modal.styles'
 

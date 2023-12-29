@@ -1,4 +1,4 @@
-import { Header } from 'components/Header-2/Header'
+import { Header } from 'components/Header/Header'
 import { Card } from 'components/Card/Card'
 import { NavMenu } from 'components/NavMenu/NavMenu'
 import { useGetUserQuery } from 'services/servicesApi'

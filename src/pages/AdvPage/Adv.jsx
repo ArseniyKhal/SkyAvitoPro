@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Header } from 'components/Header-2/Header'
+import { Header } from 'components/Header/Header'
 import { NavMenu } from 'components/NavMenu/NavMenu'
 import {
   useGetAdvIDQuery,

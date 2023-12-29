@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Card } from 'components/Card/Card'
-import { Header } from 'components/Header-2/Header'
+import { Header } from 'components/Header/Header'
 import { SearchSection } from 'components/Search/SearchSection'
 import { useGetAllAdvsQuery } from 'services/servicesApi'
 import { Loader } from 'App.styles'
