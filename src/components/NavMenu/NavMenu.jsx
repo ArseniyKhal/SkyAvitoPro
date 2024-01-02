@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { removeUser } from 'store/slices/authSlice'
 import { useAuth } from 'hooks/use-auth'
+import { advApi } from 'services/servicesApi'
 import * as S from './NavMenu.styles'
 
 export const NavMenu = () => {
@@ -81,6 +82,7 @@ export const NavMenu = () => {
         {isAuth && (
           <S.EnterButton
             onClick={() => {
+              dispatch(advApi.util.resetApiState())
               navigate('/')
               localStorage.removeItem('userSkyVito')
               dispatch(removeUser())

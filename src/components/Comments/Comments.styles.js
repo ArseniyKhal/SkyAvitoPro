@@ -37,6 +37,7 @@ export const InputsLable = styled.label`
   }
 `
 export const TextArea = styled.textarea`
+  font-family: 'Roboto', sans-serif;
   width: 100%;
   height: 100px;
   border-radius: 6px;

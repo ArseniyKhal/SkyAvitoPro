@@ -27,7 +27,8 @@ export const HeaderContent = styled.div`
   display: flex;
   gap: 10px;
   @media (width <= 800px) {
-    justify-content: flex-start;
+	 justify-content: space-between;
+}
   }
 `
 export const EnterButton = styled(Button)`
@@ -42,6 +43,14 @@ export const EnterButton = styled(Button)`
 `
 export const HeaderLogo = styled.div`
   cursor: pointer;
+  @media (width > 800px) {
+    display: none;
+  }
+`
+export const ExitImg = styled.img`
+  height: 30px;
+  width: 30px;
+  transform: translateY(-1px);
   @media (width > 800px) {
     display: none;
   }

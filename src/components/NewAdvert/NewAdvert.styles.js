@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Button } from 'App.styles'
 
-export const NewAvdForm = styled.div`
+export const NewAvdForm = styled.form`
   padding: 0px 6px;
   margin-top: -24px;
   margin-bottom: -2px;

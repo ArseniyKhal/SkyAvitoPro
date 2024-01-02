@@ -1,9 +1,7 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import * as S from './Search.styles'
 
 export const SearchSection = ({ setSearchAdv }) => {
-  const navigate = useNavigate()
   const [searchText, setSearchText] = useState('')
 
   return (

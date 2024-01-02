@@ -3,12 +3,11 @@ import { Button } from 'App.styles'
 
 export const SearchSection = styled.div`
   height: 136px;
-  width: 100%;
+  width: calc(100vw - 110px);
   margin-top: 80px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  width: 100%;
   display: flex;
   gap: 10px;
   justify-content: space-between;
@@ -16,8 +15,7 @@ export const SearchSection = styled.div`
   @media (width <= 800px) {
     margin-top: 0px;
     height: 55px;
-    padding-left: 42px;
-    padding: 0 17px 3px 57px;
+    margin: 0 57px;
   }
 `
 export const Logo = styled.div`
@@ -67,6 +65,7 @@ export const SearchText = styled.input`
     border-radius: 32px;
     background: #fff;
     border: none;
+    transform: translateY(-2px);
   }
 `
 export const EnterButton = styled(Button)`

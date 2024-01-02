@@ -1,20 +1,19 @@
+import { useState } from 'react'
 import { Header } from 'components/Header/Header'
 import { Card } from 'components/Card/Card'
 import { NavMenu } from 'components/NavMenu/NavMenu'
 import { useGetUserQuery } from 'services/servicesApi'
 import { Loader } from 'App.styles'
-import { useState } from 'react'
 import { usePatchUserMutation, useGetAllAdvsQuery } from 'services/servicesApi'
 import { Modal, Success } from 'components/ModalWindow/Modal'
 import { ChangeAvatar } from 'components/ChangeAvatar/ChangeAvatar'
-
 import * as S from './Profile.styles'
 
 const initialState = {
   name: '',
   surname: '',
   city: '',
-  tel: '',
+  phone: '',
 }
 
 export const Profile = () => {
@@ -24,16 +23,17 @@ export const Profile = () => {
   const [patchUser] = usePatchUserMutation()
   const { data: user, isLoading, isError } = useGetUserQuery()
   const [formValue, setFormValue] = useState(initialState)
-  const { name, surname, city, tel } = formValue
+  const { name, surname, city, phone } = formValue
 
   const handleChange = (e) => {
     setFormValue({ ...formValue, [e.target.name]: e.target.value })
   }
 
-  const handleClick = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault()
     try {
       setIsSending(true)
-      const patchUserData = await patchUser({ name, surname, city, tel })
+      const patchUserData = await patchUser(formValue)
       if (patchUserData) {
         setModal(<Success />)
         setTimeout(() => {
@@ -97,7 +97,7 @@ export const Profile = () => {
                       Заменить
                     </S.AvatarСhangeBtn>
                   </S.BlockAvatar>
-                  <S.BlockSettings>
+                  <S.BlockSettings onSubmit={handleSubmit}>
                     <S.InputsBlock>
                       <S.Label htmlFor="name">Имя</S.Label>
                       <S.ProfileSettingsInput
@@ -132,8 +132,8 @@ export const Profile = () => {
                       <S.Label htmlFor="city">Телефон</S.Label>
                       <S.ProfileSettingsInput
                         type="tel"
-                        name="tel"
-                        value={tel}
+                        name="phone"
+                        value={phone}
                         placeholder={user.phone}
                         onChange={handleChange}
                       />
@@ -143,10 +143,10 @@ export const Profile = () => {
                         !formValue.name &&
                         !formValue.surname &&
                         !formValue.city &&
-                        !formValue.tel &&
+                        !formValue.phone &&
                         !isSending
                       }
-                      onClick={() => handleClick()}
+                      type="submit"
                     >
                       Сохранить
                     </S.EnterButton>

@@ -42,7 +42,8 @@ export const NewAdvert = ({ closeFunction, adv, titleMod }) => {
   }
 
   // отправляем данные
-  const handleClick = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault()
     try {
       let postAdvertData
       if (adv) {
@@ -148,12 +149,10 @@ export const NewAdvert = ({ closeFunction, adv, titleMod }) => {
     }
   }
 
-  //   useEffect(() => {}, [dispatch])
-
   return (
     <>
       {!isSuccessPost ? (
-        <S.NewAvdForm>
+        <S.NewAvdForm onSubmit={handleSubmit}>
           <S.Title>{titleMod} объявление</S.Title>
           <S.InputsLable htmlFor="title">Название</S.InputsLable>
           <S.NewAvdInput
@@ -192,7 +191,7 @@ export const NewAdvert = ({ closeFunction, adv, titleMod }) => {
             disabled={
               !formValue.title || !formValue.description || !formValue.price
             }
-            onClick={() => handleClick()}
+            type="submit"
           >
             {adv ? 'Редактировать' : 'Опубликовать'}
           </S.EnterButton>

@@ -1,12 +1,16 @@
 import { useState } from 'react'
 import { useAuth } from 'hooks/use-auth'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { Modal } from 'components/ModalWindow/Modal'
 import { NewAdvert } from 'components/NewAdvert/NewAdvert'
+import { advApi } from 'services/servicesApi'
+import { removeUser } from 'store/slices/authSlice'
 import * as S from './Header.styles'
 
 export const Header = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const { isAuth } = useAuth()
   const [isModal, setModal] = useState(false)
 
@@ -80,15 +84,28 @@ export const Header = () => {
               </svg>
             </S.HeaderLogo>
             {isAuth && (
-              <S.EnterButton
-                onClick={() =>
-                  setModal(
-                    <NewAdvert closeFunction={setModal} titleMod="Новое" />,
-                  )
-                }
-              >
-                Разместить объявление
-              </S.EnterButton>
+              <>
+                <S.EnterButton
+                  onClick={() =>
+                    setModal(
+                      <NewAdvert closeFunction={setModal} titleMod="Новое" />,
+                    )
+                  }
+                >
+                  Разместить объявление
+                </S.EnterButton>
+
+                <S.ExitImg
+                  src="/img/exit.png"
+                  alt="Exit"
+                  onClick={() => {
+                    dispatch(advApi.util.resetApiState())
+                    navigate('/')
+                    localStorage.removeItem('userSkyVito')
+                    dispatch(removeUser())
+                  }}
+                ></S.ExitImg>
+              </>
             )}
             <S.EnterButton
               onClick={() => navigate(`/${isAuth ? 'profile' : 'auth'}`)}

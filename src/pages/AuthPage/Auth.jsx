@@ -1,12 +1,13 @@
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useState } from 'react'
 import {
   useLoginUserMutation,
   useRegisterUserMutation,
 } from 'services/servicesApi'
-import { useDispatch } from 'react-redux'
 import { setUser } from 'store/slices/authSlice'
 import { saveUserInfoInLocalStorage } from 'helpers/helpers'
+import { CloseBtn } from 'components/ClouseBtn/ClouseBtn'
 import * as S from './Auth.styles'
 
 const initialState = {
@@ -33,7 +34,6 @@ export const Auth = ({ typeLogin }) => {
   const [loginUser] = useLoginUserMutation()
   const [registerUser] = useRegisterUserMutation()
 
-  // вход/регистрация
   const handleClick = async () => {
     if (!formValue.email) {
       return setInputError('Введите email')
@@ -46,10 +46,10 @@ export const Auth = ({ typeLogin }) => {
     }
     if (
       !typeLogin &&
-      formValue.password.length < 8 &&
+      formValue.password.length < 6 &&
       formValue.password.length > 0
     ) {
-      return setInputError('Не менее 8 символов')
+      return setInputError('Не менее 6 символов')
     }
     try {
       setIsLoading(true)
@@ -80,10 +80,17 @@ export const Auth = ({ typeLogin }) => {
           surname,
           city,
         })
-        //   console.log(registerData)
         if (registerData.data) {
           const loginData = await loginUser({ email, password })
           if (loginData.data) {
+            console.log(loginData)
+            dispatch(
+              setUser({
+                email: formValue.email,
+                access: loginData.data.access_token,
+                refresh: loginData.data.refresh_token,
+              }),
+            )
             saveUserInfoInLocalStorage(loginData, formValue)
             navigate('/')
           }
@@ -100,6 +107,13 @@ export const Auth = ({ typeLogin }) => {
 
   return (
     <>
+      <div
+        onClick={() => {
+          navigate('/')
+        }}
+      >
+        <CloseBtn />
+      </div>
       <S.ModalForm>
         <S.ModalLogo>
           <svg
@@ -175,7 +189,7 @@ export const Auth = ({ typeLogin }) => {
           <S.ModalInput
             type="password"
             name="password"
-            placeholder="Пароль"
+            placeholder={typeLogin ? 'Пароль' : 'Пароль (не менее 6 символов)'}
             value={password}
             onChange={handleChange}
           />

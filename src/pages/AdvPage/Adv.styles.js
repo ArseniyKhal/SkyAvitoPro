@@ -238,4 +238,7 @@ export const BigImg = styled.img`
   max-height: 60vh;
   max-width: 80vh;
   object-fit: cover;
+  @media (width <= 800px) {
+    width: 100%;
+  }
 `
