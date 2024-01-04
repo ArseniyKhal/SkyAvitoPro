@@ -42,7 +42,5 @@ Project structure:
     Adaptive layouts for all pages, routes and modal forms
 
 Several screenshots:
-
     ![screenshot01](https://github.com/ArseniyKhal/SkyAvitoPro/blob/dev/screenshot01.png?raw=true)
     ![screenshot02](https://github.com/ArseniyKhal/SkyAvitoPro/blob/dev/screenshot02.png?raw=true)
-
