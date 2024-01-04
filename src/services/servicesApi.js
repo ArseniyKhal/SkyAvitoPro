@@ -234,6 +234,21 @@ export const advApi = createApi({
       invalidatesTags: ['User'],
     }),
 
+    // обновить пароль текущего пользователя
+    changePassword: builder.mutation({
+      query: ({ oldPass, pass }) => {
+        return {
+          url: 'user/password',
+          method: 'PUT',
+          body: {
+            password_1: oldPass,
+            password_2: pass,
+          },
+        }
+      },
+      invalidatesTags: ['User'],
+    }),
+
     // загрузить аватар пользователя
     uploadUserAvatar: builder.mutation({
       query: (image) => {
@@ -266,5 +281,6 @@ export const {
   useRegisterUserMutation,
   useGetUserQuery,
   usePatchUserMutation,
+  useChangePasswordMutation,
   useUploadUserAvatarMutation,
 } = advApi

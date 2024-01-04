@@ -244,8 +244,6 @@ export const TextParagraph = styled.p`
   max-width: 800px;
 `
 export const BigPic = styled.div`
-  //   max-height: 60vh;
-  //   max-width: 30vw;
   margin: 30px 0;
   position: relative;
   &:hover ${Arrows} {

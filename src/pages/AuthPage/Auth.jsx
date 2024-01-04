@@ -68,7 +68,7 @@ export const Auth = ({ typeLogin }) => {
           saveUserInfoInLocalStorage(loginData, formValue.email)
           navigate('/')
         } else {
-          setInputError(loginData.error.data.detail)
+          setInputError(loginData.error.message)
           throw new Error(loginData.error.data.detail)
         }
       } else {

@@ -34,10 +34,14 @@ export const SubTitle = styled.h3`
   }
 `
 export const ProfileSettingsContent = styled.div`
-  display: flex;
-  gap: 50px;
+  //   display: flex;
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  column-gap: 50px;
+  row-gap: 20px;
   @media (width <= 800px) {
-    flex-direction: column;
+    //  flex-direction: column;
+    grid-template-columns: 1fr;
     gap: 30px;
   }
 `
@@ -46,6 +50,10 @@ export const BlockAvatar = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  grid-row-start: span 2;
+  @media (width <= 800px) {
+    grid-row-start: span 1;
+  }
 `
 export const AvatarPicture = styled.div`
   width: 170px;
@@ -133,7 +141,6 @@ export const ProfileSettingsInput = styled.input`
 `
 export const EnterButton = styled(Button)`
   padding: 0 37px;
-  margin-top: -20px;
   @media (width <= 800px) {
     width: 100%;
   }
@@ -157,4 +164,53 @@ export const ProductsList = styled.ul`
   @media (width <= 800px) {
     grid-template: auto/ repeat(2, 1fr);
   }
+`
+
+export const Inputs = styled.div`
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 38px;
+  width: 100%;
+  @media (width <= 800px) {
+    gap: 14px;
+  }
+`
+export const ModalInput = styled.input`
+  width: 100%;
+  border: none;
+  fill: none;
+  outline: none;
+  background: transparent;
+  border-bottom: 1px solid #d0cece;
+  padding: 8px 8px;
+  font-size: 22px;
+  &::placeholder {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -0.05px;
+    color: #d0cece;
+  }
+  @media (width <= 800px) {
+    border-radius: 30px;
+    border: 1px solid #d9d9d9;
+    padding: 8px 17px;
+  }
+`
+export const ChangePasBtn = styled(EnterButton)`
+  width: 200px;
+  @media (width <= 800px) {
+    width: 100%;
+  }
+`
+export const Error = styled.div`
+  color: coral;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  margin-top: 20px;
+  text-align: left;
+  width: 100%;
 `

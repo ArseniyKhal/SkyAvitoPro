@@ -2,7 +2,10 @@ import { useState } from 'react'
 import { Header } from 'components/Header/Header'
 import { Card } from 'components/Card/Card'
 import { NavMenu } from 'components/NavMenu/NavMenu'
-import { useGetUserQuery } from 'services/servicesApi'
+import {
+  useChangePasswordMutation,
+  useGetUserQuery,
+} from 'services/servicesApi'
 import { Loader } from 'App.styles'
 import { usePatchUserMutation, useGetAllAdvsQuery } from 'services/servicesApi'
 import { Modal, Success } from 'components/ModalWindow/Modal'
@@ -146,11 +149,21 @@ export const Profile = () => {
                         !formValue.phone &&
                         !isSending
                       }
+                      style={{ marginTop: '-20px' }}
                       type="submit"
                     >
                       Сохранить
                     </S.EnterButton>
                   </S.BlockSettings>
+                  <S.ChangePasBtn
+                    onClick={() => {
+                      setModal(
+                        <ChangePassword setModal={setModal}></ChangePassword>,
+                      )
+                    }}
+                  >
+                    Сменить пароль
+                  </S.ChangePasBtn>
                 </S.ProfileSettingsContent>
               </S.ProfileSettings>
               <S.UsersProducts>
@@ -168,6 +181,81 @@ export const Profile = () => {
             ></Modal>
           )}
         </>
+      )}
+    </>
+  )
+}
+
+export const ChangePassword = ({ setModal }) => {
+  const [changePassword] = useChangePasswordMutation()
+  const [inputError, setInputError] = useState(null)
+  const [oldPass, setOldPass] = useState('')
+  const [pass, setPass] = useState('')
+  const [repPass, setRepPass] = useState('')
+  const [isSuccess, setSuccess] = useState(null)
+
+  const handleClickСhangePassword = async () => {
+    try {
+      if (!pass) {
+        return setInputError('Введите пароль')
+      }
+      if (pass !== repPass) {
+        return setInputError('пароли не совпадают')
+      }
+      if (pass.length < 6 && pass.length > 0) {
+        return setInputError('Не менее 6 символов')
+      }
+      const changePassData = await changePassword({ oldPass, pass })
+      if (changePassData.error) {
+        setInputError(changePassData.error.data.detail)
+      } else {
+        setInputError(null)
+        setSuccess(true)
+        setTimeout(() => {
+          setModal(null)
+          setSuccess(false)
+        }, 2000)
+      }
+    } catch (error) {
+      setInputError(error)
+    }
+  }
+  return (
+    <>
+      {isSuccess ? (
+        <Success />
+      ) : (
+        <S.Inputs>
+          <S.ModalInput
+            type="password"
+            name="old-password"
+            placeholder={'Старый пароль'}
+            value={oldPass}
+            onChange={(e) => setOldPass(e.target.value)}
+          />
+          <S.ModalInput
+            type="password"
+            name="repeat-password"
+            placeholder="Пароль (не менее 6 символов)"
+            value={pass}
+            onChange={(e) => setPass(e.target.value)}
+          />
+          <S.ModalInput
+            type="password"
+            name="repeat-password"
+            placeholder="Повторите пароль"
+            value={repPass}
+            onChange={(e) => setRepPass(e.target.value)}
+          />
+          {inputError && <S.Error>{inputError}</S.Error>}
+          <S.EnterButton
+            onClick={() => {
+              handleClickСhangePassword()
+            }}
+          >
+            Сменить пароль
+          </S.EnterButton>
+        </S.Inputs>
       )}
     </>
   )
