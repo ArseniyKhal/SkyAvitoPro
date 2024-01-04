@@ -40,3 +40,9 @@ Project structure:
     Modal forms of the main functions (adding a product and editing, user comments and input for entering your comment)
     UI for editing, uploading images
     Adaptive layouts for all pages, routes and modal forms
+
+Several screenshots:
+
+    ![screenshot01](https://github.com//ArseniyKhal/SkyAvitoPro/blob/dev/screenshot01.png)
+    ![screenshot02](https://github.com//ArseniyKhal/SkyAvitoPro/blob/dev/screenshot02.png)
+
