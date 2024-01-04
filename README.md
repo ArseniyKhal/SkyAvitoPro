@@ -43,6 +43,6 @@ Project structure:
 
 Several screenshots:
 
-    ![screenshot01](https://github.com//ArseniyKhal/SkyAvitoPro/blob/dev/screenshot01.png)
-    ![screenshot02](https://github.com//ArseniyKhal/SkyAvitoPro/blob/dev/screenshot02.png)
+    ![screenshot01](https://github.com/ArseniyKhal/SkyAvitoPro/blob/dev/screenshot01.png)
+    ![screenshot02](https://github.com/ArseniyKhal/SkyAvitoPro/blob/dev/screenshot02.png)
 
