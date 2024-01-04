@@ -101,6 +101,22 @@ export const ArrowLine = styled.div`
     opacity: 0.3;
   }
 `
+export const CarouselPoint = styled.div`
+  width: 100%;
+  height: 10px;
+  position: relative;
+  top: 90%;
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+`
+export const Point = styled.div`
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+  border: 2px solid #fff;
+  border-radius: 50%;
+`
 export const PictureCarousel = styled.div`
   display: flex;
   gap: 10px;
@@ -228,6 +244,8 @@ export const TextParagraph = styled.p`
   max-width: 800px;
 `
 export const BigPic = styled.div`
+  //   max-height: 60vh;
+  //   max-width: 30vw;
   margin: 30px 0;
   position: relative;
   &:hover ${Arrows} {
@@ -235,8 +253,7 @@ export const BigPic = styled.div`
   }
 `
 export const BigImg = styled.img`
-  max-height: 60vh;
-  max-width: 80vh;
+  width: 100%;
   object-fit: cover;
   @media (width <= 800px) {
     width: 100%;

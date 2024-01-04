@@ -18,14 +18,14 @@ import { CloseBtn } from 'components/ClouseBtn/ClouseBtn'
 import * as S from './Adv.styles'
 
 export const Adv = () => {
-  const { advID } = useParams()
   const navigate = useNavigate()
+  const { advID } = useParams()
   const { data: adv, isLoading } = useGetAdvIDQuery(advID)
   const { data: user } = useGetUserQuery()
+  const { data: commentAdv } = useGetAllCommentsAdQuery(advID)
   const [isModal, setModal] = useState(false)
   const [pictureIndex, setPictureIndex] = useState(0)
   const [delAdvert] = useDelAdvertMutation()
-  const { data: commentAdv } = useGetAllCommentsAdQuery(advID)
 
   // скрытие кнопки "Наверх ↑"
   const [offSet, setOffSet] = useState('')
@@ -218,6 +218,17 @@ export const Adv = () => {
 
 const FullScreenPicture = ({ images, index }) => {
   const [pictureBigIndex, setPictureBigIndex] = useState(index)
+  const mapPointList = images?.map((image, index) => {
+    return (
+      <S.Point
+        key={image.id}
+        style={{ backgroundColor: index === pictureBigIndex && '#fff' }}
+        onClick={() => {
+          setPictureBigIndex(index)
+        }}
+      ></S.Point>
+    )
+  })
   return (
     <>
       <S.BigPic>
@@ -237,6 +248,7 @@ const FullScreenPicture = ({ images, index }) => {
                   }
                 }}
               />
+              <S.CarouselPoint>{mapPointList}</S.CarouselPoint>
               <S.ArrowLine
                 onClick={() => {
                   if (pictureBigIndex !== images.length - 1) {

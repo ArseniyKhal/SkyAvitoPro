@@ -3,7 +3,7 @@ import { Button } from 'App.styles'
 
 export const SearchSection = styled.div`
   height: 136px;
-  width: calc(100vw - 110px);
+  width: 100%;
   margin-top: 80px;
   display: flex;
   justify-content: flex-end;
@@ -13,6 +13,7 @@ export const SearchSection = styled.div`
   justify-content: space-between;
   position: relative;
   @media (width <= 800px) {
+    width: calc(100vw - 110px);
     margin-top: 0px;
     height: 55px;
     margin: 0 57px;

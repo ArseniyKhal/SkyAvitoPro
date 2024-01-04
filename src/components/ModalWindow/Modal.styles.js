@@ -14,15 +14,16 @@ export const ModalDarckBG = styled.div`
 `
 export const ModalWindow = styled.div`
   position: fixed;
-  top: 40%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #ffffff;
   border-radius: 12px;
   overflow: hidden;
   padding: 44px;
-  //   width: 100%;
+  max-width: 80vw;
   @media (width <= 800px) {
+    max-width: 100vw;
     width: 100%;
     height: 100%;
     top: 0;
