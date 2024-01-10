@@ -130,9 +130,8 @@ export const advApi = createApi({
     delFotoToAdvert: builder.mutation({
       query: ({ id, file_url }) => {
         return {
-          url: `ads/${id}/image`,
+          url: `ads/${id}/image?file_url=${file_url}`,
           method: 'DELETE',
-          file_url,
         }
       },
       invalidatesTags: ['AdvertID', 'Adverts'],

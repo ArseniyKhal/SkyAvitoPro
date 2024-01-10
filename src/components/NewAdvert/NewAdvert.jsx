@@ -47,23 +47,48 @@ export const NewAdvert = ({ closeFunction, adv, titleMod }) => {
     try {
       let postAdvertData
       if (adv) {
+        // редактирование объявления
         postAdvertData = await changeAdvert({
           id: adv.id,
           formValue,
         })
+
+        const pictureForDel = adv?.images.filter(
+          ({ url: id1 }) => !images.some(({ url: id2 }) => id2 === id1),
+        )
+        if (pictureForDel) {
+          pictureForDel.forEach(async (image) => {
+            await delFotoToAdvert({
+              id: adv.id,
+              file_url: image.url,
+            })
+          })
+        }
+        const pictureForAdd = images.filter(
+          ({ url: id1 }) => !adv.images.some(({ url: id2 }) => id2 === id1),
+        )
+        if (pictureForAdd) {
+          pictureForAdd.forEach(async (image) => {
+            await addFotoToAdvert({
+              id: adv.id,
+              image,
+            })
+          })
+        }
       } else {
+        // создание объявления
         postAdvertData = await postAdvert(formValue)
+        if (images.length) {
+          const advId = postAdvertData.data.id
+          images.forEach(async (image) => {
+            await addFotoToAdvert({
+              id: advId,
+              image,
+            })
+          })
+        }
       }
 
-      if (images.length) {
-        const advId = postAdvertData.data.id
-        images.forEach(async (image) => {
-          await addFotoToAdvert({
-            id: advId,
-            image,
-          })
-        })
-      }
       if (postAdvertData.data) {
         setImages([])
         setSuccessPost(true)
@@ -84,8 +109,12 @@ export const NewAdvert = ({ closeFunction, adv, titleMod }) => {
   let counter = 0
   let ImgSrc = null
   let mapPreviewList = arr?.map((index) => {
-    if (adv?.images[index]) {
-      ImgSrc = `http://localhost:8090/${adv.images[index].url}`
+    if (images[index]) {
+      ImgSrc = `http://localhost:8090/${images[index].url}`
+      if (!images[index].url) {
+        ImgSrc = imageSrc[counter]
+        counter++
+      }
     } else if (imageSrc[counter]) {
       ImgSrc = imageSrc[counter]
       counter++
@@ -95,14 +124,16 @@ export const NewAdvert = ({ closeFunction, adv, titleMod }) => {
     return (
       <S.FotoInputBlock key={index}>
         <S.FotoInputLabel htmlFor="upload-photo"></S.FotoInputLabel>
-        {ImgSrc && <S.FotoPreview src={ImgSrc} alt="Preview"></S.FotoPreview>}
-        {/* {ImgSrc && (
+        {images[index] && (
+          <S.FotoPreview src={ImgSrc} alt="Preview"></S.FotoPreview>
+        )}
+        {images[index] && (
           <S.FotoDelBtn
             onClick={() => {
-              hendleClickDel({ index })
+              hendleClickDel({ indexInput: index })
             }}
           ></S.FotoDelBtn>
-        )} */}
+        )}
         <S.FotoInput
           type="file"
           name="file"
@@ -117,17 +148,20 @@ export const NewAdvert = ({ closeFunction, adv, titleMod }) => {
   })
 
   // клик для удаления картинки
-  //   const hendleClickDel = async ({ index }) => {
-  //  try {
-  //    const result = await delFotoToAdvert({
-  //      id: adv.id,
-  //      file_url: images[index].url,
-  //    })
-  //    console.log(result)
-  //  } catch (error) {
-  //    console.log(error)
-  //  }
-  //   }
+  const hendleClickDel = async ({ indexInput }) => {
+    setImages(images.filter((el, index) => index !== indexInput))
+    if (adv) {
+      if (imageSrc.length) {
+        const tmpImgSrcArr = imageSrc.filter(
+          (el, index) => indexInput - images.length + imageSrc.length !== index,
+        )
+        setImageSrc(tmpImgSrcArr)
+      }
+    } else {
+      const tmpImgSrcArr = imageSrc.filter((el, index) => index !== indexInput)
+      setImageSrc(tmpImgSrcArr)
+    }
+  }
 
   const uploadContent = (event) => {
     event.preventDefault()
@@ -186,7 +220,6 @@ export const NewAdvert = ({ closeFunction, adv, titleMod }) => {
             />
             <S.PriceInputSpan>₽</S.PriceInputSpan>
           </div>
-
           <S.EnterButton
             disabled={
               !formValue.title || !formValue.description || !formValue.price

@@ -70,11 +70,51 @@ export const FotoContainer = styled.div`
   overflow: hidden;
   margin-bottom: 30px;
 `
+export const FotoDelBtn = styled.div`
+  position: absolute;
+  top: -20px;
+  right: 2px;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: top 0.3s ease;
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    width: 13px;
+    height: 2px;
+    border-radius: 2px;
+    transition: background-color 0.1s ease;
+    background-color: var(--btn-disabled);
+    position: relative;
+  }
+  &:before {
+    top: -5px;
+    left: 3px;
+    transform: rotate(45deg);
+  }
+  &:after {
+    top: -24px;
+    left: 3px;
+    transform: rotate(135deg);
+  }
+  &:hover:before,
+  &:hover:after {
+    background-color: var(--main-topic);
+  }
+`
 export const FotoInputBlock = styled.div`
   width: 90px;
   height: 90px;
   position: relative;
   overflow: hidden;
+  &:hover ${FotoDelBtn} {
+    top: 2px;
+  }
 `
 export const FotoInputLabel = styled.label`
   cursor: pointer;
@@ -106,6 +146,7 @@ export const FotoInputLabel = styled.label`
     background-color: var(--main-topic);
   }
 `
+
 export const FotoPreview = styled.img`
   width: 100%;
   height: 100%;
@@ -113,43 +154,6 @@ export const FotoPreview = styled.img`
   top: 0;
   left: 0;
   object-fit: cover;
-`
-export const FotoDelBtn = styled.div`
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  width: 20px;
-  height: 20px;
-  background-color: red;
-  border-radius: 50%;
-  cursor: pointer;
-  &:before,
-  &:after {
-    content: '';
-    position: absolute;
-    display: inline-block;
-    width: 14px;
-    height: 2px;
-    border-radius: 2px;
-    transition: background-color 0.1s ease;
-    background-color: var(--btn-disabled);
-    position: relative;
-    //  z-index: 7;
-  }
-  &:before {
-    top: -5px;
-    left: 3px;
-    transform: rotate(45deg);
-  }
-  &:after {
-    top: -24px;
-    left: 3px;
-    transform: rotate(135deg);
-  }
-  &:hover:before,
-  &:hover:after {
-    background-color: var(--main-topic);
-  }
 `
 export const FotoInput = styled.input`
   opacity: 0;
